@@ -6,7 +6,7 @@ import domain.money.Money
 enum class Rank(
     private val matchCount: Int?,
     private val includeBonus: Boolean,
-    private val money: Money
+    val money: Money
 ) {
     FIRST(6, false, Money(2_000_000_000)),
     SECOND(6, true, Money(30_000_000)),
