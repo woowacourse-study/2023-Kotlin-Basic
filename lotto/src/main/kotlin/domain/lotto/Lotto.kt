@@ -29,4 +29,8 @@ class Lotto private constructor(
         val distinctRemovedCount = (values + other.values).distinct().size
         return (LOTTO_SIZE * 2) - distinctRemovedCount
     }
+
+    fun has(number: LottoNumber): Boolean {
+        return number in values
+    }
 }

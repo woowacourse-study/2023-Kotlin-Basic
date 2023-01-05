@@ -51,4 +51,13 @@ class LottoTest : StringSpec({
             lotto.match(Lotto.manual(1, 2, 3, 4, 5, 6)) shouldBe expected
         }
     }
+
+    "has는 로또가 특정 숫자를 포함하고 있는지 여부를 반환한다." {
+        forAll(
+            row(Lotto.manual(1, 2, 3, 4, 5, 6), LottoNumber(6), true),
+            row(Lotto.manual(1, 2, 3, 4, 5, 6), LottoNumber(45), false)
+        ) { lotto, number, expected ->
+            lotto.has(number) shouldBe expected
+        }
+    }
 })
