@@ -9,7 +9,7 @@ import io.kotest.matchers.shouldBe
 class LottoNumberTest : StringSpec({
     "로또 번호가 1보다 작다면, 예외가 발생한다." {
         forAll(
-            row(3),
+            row(0),
             row(-1),
             row(-10),
             row(-100)

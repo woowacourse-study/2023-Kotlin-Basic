@@ -3,9 +3,11 @@ package domain.lotto
 class Lotto private constructor(
     private val values: List<LottoNumber>
 ) {
-    companion object Factory {
+    companion object {
+        private const val LOTTO_SIZE = 6
+
         fun manual(vararg numbers: Int): Lotto {
-            require(numbers.distinct().size == 6) {
+            require(numbers.distinct().size == LOTTO_SIZE) {
                 IllegalArgumentException("로또 숫자는 6자리여야 합니다.")
             }
 
@@ -21,5 +23,10 @@ class Lotto private constructor(
 
             return Lotto(lottoNumbers)
         }
+    }
+
+    fun match(other: Lotto): Int {
+        val distinctRemovedCount = (values + other.values).distinct().size
+        return (LOTTO_SIZE * 2) - distinctRemovedCount
     }
 }
