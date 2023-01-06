@@ -11,6 +11,7 @@
 ### :rocket: Missions
 우아한테크코스에서 진행했던 미션을 코틀린으로 다시 돌아봅니다.
 - [로또](https://github.com/woowacourse/java-lotto)
+  - 리뷰: 토르 -> 후디 -> 써머 -> 오찌 -> 매트 -> 토르  
 - [워들](https://github.com/woowahan-pjs/kotlin-wordle)
 - [블랙잭](https://github.com/woowacourse/java-blackjack)
 - [지하철 노선도](https://github.com/woowacourse/atdd-subway-map) + [경로 조회](https://github.com/woowacourse/atdd-subway-path)
