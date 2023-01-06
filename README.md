@@ -21,6 +21,6 @@
 |[토르](https://github.com/injoon2019)|[써머](https://github.com/hyewoncc)|[오찌](https://github.com/Ohzzi)|[매트](https://github.com/hyeonic)|[후디](https://github.com/devHudi)|
 
 ### :book: Reference
-<img src="https://user-images.githubusercontent.com/66253212/210948161-448f8511-7669-4897-9eed-87d1add7d1f9.png" width="30%" height="30%">
+Kotlin in Action - 드미트리 제메로프 저
 
-[Kotlin in Action](http://www.yes24.com/Product/Goods/55148593)
+<img src="https://user-images.githubusercontent.com/66253212/210948161-448f8511-7669-4897-9eed-87d1add7d1f9.png" width="30%" height="30%">
