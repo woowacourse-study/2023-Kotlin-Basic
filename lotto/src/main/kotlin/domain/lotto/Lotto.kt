@@ -3,7 +3,7 @@ package domain.lotto
 import domain.lotto.LottoNumber.Companion.MAX_LOTTO_NUMBER
 import domain.lotto.LottoNumber.Companion.MIN_LOTTO_NUMBER
 
-class Lotto(
+class Lotto private constructor(
     private var values: List<LottoNumber>
 ) {
     init {

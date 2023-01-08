@@ -100,8 +100,7 @@ private fun inputLotto(): Lotto {
 
     val numbers = input.split(LOTTO_NUMBER_DELIMITER)
         .map { it.toInt() }
-        .map { LottoNumber(it) }
-        .toList()
+        .toIntArray()
 
-    return Lotto(numbers)
+    return Lotto.manual(*numbers)
 }
