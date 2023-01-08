@@ -4,7 +4,7 @@ import domain.lotto.LottoNumber.Companion.MAX_LOTTO_NUMBER
 import domain.lotto.LottoNumber.Companion.MIN_LOTTO_NUMBER
 
 class Lotto private constructor(
-    private var values: List<LottoNumber>
+    var values: List<LottoNumber>
 ) {
     init {
         require(values.distinct().size == LOTTO_SIZE) { "로또 숫자는 6자리여야 합니다." }
@@ -17,10 +17,6 @@ class Lotto private constructor(
 
     fun has(number: LottoNumber): Boolean {
         return number in values
-    }
-
-    override fun toString(): String {
-        return values.toString()
     }
 
     companion object {

@@ -1,7 +1,7 @@
 package domain.lotto
 
 data class LottoNumber(
-    private val value: Int
+    val value: Int
 ) {
     companion object {
         const val MIN_LOTTO_NUMBER = 1
@@ -12,9 +12,5 @@ data class LottoNumber(
         require(value in MIN_LOTTO_NUMBER..MAX_LOTTO_NUMBER) {
             "로또 번호는 $MIN_LOTTO_NUMBER ~ $MAX_LOTTO_NUMBER 사이여야 합니다."
         }
-    }
-
-    override fun toString(): String {
-        return value.toString()
     }
 }

@@ -33,7 +33,7 @@ fun inputManualLottos(manualCount: Int): List<Lotto> {
 fun printLottoBundle(lottoBundle: LottoBundle, manualLottoCount: Int) {
     println("\n수동으로 ${manualLottoCount}장, 자동으로 ${lottoBundle.lottos.size - manualLottoCount}개를 구매했습니다.")
     lottoBundle.lottos.forEach {
-        println(it)
+        println(renderLottoText(it))
     }
 }
 
@@ -103,4 +103,12 @@ private fun inputLotto(): Lotto {
         .toIntArray()
 
     return Lotto.manual(*numbers)
+}
+
+private fun renderLottoText(lotto: Lotto): String {
+    val lottoNumberText = lotto.values
+        .map { it.value }
+        .joinToString(LOTTO_NUMBER_DELIMITER)
+    
+    return "[${lottoNumberText}]"
 }
