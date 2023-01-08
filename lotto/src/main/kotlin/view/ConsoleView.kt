@@ -10,6 +10,7 @@ import domain.winning.Statistics
 import domain.winning.WinningLotto
 import kotlin.math.roundToInt
 
+private const val LOTTO_INPUT_REGEX = "\\d?\\d, \\d?\\d, \\d?\\d, \\d?\\d, \\d?\\d, \\d?\\d"
 private const val LOTTO_NUMBER_DELIMITER = ", "
 
 fun inputMoney(): Money {
@@ -95,6 +96,7 @@ private fun inputDecimal(): Int {
 
 private fun inputLotto(): Lotto {
     val input = input()
+    require(Regex(LOTTO_INPUT_REGEX).matches(input)) { "로또 입력 형식이 올바르지 않습니다. (예: 1, 2, 3, 4, 5, 6)" }
 
     val numbers = input.split(LOTTO_NUMBER_DELIMITER)
         .map { it.toInt() }
