@@ -1,5 +1,8 @@
 package domain.lotto
 
+import domain.lotto.LottoNumber.Companion.MAX_LOTTO_NUMBER
+import domain.lotto.LottoNumber.Companion.MIN_LOTTO_NUMBER
+
 class Lotto(
     private var values: List<LottoNumber>
 ) {
@@ -17,9 +20,9 @@ class Lotto(
         }
 
         fun auto(): Lotto {
-            val lottoNumbers: List<LottoNumber> = (1..45).toList()
+            val lottoNumbers: List<LottoNumber> = (MIN_LOTTO_NUMBER..MAX_LOTTO_NUMBER).toList()
                 .shuffled()
-                .take(6)
+                .take(LOTTO_SIZE)
                 .map { LottoNumber(it) }
 
             return Lotto(lottoNumbers)

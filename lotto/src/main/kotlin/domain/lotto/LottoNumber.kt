@@ -4,8 +4,8 @@ data class LottoNumber(
     private val value: Int
 ) {
     companion object {
-        private const val MIN_LOTTO_NUMBER = 1
-        private const val MAX_LOTTO_NUMBER = 45
+        const val MIN_LOTTO_NUMBER = 1
+        const val MAX_LOTTO_NUMBER = 45
     }
 
     init {
