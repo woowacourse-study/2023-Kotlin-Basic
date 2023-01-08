@@ -19,26 +19,26 @@ fun inputMoney(): Money {
 }
 
 fun inputManualLottoCount(): Int {
-    println("수동으로 구매할 로또 수를 입력해 주세요.")
+    println("\n수동으로 구매할 로또 수를 입력해 주세요.")
     return inputDecimal()
 }
 
 fun inputManualLottos(manualCount: Int): List<Lotto> {
-    println("수동으로 구매할 번호를 입력해 주세요.")
+    println("\n수동으로 구매할 번호를 입력해 주세요.")
     return (1..manualCount).map {
         inputLotto()
     }
 }
 
 fun printLottoBundle(lottoBundle: LottoBundle, manualLottoCount: Int) {
-    println("수동으로 ${manualLottoCount}장, 자동으로 ${lottoBundle.lottos.size - manualLottoCount}개를 구매했습니다.")
+    println("\n수동으로 ${manualLottoCount}장, 자동으로 ${lottoBundle.lottos.size - manualLottoCount}개를 구매했습니다.")
     lottoBundle.lottos.forEach {
         println(it)
     }
 }
 
 fun inputWinningLotto(): WinningLotto {
-    println("지난 주 당첨 번호를 입력해 주세요.")
+    println("\n지난 주 당첨 번호를 입력해 주세요.")
     val inputLotto = inputLotto()
 
     println("보너스 볼을 입력해 주세요.")
@@ -48,7 +48,7 @@ fun inputWinningLotto(): WinningLotto {
 }
 
 fun printStatistics(statistics: Statistics) {
-    println("당첨 통계\n---------")
+    println("\n당첨 통계\n---------")
 
     printSingleStatistics(statistics, FIFTH)
     printSingleStatistics(statistics, FOURTH)
