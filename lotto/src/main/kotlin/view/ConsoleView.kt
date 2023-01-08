@@ -8,7 +8,6 @@ import domain.winning.Rank
 import domain.winning.Rank.*
 import domain.winning.Statistics
 import domain.winning.WinningLotto
-import kotlin.math.roundToInt
 
 private const val LOTTO_INPUT_REGEX = "\\d?\\d, \\d?\\d, \\d?\\d, \\d?\\d, \\d?\\d, \\d?\\d"
 private const val LOTTO_NUMBER_DELIMITER = ", "
@@ -70,13 +69,10 @@ private fun printSingleStatistics(statistics: Statistics, rank: Rank) {
 }
 
 private fun printProfitRate(statistics: Statistics) {
-    var profit = "손해"
-    if (statistics.profitRate > 1) {
-        profit = "이익"
-    } // if문 축약?
-    val profitRate = (statistics.profitRate * 100.0).roundToInt() / 100.0
+    val profitOrLossText = if (statistics.profitRate > 1) "손해" else "이익"
+    val profitRate = String.format("%.2f", statistics.profitRate).toDouble()
 
-    println("총 수익률은 ${profitRate}입니다.(기준이 1이기 때문에 결과적으로 ${profit}라는 의미임)")
+    println("총 수익률은 ${profitRate}입니다.(기준이 1이기 때문에 결과적으로 ${profitOrLossText}라는 의미임)")
 }
 
 private fun input(): String {
