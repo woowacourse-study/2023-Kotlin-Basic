@@ -10,6 +10,19 @@ class Lotto(
         require(values.distinct().size == LOTTO_SIZE) { "로또 숫자는 6자리여야 합니다." }
     }
 
+    fun match(other: Lotto): Int {
+        val distinctRemovedCount = (values + other.values).distinct().size
+        return (LOTTO_SIZE * 2) - distinctRemovedCount
+    }
+
+    fun has(number: LottoNumber): Boolean {
+        return number in values
+    }
+
+    override fun toString(): String {
+        return values.toString()
+    }
+
     companion object {
         private const val LOTTO_SIZE = 6
         const val LOTTO_PRICE = 1_000
@@ -27,18 +40,5 @@ class Lotto(
 
             return Lotto(lottoNumbers)
         }
-    }
-
-    fun match(other: Lotto): Int {
-        val distinctRemovedCount = (values + other.values).distinct().size
-        return (LOTTO_SIZE * 2) - distinctRemovedCount
-    }
-
-    fun has(number: LottoNumber): Boolean {
-        return number in values
-    }
-
-    override fun toString(): String {
-        return values.toString()
     }
 }
