@@ -1,7 +1,9 @@
 package domain.winning
 
 import domain.lotto.Lotto
+import domain.lotto.LottoBundle
 import domain.lotto.LottoNumber
+import domain.money.Money
 import domain.winning.Rank.*
 import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.matchers.shouldBe
@@ -25,6 +27,7 @@ class StatisticsTest : BehaviorSpec({
             Lotto.manual(17, 21, 29, 37, 42, 45),
             Lotto.manual(3, 8, 27, 30, 35, 44)
         )
+        val lottoBundle = LottoBundle(Money(15_000), lottos)
 
         val winningLotto = WinningLotto(
             Lotto.manual(1, 2, 3, 4, 5, 6),
@@ -32,7 +35,7 @@ class StatisticsTest : BehaviorSpec({
         )
 
         When("당첨 통계를 계산하면") {
-            val statistics = Statistics(lottos, winningLotto)
+            val statistics = Statistics(lottoBundle, winningLotto)
 
             Then("1등은 1개이다.") {
                 statistics.ranks.get(FIRST) shouldBe 1

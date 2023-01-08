@@ -6,16 +6,18 @@ import domain.lotto.LottoNumber.Companion.MIN_LOTTO_NUMBER
 class Lotto(
     private var values: List<LottoNumber>
 ) {
+    init {
+        require(values.distinct().size == LOTTO_SIZE) {
+            IllegalArgumentException("로또 숫자는 6자리여야 합니다.")
+        }
+    }
+
     companion object {
         private const val LOTTO_SIZE = 6
         const val LOTTO_PRICE = 1_000
 
         fun manual(vararg numbers: Int): Lotto {
-            require(numbers.distinct().size == LOTTO_SIZE) {
-                IllegalArgumentException("로또 숫자는 6자리여야 합니다.")
-            }
-
-            val lottoNumbers: List<LottoNumber> = numbers.map { LottoNumber(it) }
+            val lottoNumbers = numbers.map { LottoNumber(it) }
             return Lotto(lottoNumbers)
         }
 
