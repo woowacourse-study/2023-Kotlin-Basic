@@ -20,7 +20,7 @@ enum class Rank(
     companion object {
         fun match(lotto: Lotto, winningLotto: WinningLotto): Rank {
             return values().find { rank ->
-                var matchCount = lotto.match(winningLotto.winningLotto)
+                var matchCount = lotto.matchCount(winningLotto.winningLotto)
                 val hasBonus = lotto.has(winningLotto.bonusNumber)
                 if (rank.includeBonus && hasBonus) {
                     matchCount++

@@ -48,7 +48,7 @@ class LottoTest : StringSpec({
             row(Lotto.manual(1, 41, 42, 43, 44, 45), 1),
             row(Lotto.manual(40, 41, 42, 43, 44, 45), 0)
         ) { lotto, expected ->
-            lotto.match(Lotto.manual(1, 2, 3, 4, 5, 6)) shouldBe expected
+            lotto.matchCount(Lotto.manual(1, 2, 3, 4, 5, 6)) shouldBe expected
         }
     }
 

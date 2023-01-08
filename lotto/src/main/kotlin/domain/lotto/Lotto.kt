@@ -10,7 +10,7 @@ class Lotto private constructor(
         require(values.distinct().size == LOTTO_SIZE) { "로또 숫자는 6자리여야 합니다." }
     }
 
-    fun match(other: Lotto): Int {
+    fun matchCount(other: Lotto): Int {
         val distinctRemovedCount = (values + other.values).distinct().size
         return (LOTTO_SIZE * 2) - distinctRemovedCount
     }
