@@ -1,7 +1,7 @@
 package domain.lotto
 
-class Lotto private constructor(
-    private val values: List<LottoNumber>
+class Lotto(
+    private var values: List<LottoNumber>
 ) {
     companion object {
         private const val LOTTO_SIZE = 6
@@ -33,5 +33,9 @@ class Lotto private constructor(
 
     fun has(number: LottoNumber): Boolean {
         return number in values
+    }
+
+    override fun toString(): String {
+        return values.toString()
     }
 }

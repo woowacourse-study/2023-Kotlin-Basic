@@ -1,9 +1,10 @@
 package domain.winning
 
 import domain.lotto.Lotto
+import domain.lotto.LottoBundle
 
 class Statistics(
-    lottos: List<Lotto>,
+    lottoBundle: LottoBundle,
     winningLotto: WinningLotto
 ) {
     val ranks: Map<Rank, Int>
@@ -11,13 +12,13 @@ class Statistics(
 
     // TODO: refactor
     init {
-        ranks = lottos.map { Rank.match(it, winningLotto) }
+        ranks = lottoBundle.lottos.map { Rank.match(it, winningLotto) }
             .groupBy { it }
             .map { (key, value) -> key to value.size }
             .toMap()
 
         val totalWinningMoney = ranks.map { (key, value) -> key.money.value * value }
             .reduce { acc, cur -> acc + cur }
-        profitRate = totalWinningMoney.toDouble() / (Lotto.LOTTO_PRICE * lottos.size)
+        profitRate = totalWinningMoney.toDouble() / (Lotto.LOTTO_PRICE * lottoBundle.lottos.size)
     }
 }

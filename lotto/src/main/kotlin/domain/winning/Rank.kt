@@ -4,8 +4,8 @@ import domain.lotto.Lotto
 import domain.money.Money
 
 enum class Rank(
-    private val matchCount: Int?,
-    private val includeBonus: Boolean,
+    val matchCount: Int,
+    val includeBonus: Boolean,
     val money: Money
 ) {
     FIRST(6, false, Money(2_000_000_000)),
@@ -13,7 +13,7 @@ enum class Rank(
     THIRD(5, true, Money(1_500_000)),
     FOURTH(4, true, Money(50_000)),
     FIFTH(3, true, Money(5_000)),
-    NONE(null, false, Money(0)),
+    NONE(0, false, Money(0)),
     ;
 
     // TODO: refactor

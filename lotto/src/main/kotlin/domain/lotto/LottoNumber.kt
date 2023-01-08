@@ -13,4 +13,8 @@ data class LottoNumber(
             throw IllegalArgumentException("로또 번호는 $MIN_LOTTO_NUMBER ~ $MAX_LOTTO_NUMBER 사이여야 합니다.")
         }
     }
+
+    override fun toString(): String {
+        return value.toString()
+    }
 }
