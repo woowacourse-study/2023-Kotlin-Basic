@@ -7,9 +7,7 @@ class Lotto(
     private var values: List<LottoNumber>
 ) {
     init {
-        require(values.distinct().size == LOTTO_SIZE) {
-            IllegalArgumentException("로또 숫자는 6자리여야 합니다.")
-        }
+        require(values.distinct().size == LOTTO_SIZE) { "로또 숫자는 6자리여야 합니다." }
     }
 
     companion object {

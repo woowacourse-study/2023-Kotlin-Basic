@@ -80,9 +80,7 @@ private fun printProfitRate(statistics: Statistics) {
 
 private fun input(): String {
     val input = readLine() ?: ""
-    require(input.isNotBlank()) {
-        IllegalArgumentException("빈 문자열을 입력할 수 없습니다. 다시 입력해주세요.")
-    }
+    require(input.isNotBlank()) { "빈 문자열을 입력할 수 없습니다. 다시 입력해주세요." }
 
     return input
 }
