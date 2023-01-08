@@ -2,9 +2,7 @@ package domain
 
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.StringSpec
-import io.kotest.matchers.should
 import io.kotest.matchers.shouldBe
-import io.kotest.matchers.string.match
 
 internal class LottoTest : StringSpec({
     "로또 번호가 6개가 아니면 예외를 발생시킨다." {
@@ -13,13 +11,13 @@ internal class LottoTest : StringSpec({
             listOf(1, 2, 3, 4, 5, 6, 7)
         ).forEach {
             shouldThrow<IllegalArgumentException> { Lotto.from(it) }
-                .message should match("로또 번호는 6개여야 합니다.")
+                .message shouldBe "로또 번호는 6개여야 합니다."
         }
     }
 
     "로또 번호에 중복이 있으면 예외를 발생시킨다." {
         shouldThrow<IllegalArgumentException> { Lotto.from(listOf(1, 1, 2, 3, 4, 5)) }
-            .message should match("로또 번호에 중복이 있을 수 없습니다.")
+            .message shouldBe "로또 번호에 중복이 있을 수 없습니다."
     }
 
     "로또가 특정 번호를 포함하고 있는 지 확인할 수 있다." {
