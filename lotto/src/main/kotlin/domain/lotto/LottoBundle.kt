@@ -7,6 +7,8 @@ class LottoBundle(
     manualLottos: List<Lotto>
 ) {
     val lottos: List<Lotto>
+    val lottoCount: Int
+        get() = lottos.size
 
     init {
         val lottoCount: Int = inputMoney.value / Lotto.LOTTO_PRICE

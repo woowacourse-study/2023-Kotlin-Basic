@@ -17,7 +17,7 @@ class LottoBundleTest : StringSpec({
 
         val lottoBundle = LottoBundle(inputMoney, manualLottos)
 
-        lottoBundle.lottos.size shouldBe 15
+        lottoBundle.lottoCount shouldBe 15
     }
 
 })

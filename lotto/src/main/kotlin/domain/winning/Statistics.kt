@@ -29,7 +29,7 @@ class Statistics(
             .sum()
             .toDouble()
 
-        val paidMoney = Lotto.LOTTO_PRICE * lottoBundle.lottos.size
+        val paidMoney = Lotto.LOTTO_PRICE * lottoBundle.lottoCount
 
         return totalWinningMoney / paidMoney
     }

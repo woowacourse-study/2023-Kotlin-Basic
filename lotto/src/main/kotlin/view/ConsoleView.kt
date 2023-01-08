@@ -31,7 +31,7 @@ fun inputManualLottos(manualCount: Int): List<Lotto> {
 }
 
 fun printLottoBundle(lottoBundle: LottoBundle, manualLottoCount: Int) {
-    println("\n수동으로 ${manualLottoCount}장, 자동으로 ${lottoBundle.lottos.size - manualLottoCount}개를 구매했습니다.")
+    println("\n수동으로 ${manualLottoCount}장, 자동으로 ${lottoBundle.lottoCount - manualLottoCount}개를 구매했습니다.")
     lottoBundle.lottos.forEach {
         println(renderLottoText(it))
     }
