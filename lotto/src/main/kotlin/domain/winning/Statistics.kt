@@ -7,18 +7,30 @@ class Statistics(
     lottoBundle: LottoBundle,
     winningLotto: WinningLotto
 ) {
-    val ranks: Map<Rank, Int>
+    val rankAndCount: Map<Rank, Int>
     val profitRate: Double
 
-    // TODO: refactor
     init {
-        ranks = lottoBundle.lottos.map { Rank.match(it, winningLotto) }
+        rankAndCount = countRank(lottoBundle, winningLotto)
+        profitRate = calculateProfitRate(lottoBundle)
+    }
+
+    private fun countRank(lottoBundle: LottoBundle, winningLotto: WinningLotto): Map<Rank, Int> {
+        return lottoBundle.lottos
+            .map { Rank.match(it, winningLotto) }
             .groupBy { it }
             .map { (key, value) -> key to value.size }
             .toMap()
+    }
 
-        val totalWinningMoney = ranks.map { (key, value) -> key.money.value * value }
-            .reduce { acc, cur -> acc + cur }
-        profitRate = totalWinningMoney.toDouble() / (Lotto.LOTTO_PRICE * lottoBundle.lottos.size)
+    private fun calculateProfitRate(lottoBundle: LottoBundle): Double {
+        val totalWinningMoney = rankAndCount
+            .map { (key, value) -> key.money.value * value }
+            .sum()
+            .toDouble()
+
+        val paidMoney = Lotto.LOTTO_PRICE * lottoBundle.lottos.size
+
+        return totalWinningMoney / paidMoney
     }
 }

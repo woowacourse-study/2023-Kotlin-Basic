@@ -66,7 +66,7 @@ private fun printSingleStatistics(statistics: Statistics, rank: Rank) {
         bonusBallText = ", 보너스 볼 일치"
     }
 
-    println("${matchCount}개 일치${bonusBallText}(${rank.money.value}원)- ${statistics.ranks[rank] ?: 0}개")
+    println("${matchCount}개 일치${bonusBallText}(${rank.money.value}원)- ${statistics.rankAndCount[rank] ?: 0}개")
 }
 
 private fun printProfitRate(statistics: Statistics) {
@@ -109,6 +109,6 @@ private fun renderLottoText(lotto: Lotto): String {
     val lottoNumberText = lotto.values
         .map { it.value }
         .joinToString(LOTTO_NUMBER_DELIMITER)
-    
+
     return "[${lottoNumberText}]"
 }

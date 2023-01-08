@@ -38,23 +38,23 @@ class StatisticsTest : BehaviorSpec({
             val statistics = Statistics(lottoBundle, winningLotto)
 
             Then("1등은 1개이다.") {
-                statistics.ranks.get(FIRST) shouldBe 1
+                statistics.rankAndCount.get(FIRST) shouldBe 1
             }
 
             Then("2등은 1개이다.") {
-                statistics.ranks.get(SECOND) shouldBe 1
+                statistics.rankAndCount.get(SECOND) shouldBe 1
             }
 
             Then("3등은 1개이다.") {
-                statistics.ranks.get(THIRD) shouldBe 1
+                statistics.rankAndCount.get(THIRD) shouldBe 1
             }
 
             Then("4등은 1개이다.") {
-                statistics.ranks.get(FOURTH) shouldBe 1
+                statistics.rankAndCount.get(FOURTH) shouldBe 1
             }
 
             Then("5등은 2개이다.") {
-                statistics.ranks.get(FIFTH) shouldBe 2
+                statistics.rankAndCount.get(FIFTH) shouldBe 2
             }
 
             Then("수익률은 135437.33333333334 이다.") {
