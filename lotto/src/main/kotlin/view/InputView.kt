@@ -2,15 +2,11 @@ package view
 
 import domain.lotto.Lotto
 import domain.lotto.LottoNumber
-import domain.lotto.Lottos
 import domain.money.Money
-import domain.winning.Rank
-import domain.winning.Rank.*
-import domain.winning.Statistics
 import domain.winning.WinningLotto
 
 private const val LOTTO_INPUT_REGEX = "\\d?\\d, \\d?\\d, \\d?\\d, \\d?\\d, \\d?\\d, \\d?\\d"
-private const val LOTTO_NUMBER_DELIMITER = ", "
+const val LOTTO_NUMBER_DELIMITER = ", "
 
 fun inputMoney(): Money {
     println("구입금액을 입력해 주세요.")
@@ -29,12 +25,6 @@ fun inputManualLottos(manualCount: Int): List<Lotto> {
     }
 }
 
-fun printLottoBundle(lottos: Lottos, manualLottoCount: Int) {
-    println("\n수동으로 ${manualLottoCount}장, 자동으로 ${lottos.lottoCount - manualLottoCount}개를 구매했습니다.")
-    lottos.lottos.forEach {
-        println(renderLottoText(it))
-    }
-}
 
 fun inputWinningLotto(): WinningLotto {
     println("\n지난 주 당첨 번호를 입력해 주세요.")
@@ -46,28 +36,6 @@ fun inputWinningLotto(): WinningLotto {
     return WinningLotto(inputLotto, bonusNumber)
 }
 
-fun printStatistics(statistics: Statistics) {
-    println("\n당첨 통계\n---------")
-
-    printSingleStatistics(statistics, 3, FIFTH)
-    printSingleStatistics(statistics, 4, FOURTH)
-    printSingleStatistics(statistics, 5, THIRD)
-    printSingleStatistics(statistics, 6, SECOND)
-    printSingleStatistics(statistics, 6, FIRST)
-    printProfitRate(statistics)
-}
-
-private fun printSingleStatistics(statistics: Statistics, matchCount: Int, rank: Rank) {
-    val bonusBallText = if (rank == SECOND) ", 보너스 볼 일치" else " "
-    println("${matchCount}개 일치${bonusBallText}(${rank.prize.value}원)- ${statistics.rankAndCount[rank] ?: 0}개")
-}
-
-private fun printProfitRate(statistics: Statistics) {
-    val profitOrLossText = if (statistics.profitRate > 1) "이익" else "손해"
-    val profitRate = String.format("%.2f", statistics.profitRate).toDouble()
-
-    println("총 수익률은 ${profitRate}입니다.(기준이 1이기 때문에 결과적으로 ${profitOrLossText}라는 의미임)")
-}
 
 private fun input(): String {
     val input = readLine() ?: ""
@@ -93,12 +61,4 @@ private fun inputLotto(): Lotto {
         .toIntArray()
 
     return Lotto.manual(*numbers)
-}
-
-private fun renderLottoText(lotto: Lotto): String {
-    val lottoNumberText = lotto.values
-        .map { it.value }
-        .joinToString(LOTTO_NUMBER_DELIMITER)
-
-    return "[${lottoNumberText}]"
 }
