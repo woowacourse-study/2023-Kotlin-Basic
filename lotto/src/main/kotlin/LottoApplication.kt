@@ -1,6 +1,4 @@
-import domain.Lotto
-import domain.LottoMachine
-import domain.PurchaseMoney
+import domain.*
 import view.*
 
 fun main() {
@@ -12,7 +10,11 @@ fun main() {
 
     val autoCount = purchaseMoney.purchasableCount - manualCount
     lotteries.addAll(LottoMachine.issueAutomatically(autoCount))
-    printLotteries(lotteries)
+    printLotteries(lotteries, manualCount, autoCount)
+
+    val winningLotto = WinningLotto(readWinningNumbers(), readBonusBall())
+    val winningResult = WinningResult.of(winningLotto, lotteries)
+    printWinningResult(winningResult)
 }
 
 private fun inputPurchaseMoney(): PurchaseMoney {
