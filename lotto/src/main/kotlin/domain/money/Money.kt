@@ -8,6 +8,10 @@ data class Money(
     }
 
     init {
-        require(value % MONEY_MIN_UNIT == 0) { "금액은 1,000원 단위여야 합니다." }
+        require(isMultipleOfMinUnit()) { "금액은 1,000원 단위여야 합니다." }
+    }
+
+    private fun isMultipleOfMinUnit(): Boolean {
+        return value % MONEY_MIN_UNIT == 0
     }
 }

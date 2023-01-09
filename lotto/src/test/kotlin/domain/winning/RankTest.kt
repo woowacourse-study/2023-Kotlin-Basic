@@ -14,7 +14,7 @@ class RankTest : BehaviorSpec({
 
         When("보너스 번호를 제외하고, 6개의 번호가 일치하면") {
             val lotto = Lotto.manual(1, 2, 3, 4, 5, 6)
-            val actual = Rank.match(lotto, winningLotto)
+            val actual = Rank.determine(lotto, winningLotto)
 
             Then("Rank.FIRST를 반환한다.") {
                 actual shouldBe Rank.FIRST
@@ -23,7 +23,7 @@ class RankTest : BehaviorSpec({
 
         When("보너스 번호를 포함하여, 6개의 번호가 일치하면") {
             val lotto = Lotto.manual(1, 2, 3, 4, 5, 7)
-            val actual = Rank.match(lotto, winningLotto)
+            val actual = Rank.determine(lotto, winningLotto)
 
             Then("Rank.SECOND를 반환한다.") {
                 actual shouldBe Rank.SECOND
@@ -32,7 +32,7 @@ class RankTest : BehaviorSpec({
 
         When("보너스 번호를 포함하여, 5개의 번호가 일치하면") {
             val lotto = Lotto.manual(1, 2, 3, 4, 5, 45)
-            val actual = Rank.match(lotto, winningLotto)
+            val actual = Rank.determine(lotto, winningLotto)
 
             Then("Rank.THIRD를 반환한다.") {
                 actual shouldBe Rank.THIRD
@@ -41,7 +41,7 @@ class RankTest : BehaviorSpec({
 
         When("보너스 번호를 포함하여, 4개의 번호가 일치하면") {
             val lotto = Lotto.manual(1, 2, 3, 4, 44, 45)
-            val actual = Rank.match(lotto, winningLotto)
+            val actual = Rank.determine(lotto, winningLotto)
 
             Then("Rank.FOURTH를 반환한다.") {
                 actual shouldBe Rank.FOURTH
@@ -50,7 +50,7 @@ class RankTest : BehaviorSpec({
 
         When("보너스 번호를 포함하여, 3개의 번호가 일치하면") {
             val lotto = Lotto.manual(1, 2, 3, 43, 44, 45)
-            val actual = Rank.match(lotto, winningLotto)
+            val actual = Rank.determine(lotto, winningLotto)
 
             Then("Rank.FIFTH를 반환한다.") {
                 actual shouldBe Rank.FIFTH

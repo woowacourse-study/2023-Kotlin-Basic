@@ -17,7 +17,7 @@ class Statistics(
 
     private fun countRank(lottos: Lottos, winningLotto: WinningLotto): Map<Rank, Int> {
         return lottos.lottos
-            .map { Rank.match(it, winningLotto) }
+            .map { Rank.determine(it, winningLotto) }
             .groupBy { it }
             .map { (key, value) -> key to value.size }
             .toMap()
@@ -25,7 +25,7 @@ class Statistics(
 
     private fun calculateProfitRate(lottos: Lottos): Double {
         val totalWinningMoney = rankAndCount
-            .map { (key, value) -> key.money.value * value }
+            .map { (key, value) -> key.prize.value * value }
             .sum()
             .toDouble()
 

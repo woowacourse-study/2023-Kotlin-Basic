@@ -49,19 +49,17 @@ fun inputWinningLotto(): WinningLotto {
 fun printStatistics(statistics: Statistics) {
     println("\n당첨 통계\n---------")
 
-    printSingleStatistics(statistics, FIFTH)
-    printSingleStatistics(statistics, FOURTH)
-    printSingleStatistics(statistics, THIRD)
-    printSingleStatistics(statistics, SECOND)
-    printSingleStatistics(statistics, FIRST)
+    printSingleStatistics(statistics, 3, FIFTH)
+    printSingleStatistics(statistics, 4, FOURTH)
+    printSingleStatistics(statistics, 5, THIRD)
+    printSingleStatistics(statistics, 6, SECOND)
+    printSingleStatistics(statistics, 6, FIRST)
     printProfitRate(statistics)
 }
 
-private fun printSingleStatistics(statistics: Statistics, rank: Rank) {
-    val matchCount = if (rank == SECOND) rank.matchCount else rank.matchCount - 1
+private fun printSingleStatistics(statistics: Statistics, matchCount: Int, rank: Rank) {
     val bonusBallText = if (rank == SECOND) ", 보너스 볼 일치" else " "
-
-    println("${matchCount}개 일치${bonusBallText}(${rank.money.value}원)- ${statistics.rankAndCount[rank] ?: 0}개")
+    println("${matchCount}개 일치${bonusBallText}(${rank.prize.value}원)- ${statistics.rankAndCount[rank] ?: 0}개")
 }
 
 private fun printProfitRate(statistics: Statistics) {

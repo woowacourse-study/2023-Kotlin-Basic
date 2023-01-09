@@ -13,8 +13,12 @@ class Lottos(
     init {
         val paidLottoCount = inputMoney.value / Lotto.LOTTO_PRICE
         val autoLottoCount = paidLottoCount - manualLottos.size
-        val generatedAutoLottos = (1..autoLottoCount).map { Lotto.auto() }
+        val generatedAutoLottos = generateAutoLottos(autoLottoCount)
 
         lottos = manualLottos + generatedAutoLottos
+    }
+
+    private fun generateAutoLottos(autoLottoCount: Int): List<Lotto> {
+        return (1..autoLottoCount).map { Lotto.auto() }
     }
 }
