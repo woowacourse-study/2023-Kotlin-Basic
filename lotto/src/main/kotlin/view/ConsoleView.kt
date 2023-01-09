@@ -69,7 +69,7 @@ private fun printSingleStatistics(statistics: Statistics, rank: Rank) {
 }
 
 private fun printProfitRate(statistics: Statistics) {
-    val profitOrLossText = if (statistics.profitRate > 1) "손해" else "이익"
+    val profitOrLossText = if (statistics.profitRate > 1) "이익" else "손해"
     val profitRate = String.format("%.2f", statistics.profitRate).toDouble()
 
     println("총 수익률은 ${profitRate}입니다.(기준이 1이기 때문에 결과적으로 ${profitOrLossText}라는 의미임)")
