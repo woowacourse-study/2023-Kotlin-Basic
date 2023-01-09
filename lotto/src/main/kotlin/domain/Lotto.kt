@@ -1,7 +1,7 @@
 package domain
 
 class Lotto private constructor(
-    private val numbers: List<LottoNumber>
+    val numbers: List<LottoNumber>
 ) {
     init {
         require(numbers.size == NUMBERS_SIZE) { "로또 번호는 6개여야 합니다." }
