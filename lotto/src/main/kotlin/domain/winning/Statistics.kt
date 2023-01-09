@@ -1,35 +1,35 @@
 package domain.winning
 
 import domain.lotto.Lotto
-import domain.lotto.LottoBundle
+import domain.lotto.Lottos
 
 class Statistics(
-    lottoBundle: LottoBundle,
+    lottos: Lottos,
     winningLotto: WinningLotto
 ) {
     val rankAndCount: Map<Rank, Int>
     val profitRate: Double
 
     init {
-        rankAndCount = countRank(lottoBundle, winningLotto)
-        profitRate = calculateProfitRate(lottoBundle)
+        rankAndCount = countRank(lottos, winningLotto)
+        profitRate = calculateProfitRate(lottos)
     }
 
-    private fun countRank(lottoBundle: LottoBundle, winningLotto: WinningLotto): Map<Rank, Int> {
-        return lottoBundle.lottos
+    private fun countRank(lottos: Lottos, winningLotto: WinningLotto): Map<Rank, Int> {
+        return lottos.lottos
             .map { Rank.match(it, winningLotto) }
             .groupBy { it }
             .map { (key, value) -> key to value.size }
             .toMap()
     }
 
-    private fun calculateProfitRate(lottoBundle: LottoBundle): Double {
+    private fun calculateProfitRate(lottos: Lottos): Double {
         val totalWinningMoney = rankAndCount
             .map { (key, value) -> key.money.value * value }
             .sum()
             .toDouble()
 
-        val paidMoney = Lotto.LOTTO_PRICE * lottoBundle.lottoCount
+        val paidMoney = Lotto.LOTTO_PRICE * lottos.lottoCount
 
         return totalWinningMoney / paidMoney
     }

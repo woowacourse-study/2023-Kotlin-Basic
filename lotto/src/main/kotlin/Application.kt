@@ -1,4 +1,4 @@
-import domain.lotto.LottoBundle
+import domain.lotto.Lottos
 import domain.winning.Statistics
 import view.*
 
@@ -7,12 +7,12 @@ fun main() {
     val manualLottoCount = retryOnException { inputManualLottoCount() }
     val manualLottos = retryOnException { inputManualLottos(manualLottoCount) }
 
-    val lottoBundle = LottoBundle(inputMoney, manualLottos)
-    printLottoBundle(lottoBundle, manualLottoCount)
+    val lottos = Lottos(inputMoney, manualLottos)
+    printLottoBundle(lottos, manualLottoCount)
 
     val winningLotto = retryOnException { inputWinningLotto() }
 
-    val statistics = Statistics(lottoBundle, winningLotto)
+    val statistics = Statistics(lottos, winningLotto)
     printStatistics(statistics)
 }
 

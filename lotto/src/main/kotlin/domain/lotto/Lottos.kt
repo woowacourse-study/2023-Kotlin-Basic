@@ -2,7 +2,7 @@ package domain.lotto
 
 import domain.money.Money
 
-class LottoBundle(
+class Lottos(
     inputMoney: Money,
     manualLottos: List<Lotto>
 ) {
@@ -11,9 +11,8 @@ class LottoBundle(
         get() = lottos.size
 
     init {
-        val lottoCount: Int = inputMoney.value / Lotto.LOTTO_PRICE
+        val lottoCount = inputMoney.value / Lotto.LOTTO_PRICE
         val autoCount = lottoCount - manualLottos.size
-
         val autoLottos = (1..autoCount).toList()
             .map { Lotto.auto() }
 

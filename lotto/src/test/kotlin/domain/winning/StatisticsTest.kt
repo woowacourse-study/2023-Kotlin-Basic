@@ -1,8 +1,8 @@
 package domain.winning
 
 import domain.lotto.Lotto
-import domain.lotto.LottoBundle
 import domain.lotto.LottoNumber
+import domain.lotto.Lottos
 import domain.money.Money
 import domain.winning.Rank.*
 import io.kotest.core.spec.style.BehaviorSpec
@@ -27,7 +27,7 @@ class StatisticsTest : BehaviorSpec({
             Lotto.manual(17, 21, 29, 37, 42, 45),
             Lotto.manual(3, 8, 27, 30, 35, 44)
         )
-        val lottoBundle = LottoBundle(Money(15_000), lottos)
+        val lottoBundle = Lottos(Money(15_000), lottos)
 
         val winningLotto = WinningLotto(
             Lotto.manual(1, 2, 3, 4, 5, 6),
