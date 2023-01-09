@@ -58,12 +58,8 @@ fun printStatistics(statistics: Statistics) {
 }
 
 private fun printSingleStatistics(statistics: Statistics, rank: Rank) {
-    var matchCount = rank.matchCount
-    var bonusBallText = " "
-    if (rank == SECOND) {
-        matchCount--
-        bonusBallText = ", 보너스 볼 일치"
-    }
+    val matchCount = if (rank == SECOND) rank.matchCount else rank.matchCount - 1
+    val bonusBallText = if (rank == SECOND) ", 보너스 볼 일치" else " "
 
     println("${matchCount}개 일치${bonusBallText}(${rank.money.value}원)- ${statistics.rankAndCount[rank] ?: 0}개")
 }
