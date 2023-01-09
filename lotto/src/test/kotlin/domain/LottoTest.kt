@@ -1,6 +1,7 @@
 package domain
 
 import io.kotest.assertions.throwables.shouldThrow
+import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.inspectors.forAll
 import io.kotest.matchers.shouldBe
@@ -30,5 +31,66 @@ class LottoTest : StringSpec({
 
         shouldThrow<IllegalArgumentException> { WinningLotto(lotto, Ball(1)) }
             .message shouldBe "보너스 숫자는 로또 번호와 중복될 수 없습니다"
+    }
+})
+
+class WinningLottoTest : BehaviorSpec({
+
+    Given("우승 로또로 다른 로또를 채점하면") {
+        val winningLotto = WinningLotto(Lotto(listOf(1, 2, 3, 4, 5, 6).map { Ball(it) }), Ball(7))
+
+        When("숫자가 2개 이하로 일치할 때") {
+            val other = Lotto(listOf(1, 2, 31, 32, 33, 34).map { Ball(it) })
+
+            Then("결과는 FAIL 이다") {
+                val prize = winningLotto.score(other)
+                prize shouldBe Prize.FAIL
+            }
+        }
+
+        When("숫자가 3개 일치할 때") {
+            val other = Lotto(listOf(1, 2, 3, 32, 33, 34).map { Ball(it) })
+
+            Then("결과는 5등 이다") {
+                val prize = winningLotto.score(other)
+                prize shouldBe Prize.FIFTH
+            }
+        }
+
+        When("숫자가 4개 일치할 때") {
+            val other = Lotto(listOf(1, 2, 3, 4, 33, 34).map { Ball(it) })
+
+            Then("결과는 4등 이다") {
+                val prize = winningLotto.score(other)
+                prize shouldBe Prize.FORTH
+            }
+        }
+
+        When("숫자가 5개 일치하고, 보너스는 일치하지 않을 때") {
+            val other = Lotto(listOf(1, 2, 3, 4, 5, 34).map { Ball(it) })
+
+            Then("결과는 3등 이다") {
+                val prize = winningLotto.score(other)
+                prize shouldBe Prize.THIRD
+            }
+        }
+
+        When("숫자가 5개 일치하고, 보너스도 일치할 때") {
+            val other = Lotto(listOf(1, 2, 3, 4, 5, 7).map { Ball(it) })
+
+            Then("결과는 2등 이다") {
+                val prize = winningLotto.score(other)
+                prize shouldBe Prize.SECOND
+            }
+        }
+
+        When("숫자가 6개 일치하면") {
+            val other = Lotto(listOf(1, 2, 3, 4, 5, 6).map { Ball(it) })
+
+            Then("결과는 1등 이다") {
+                val prize = winningLotto.score(other)
+                prize shouldBe Prize.FIRST
+            }
+        }
     }
 })
