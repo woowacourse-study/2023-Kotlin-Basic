@@ -7,12 +7,12 @@ class Lotto private constructor(
     val values: List<LottoNumber>
 ) {
     init {
+        require(values.distinct().size == values.size) { "로또 숫자가 중복될 수 없습니다." }
         require(values.distinct().size == LOTTO_SIZE) { "로또 숫자는 6자리여야 합니다." }
     }
 
     fun matchCount(other: Lotto): Int {
-        val distinctRemovedCount = (values + other.values).distinct().size
-        return (LOTTO_SIZE * 2) - distinctRemovedCount
+        return values.intersect(other.values.toSet()).size
     }
 
     fun has(number: LottoNumber): Boolean {
