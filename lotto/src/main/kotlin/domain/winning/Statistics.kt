@@ -25,7 +25,7 @@ class Statistics(
 
     private fun calculateProfitRate(lottos: Lottos): Double {
         val totalWinningMoney = rankAndCount
-            .map { (key, value) -> key.prize.value * value }
+            .map { (rank, value) -> rank.prize.value * value }
             .sum()
             .toDouble()
 

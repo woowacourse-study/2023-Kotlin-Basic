@@ -20,11 +20,11 @@ enum class Rank(
             val hasBonusNumber = lotto.has(winningLotto.bonusNumber)
 
             return when {
-                matchCount == 6 && !hasBonusNumber -> FIRST
-                matchCount == 6 && hasBonusNumber -> SECOND
-                matchCount == 5 && !hasBonusNumber -> THIRD
-                matchCount == 4 && !hasBonusNumber -> FOURTH
-                matchCount == 3 && !hasBonusNumber -> FIFTH
+                matchCount == 6 -> FIRST
+                matchCount == 5 && hasBonusNumber -> SECOND
+                matchCount == 5 -> THIRD
+                matchCount == 4 -> FOURTH
+                matchCount == 3 -> FIFTH
                 else -> NONE
             }
         }
