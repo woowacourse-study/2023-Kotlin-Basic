@@ -29,7 +29,7 @@ class Lotto private constructor(
         }
 
         fun auto(): Lotto {
-            val lottoNumbers: List<LottoNumber> = (MIN_LOTTO_NUMBER..MAX_LOTTO_NUMBER).toList()
+            val lottoNumbers = (MIN_LOTTO_NUMBER..MAX_LOTTO_NUMBER).toList()
                 .shuffled()
                 .take(LOTTO_SIZE)
                 .map { LottoNumber(it) }
