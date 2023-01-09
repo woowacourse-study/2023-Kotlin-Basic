@@ -8,6 +8,7 @@ data class Money(
     }
 
     init {
+        require(value >= 0) { "금액은 음수일 수 없습니다." }
         require(isMultipleOfMinUnit()) { "금액은 1,000원 단위여야 합니다." }
     }
 

@@ -1,6 +1,7 @@
 package view
 
 import domain.lotto.Lotto
+import domain.lotto.LottoCount
 import domain.lotto.LottoNumber
 import domain.money.Money
 import domain.winning.WinningLotto
@@ -13,18 +14,17 @@ fun inputMoney(): Money {
     return Money(inputDecimal())
 }
 
-fun inputManualLottoCount(): Int {
+fun inputManualLottoCount(): LottoCount {
     println("\n수동으로 구매할 로또 수를 입력해 주세요.")
-    return inputDecimal()
+    return LottoCount(inputDecimal())
 }
 
-fun inputManualLottos(manualCount: Int): List<Lotto> {
+fun inputManualLottos(manualCount: LottoCount): List<Lotto> {
     println("\n수동으로 구매할 번호를 입력해 주세요.")
-    return (1..manualCount).map {
+    return (1..manualCount.value).map {
         inputLotto()
     }
 }
-
 
 fun inputWinningLotto(): WinningLotto {
     println("\n지난 주 당첨 번호를 입력해 주세요.")

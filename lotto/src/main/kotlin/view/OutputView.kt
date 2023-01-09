@@ -1,12 +1,13 @@
 package view
 
 import domain.lotto.Lotto
+import domain.lotto.LottoCount
 import domain.lotto.Lottos
 import domain.winning.Rank
 import domain.winning.Statistics
 
-fun printLottoBundle(lottos: Lottos, manualLottoCount: Int) {
-    println("\n수동으로 ${manualLottoCount}장, 자동으로 ${lottos.lottoCount - manualLottoCount}개를 구매했습니다.")
+fun printLottoBundle(lottos: Lottos, manualLottoCount: LottoCount) {
+    println("\n수동으로 ${manualLottoCount.value}장, 자동으로 ${lottos.lottoCount - manualLottoCount.value}개를 구매했습니다.")
     lottos.lottos.forEach {
         println(renderLottoText(it))
     }

@@ -6,6 +6,18 @@ import io.kotest.data.forAll
 import io.kotest.data.row
 
 class MoneyTest : StringSpec({
+    "금액이 음수라면 예외가 발생한다." {
+        forAll(
+            row(-1),
+            row(-1000),
+            row(-1111)
+        ) { given ->
+            shouldThrow<IllegalArgumentException> {
+                Money(given)
+            }
+        }
+    }
+
     "금액이 1000원 단위가 아니라면 예외가 발생한다." {
         forAll(
             row(1_001),
