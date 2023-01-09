@@ -24,4 +24,11 @@ class LottoTest : StringSpec({
                 .message shouldBe "로또는 중복되지 않는 6개 숫자로 구성되어야 합니다"
         }
     }
+
+    "우승 로또의 보너스 숫자는 로또 숫자와 중복되지 않아야 한다" {
+        val lotto = Lotto(listOf(1, 2, 3, 4, 5, 6).map { Ball(it) })
+
+        shouldThrow<IllegalArgumentException> { WinningLotto(lotto, Ball(1)) }
+            .message shouldBe "보너스 숫자는 로또 번호와 중복될 수 없습니다"
+    }
 })
