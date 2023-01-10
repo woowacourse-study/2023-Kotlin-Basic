@@ -15,4 +15,10 @@ internal class PurchaseMoneyTest : StringSpec({
 
         money.purchasableCount shouldBe 1
     }
+
+    "천 원 이하를 버림한 실 구매 금액을 계산할 수 있다." {
+        val money = PurchaseMoney(1_001)
+
+        money.availableAmount shouldBe 1_000
+    }
 })
