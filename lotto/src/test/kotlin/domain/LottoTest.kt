@@ -21,13 +21,13 @@ class LottoTest : StringSpec({
             listOf(1, 2, 3, 4, 5, 6, 7),
             listOf(1, 2, 3, 4, 5, 5)
         ).forAll { numbers ->
-            shouldThrow<IllegalArgumentException> { Lotto(numbers.map { Ball(it) }) }
+            shouldThrow<IllegalArgumentException> { Lotto { numbers } }
                 .message shouldBe "로또는 중복되지 않는 6개 숫자로 구성되어야 합니다"
         }
     }
 
     "우승 로또의 보너스 숫자는 로또 숫자와 중복되지 않아야 한다" {
-        val lotto = Lotto(listOf(1, 2, 3, 4, 5, 6).map { Ball(it) })
+        val lotto = Lotto { listOf(1, 2, 3, 4, 5, 6) }
 
         shouldThrow<IllegalArgumentException> { WinningLotto(lotto, Ball(1)) }
             .message shouldBe "보너스 숫자는 로또 번호와 중복될 수 없습니다"
@@ -37,10 +37,11 @@ class LottoTest : StringSpec({
 class WinningLottoTest : BehaviorSpec({
 
     Given("우승 로또로 다른 로또를 채점하면") {
-        val winningLotto = WinningLotto(Lotto(listOf(1, 2, 3, 4, 5, 6).map { Ball(it) }), Ball(7))
+        val lotto = Lotto { listOf(1, 2, 3, 4, 5, 6) }
+        val winningLotto = WinningLotto(lotto, Ball(7))
 
         When("숫자가 2개 이하로 일치할 때") {
-            val other = Lotto(listOf(1, 2, 31, 32, 33, 34).map { Ball(it) })
+            val other = Lotto { listOf(1, 2, 33, 34, 35, 36) }
 
             Then("결과는 FAIL 이다") {
                 val prize = winningLotto.score(other)
@@ -49,7 +50,7 @@ class WinningLottoTest : BehaviorSpec({
         }
 
         When("숫자가 3개 일치할 때") {
-            val other = Lotto(listOf(1, 2, 3, 32, 33, 34).map { Ball(it) })
+            val other = Lotto { listOf(1, 2, 3, 32, 33, 34) }
 
             Then("결과는 5등 이다") {
                 val prize = winningLotto.score(other)
@@ -58,7 +59,7 @@ class WinningLottoTest : BehaviorSpec({
         }
 
         When("숫자가 4개 일치할 때") {
-            val other = Lotto(listOf(1, 2, 3, 4, 33, 34).map { Ball(it) })
+            val other = Lotto { listOf(1, 2, 3, 4, 33, 34) }
 
             Then("결과는 4등 이다") {
                 val prize = winningLotto.score(other)
@@ -67,7 +68,7 @@ class WinningLottoTest : BehaviorSpec({
         }
 
         When("숫자가 5개 일치하고, 보너스는 일치하지 않을 때") {
-            val other = Lotto(listOf(1, 2, 3, 4, 5, 34).map { Ball(it) })
+            val other = Lotto { listOf(1, 2, 3, 4, 5, 34) }
 
             Then("결과는 3등 이다") {
                 val prize = winningLotto.score(other)
@@ -76,7 +77,7 @@ class WinningLottoTest : BehaviorSpec({
         }
 
         When("숫자가 5개 일치하고, 보너스도 일치할 때") {
-            val other = Lotto(listOf(1, 2, 3, 4, 5, 7).map { Ball(it) })
+            val other = Lotto { listOf(1, 2, 3, 4, 5, 7) }
 
             Then("결과는 2등 이다") {
                 val prize = winningLotto.score(other)
@@ -85,7 +86,7 @@ class WinningLottoTest : BehaviorSpec({
         }
 
         When("숫자가 6개 일치하면") {
-            val other = Lotto(listOf(1, 2, 3, 4, 5, 6).map { Ball(it) })
+            val other = Lotto { listOf(1, 2, 3, 4, 5, 6) }
 
             Then("결과는 1등 이다") {
                 val prize = winningLotto.score(other)
