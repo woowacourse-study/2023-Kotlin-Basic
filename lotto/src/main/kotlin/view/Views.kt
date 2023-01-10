@@ -73,10 +73,9 @@ fun printWinningResult(winningResult: WinningResult) {
     )
 
     winningResult.result.forEach { (rank, value) ->
-        if (rank === FAILED) {
-            return
+        if (rank != FAILED) {
+            println("${getMatchingInfo(rank)}- ${value}개")
         }
-        println("${getMatchingInfo(rank)}- ${value}개")
     }
 }
 
