@@ -3,6 +3,7 @@ package view
 import domain.Lotto
 import domain.Rank
 import domain.Rank.*
+import domain.ReturnRate
 import domain.WinningResult
 import util.isNumeric
 
@@ -77,4 +78,8 @@ fun printWinningResult(winningResult: WinningResult) {
         }
         println("${getMatchingInfo(rank)}- ${value}개")
     }
+}
+
+fun printReturnRate(returnRate: ReturnRate) {
+    println("총 수익률은 ${String.format("%.2f", returnRate.value)}입니다.")
 }
