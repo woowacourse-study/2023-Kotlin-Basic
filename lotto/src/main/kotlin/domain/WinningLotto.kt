@@ -11,18 +11,16 @@ class WinningLotto(
     constructor(winningNumbers: List<Int>, bonusBall: Int) : this(Lotto.from(winningNumbers), LottoNumber(bonusBall))
 
     fun judgeRank(purchasedLotto: Lotto): Rank {
-        fun judgeSecondPrize(): Rank {
-            if (purchasedLotto.contains(bonusBall)) {
-                return Rank.SECOND
-            }
-            return Rank.THIRD
-        }
+        fun hasBonusBall(): Boolean = purchasedLotto.contains(bonusBall)
 
-        return when (winningNumbers.countMatches(purchasedLotto)) {
-            6 -> Rank.FIRST
-            5 -> judgeSecondPrize()
-            4 -> Rank.FOURTH
-            3 -> Rank.FIFTH
+        val count = winningNumbers.countMatches(purchasedLotto)
+
+        return when {
+            count == 6 -> Rank.FIRST
+            count == 5 && hasBonusBall() -> Rank.SECOND
+            count == 5 -> Rank.THIRD
+            count == 4 -> Rank.FOURTH
+            count == 3 -> Rank.FIFTH
             else -> Rank.FAILED
         }
     }
