@@ -16,9 +16,6 @@ fun main() {
     val winningLotto = WinningLotto(readWinningNumbers(), readBonusBall())
     val winningResult = WinningResult.of(winningLotto, lotteries)
     printWinningResult(winningResult)
-
-    val returnRate = ReturnRate.calculate(winningResult.totalReward, purchaseMoney)
-    printReturnRate(returnRate)
 }
 
 private fun inputPurchaseMoney(): PurchaseMoney {

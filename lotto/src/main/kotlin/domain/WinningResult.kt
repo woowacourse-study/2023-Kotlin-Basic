@@ -3,7 +3,9 @@ package domain
 class WinningResult private constructor(
     val result: Map<Rank, Int>
 ) {
-    val totalReward: Int = result.map { it.key.reward * it.value }.sum()
+    private val totalReward: Int = result.map { it.key.reward * it.value }.sum()
+    private val totalPurchaseMoney: Int = result.values.sum()
+    val returnRate: Double = totalReward.toDouble() / totalPurchaseMoney
 
     companion object {
         fun of(winningLotto: WinningLotto, purchasedLotteries: List<Lotto>): WinningResult {

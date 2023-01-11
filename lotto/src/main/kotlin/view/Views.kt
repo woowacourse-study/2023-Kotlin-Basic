@@ -1,7 +1,10 @@
 package view
 
-import domain.*
+import domain.Lotto
+import domain.PurchaseCount
+import domain.Rank
 import domain.Rank.*
+import domain.WinningResult
 import util.isNumeric
 
 private const val LOTTO_NUMBER_DELIMITER = ","
@@ -74,8 +77,5 @@ fun printWinningResult(winningResult: WinningResult) {
             println("${getMatchingInfo(rank)}- ${value}개")
         }
     }
-}
-
-fun printReturnRate(returnRate: ReturnRate) {
-    println("총 수익률은 ${String.format("%.2f", returnRate.value)}입니다.")
+    println("총 수익률은 ${String.format("%.2f", winningResult.returnRate)}입니다.")
 }

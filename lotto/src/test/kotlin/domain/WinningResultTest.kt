@@ -22,7 +22,7 @@ internal class WinningResultTest : StringSpec({
                 Pair(FIFTH, 0),
                 Pair(FAILED, 0)
             )
-            winningResult.totalReward shouldBe 2_000_000_000
+            winningResult.returnRate shouldBe 2.0E9
         }
     }
 })
