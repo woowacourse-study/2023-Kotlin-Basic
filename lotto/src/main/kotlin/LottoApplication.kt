@@ -3,12 +3,13 @@ import view.*
 
 fun main() {
     val purchaseMoney = inputPurchaseMoney()
+    val totalPurchaseCount = PurchaseCount(purchaseMoney)
 
-    val manualCount = inputManualCount(purchaseMoney)
+    val manualCount = inputManualCount(totalPurchaseCount)
     val lotteries = mutableListOf<Lotto>()
     lotteries.addAll(issueManualLotteries(manualCount))
 
-    val autoCount = purchaseMoney.purchasableCount - manualCount
+    val autoCount = totalPurchaseCount - manualCount
     lotteries.addAll(LottoMachine.issueAutomatically(autoCount))
     printLotteries(lotteries, manualCount, autoCount)
 
@@ -29,20 +30,20 @@ private fun inputPurchaseMoney(): PurchaseMoney {
     }
 }
 
-private fun inputManualCount(purchaseMoney: PurchaseMoney): Int {
+private fun inputManualCount(totalPurchaseCount: PurchaseCount): PurchaseCount {
     return try {
         val manualCount = readManualCount()
-        require(manualCount <= purchaseMoney.purchasableCount) {
-            "${purchaseMoney.purchasableCount}장 보다 많이 구매할 수 없습니다."
+        require(manualCount <= totalPurchaseCount.value) {
+            "${totalPurchaseCount}장 보다 많이 구매할 수 없습니다."
         }
-        return manualCount
+        return PurchaseCount(manualCount)
     } catch (e: IllegalArgumentException) {
         printErrorMessage(e.message)
-        inputManualCount(purchaseMoney)
+        inputManualCount(totalPurchaseCount)
     }
 }
 
-private fun issueManualLotteries(count: Int): List<Lotto> {
+private fun issueManualLotteries(count: PurchaseCount): List<Lotto> {
     fun issueManualLotto(): Lotto {
         return try {
             Lotto.from(readManualLottoNumbers())
@@ -52,9 +53,5 @@ private fun issueManualLotteries(count: Int): List<Lotto> {
         }
     }
 
-    val lotteries = mutableListOf<Lotto>()
-    for (i in 1..count) {
-        lotteries.add(issueManualLotto())
-    }
-    return lotteries
+    return (1..count.value).map { issueManualLotto() }
 }

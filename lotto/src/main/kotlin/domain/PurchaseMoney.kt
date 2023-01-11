@@ -3,15 +3,12 @@ package domain
 data class PurchaseMoney(
     val value: Int
 ) {
-    val purchasableCount: Int
-        get() = value / LOTTO_PRICE
-
     init {
         require(value >= LOTTO_PRICE) { "구입 금액은 로또 한 장의 가격보다 커야 합니다." }
         require(value % LOTTO_PRICE == 0) { "구입 금액은 천 원 단위어야 합니다." }
     }
 
     companion object {
-        private const val LOTTO_PRICE = 1_000
+        const val LOTTO_PRICE = 1_000
     }
 }

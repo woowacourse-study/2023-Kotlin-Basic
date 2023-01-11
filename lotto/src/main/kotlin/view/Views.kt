@@ -1,10 +1,7 @@
 package view
 
-import domain.Lotto
-import domain.Rank
+import domain.*
 import domain.Rank.*
-import domain.ReturnRate
-import domain.WinningResult
 import util.isNumeric
 
 private const val LOTTO_NUMBER_DELIMITER = ","
@@ -50,7 +47,7 @@ fun printErrorMessage(errorMessage: String?) {
     println(errorMessage ?: "오류가 발생했습니다.")
 }
 
-fun printLotteries(lotteries: List<Lotto>, manualCount: Int, autoCount: Int) {
+fun printLotteries(lotteries: List<Lotto>, manualCount: PurchaseCount, autoCount: PurchaseCount) {
     println("수동으로 ${manualCount}장, 자동으로 ${autoCount}장 구매했습니다.")
     lotteries.forEach { println(it.numbers.joinToString(", ", "[", "]")) }
 }
