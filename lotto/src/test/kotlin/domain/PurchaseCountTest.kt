@@ -2,6 +2,8 @@ package domain
 
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.StringSpec
+import io.kotest.data.row
+import io.kotest.inspectors.forAll
 import io.kotest.matchers.shouldBe
 
 internal class PurchaseCountTest : StringSpec({
@@ -11,9 +13,10 @@ internal class PurchaseCountTest : StringSpec({
     }
 
     "구입 금액 천 원당 1개의 값을 가진 구입 장 수를 생성할 수 있다." {
-        val purchaseMoney = PurchaseMoney(2_000)
-
-        PurchaseCount(purchaseMoney) shouldBe PurchaseCount(2)
+        listOf(
+            row(PurchaseMoney(1_000), PurchaseCount(1)),
+            row(PurchaseMoney(2_000), PurchaseCount(2))
+        ).forAll { (purchaseMoney, expected) -> PurchaseCount(purchaseMoney) shouldBe expected }
     }
 
     "구입 장 수 끼리 뺄셈을 할 수 있다." {
