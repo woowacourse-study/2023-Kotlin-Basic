@@ -2,6 +2,7 @@ package domain
 
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.StringSpec
+import io.kotest.inspectors.forAll
 import io.kotest.matchers.shouldBe
 
 internal class LottoTest : StringSpec({
@@ -9,7 +10,7 @@ internal class LottoTest : StringSpec({
         listOf(
             listOf(1, 2, 3, 4, 5),
             listOf(1, 2, 3, 4, 5, 6, 7)
-        ).forEach {
+        ).forAll {
             shouldThrow<IllegalArgumentException> { Lotto.from(it) }
                 .message shouldBe "로또 번호는 6개여야 합니다."
         }

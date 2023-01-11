@@ -3,6 +3,7 @@ package domain
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.data.row
+import io.kotest.inspectors.forAll
 import io.kotest.matchers.shouldBe
 
 internal class WinningLottoTest : StringSpec({
@@ -19,7 +20,7 @@ internal class WinningLottoTest : StringSpec({
             row(Lotto.from(listOf(1, 2, 3, 4, 8, 9)), Rank.FOURTH),
             row(Lotto.from(listOf(1, 2, 3, 8, 9, 10)), Rank.FIFTH),
             row(Lotto.from(listOf(1, 2, 8, 9, 10, 11)), Rank.FAILED)
-        ).forEach { (lotto, rank) -> winningLotto.judgeRank(lotto) shouldBe rank }
+        ).forAll { (lotto, rank) -> winningLotto.judgeRank(lotto) shouldBe rank }
     }
 
     "구매한 로또가 당첨 번호를 5개 포함하고 있고 보너스 볼을 포함하고 있으면 2등이다." {
