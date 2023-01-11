@@ -27,6 +27,15 @@ class Lotto(strategy: LottoStrategy) {
     fun match(other: Lotto): Int {
         return balls.count { other.balls.contains(it) }
     }
+
+    fun state(): String {
+        return balls.sortedBy { it.number }
+            .joinToString(separator = ", ", transform = { it.number.toString() })
+    }
+
+    companion object {
+        const val PRICE = 1_000
+    }
 }
 
 data class Ball(val number: Int) {
