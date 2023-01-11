@@ -7,11 +7,15 @@ class WinningResult private constructor(
 
     companion object {
         fun of(winningLotto: WinningLotto, purchasedLotteries: List<Lotto>): WinningResult {
-            val result = mutableMapOf(*Rank.values().map { Pair(it, 0) }.toTypedArray())
-            for (it in purchasedLotteries) {
-                val rank = winningLotto.judgeRank(it)
-                result[rank] = result[rank]?.plus(1) ?: 1
-            }
+            val result = mutableMapOf(
+                *Rank.values()
+                    .map { it to 0 }
+                    .toTypedArray()
+            )
+            result.putAll(purchasedLotteries.map { winningLotto.judgeRank(it) }
+                .groupingBy { it }
+                .eachCount()
+            )
             return WinningResult(result)
         }
     }
