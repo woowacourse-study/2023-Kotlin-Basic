@@ -10,7 +10,7 @@ import util.isNumeric
 private const val LOTTO_NUMBER_DELIMITER = ","
 
 fun readPurchaseMoney(): Int {
-    println("구입 금액을 입력해 주세요.")
+    println("구입 금액을 천 원 단위로 입력해 주세요.")
     return readNumber("구입 금액은 숫자여야 합니다.")
 }
 

@@ -5,7 +5,7 @@ class ReturnRate private constructor(
 ) {
     companion object {
         fun calculate(totalReward: Int, purchaseMoney: PurchaseMoney): ReturnRate = ReturnRate(
-            totalReward.toDouble() / purchaseMoney.availableAmount
+            totalReward.toDouble() / purchaseMoney.value
         )
     }
 }

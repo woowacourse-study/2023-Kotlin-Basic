@@ -10,15 +10,8 @@ internal class PurchaseMoneyTest : StringSpec({
             .message shouldBe "구입 금액은 로또 한 장의 가격보다 커야 합니다."
     }
 
-    "천 원 당 한 장의 로또를 구매할 수 있다." {
-        val money = PurchaseMoney(1_001)
-
-        money.purchasableCount shouldBe 1
-    }
-
-    "천 원 이하를 버림한 실 구매 금액을 계산할 수 있다." {
-        val money = PurchaseMoney(1_001)
-
-        money.availableAmount shouldBe 1_000
+    "구입 금액은 천 원 단위어야 한다." {
+        shouldThrow<IllegalArgumentException> { PurchaseMoney(1_001) }
+            .message shouldBe "구입 금액은 천 원 단위어야 합니다."
     }
 })
