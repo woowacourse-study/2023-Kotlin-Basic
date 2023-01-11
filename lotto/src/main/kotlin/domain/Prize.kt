@@ -1,7 +1,7 @@
 package domain
 
 enum class Prize(
-    private val hits: Int,
+    val hits: Int,
     val reward: Int
 ) {
     FIRST(6, 2_000_000_000),
