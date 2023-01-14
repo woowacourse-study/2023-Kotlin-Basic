@@ -5,8 +5,12 @@ import lotto.domain.Lotto.Number
 
 object Judge {
 
-    fun judgeResult(purchaseLottos: List<Lotto>, winningLotto: Lotto, bonusNumber: Number): MutableMap<Int, Int> {
-        val results = mutableMapOf<Int, Int>(Pair(1, 0), Pair(2, 0), Pair(3, 0), Pair(4, 0), Pair(5, 0))
+    fun judgeResult(purchaseLottos: List<Lotto>, winningLotto: Lotto, bonusNumber: Number): Map<Int, Int> {
+        val results = mutableMapOf(
+            *(1..5)
+                .map { it to 0 }
+                .toTypedArray()
+        )
 
         purchaseLottos
             .forEach {

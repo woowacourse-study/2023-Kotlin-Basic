@@ -17,7 +17,7 @@ internal class LottoTest {
         bonusNumber: Number,
         rank: Int,
     ) {
-        val lotto = Lotto.ofInt(lottoNumbers)
+        val lotto = Lotto.fromInts(lottoNumbers)
 
         val judgeWinning = lotto.judgeWinning(winningLotto, bonusNumber)
 
@@ -26,7 +26,7 @@ internal class LottoTest {
 
     companion object {
 
-        val winningLotto = Lotto.ofInt(listOf(1, 2, 3, 4, 5, 6))
+        val winningLotto = Lotto.fromInts(listOf(1, 2, 3, 4, 5, 6))
         val bonusNumber = Number(7)
 
         @JvmStatic

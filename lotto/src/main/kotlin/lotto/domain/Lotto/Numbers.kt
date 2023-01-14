@@ -1,14 +1,9 @@
 package lotto.domain.Lotto
 
-class Numbers {
+object Numbers {
 
-    companion object {
-        private val values = mutableListOf<Number>().also {
-            for (i in 1..45)
-                it.add(Number(i))
-        }
+        private val values = (1..45)
 
-        fun getShuffledNumbers(count: Int): MutableList<Number> =
-            values.shuffled().subList(0, count).toMutableList()
-    }
+        fun getShuffledNumbers(count: Int): List<Int> =
+            values.shuffled().subList(0, count).toList()
 }

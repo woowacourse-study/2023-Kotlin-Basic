@@ -6,13 +6,11 @@ class JudgeResult(
 ) {
 
     fun calculateRank(): Int {
-        return when (sameCount) {
-            6 -> 1
-            5 -> {
-                if (bonusWin) return 2
-                return 3
-            }
-            4 -> 4
+        return when {
+            sameCount == 6 -> 1
+            sameCount == 5 && bonusWin -> 2
+            sameCount == 5 -> 3
+            sameCount == 4 -> 4
             else -> 5
         }
     }

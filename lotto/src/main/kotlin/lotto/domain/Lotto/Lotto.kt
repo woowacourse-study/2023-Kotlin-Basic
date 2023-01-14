@@ -6,8 +6,12 @@ class Lotto(
     val numbers: Set<Number>
 ) {
 
+    init {
+        validateCount(numbers)
+    }
+
     fun judgeWinning(winningLotto: Lotto, bonusNumber: Number): JudgeResult {
-        var sameCount = 0
+        var sameCount = numbers.count { winningLotto.numbers.contains(it) }
         var bonusWin = false
 
         for (number in numbers) {
@@ -27,20 +31,21 @@ class Lotto(
         numbers.contains(number)
 
     companion object {
-        fun ofNumbers(numbers: MutableList<Number>): Lotto {
-            validateCount(numbers)
+        private const val LOTTO_SIZE = 6
+
+        fun fromNumbers(numbers: List<Number>): Lotto {
             return Lotto(numbers.sortedBy { it.value }.toSet())
         }
 
-        fun ofInt(numbers: List<Int>): Lotto {
-            return ofNumbers(numbers.map { Number(it) }
-                .toMutableList())
+        fun fromInts(numbers: List<Int>): Lotto {
+            return fromNumbers(numbers.map { Number(it) }
+                .toList())
         }
+    }
 
-        private fun validateCount(numbers: MutableList<Number>) {
-            if (numbers.toMutableSet().size != 6) {
-                throw IllegalArgumentException("중복되지 않는 6개의 숫자여야 합니다.")
-            }
+    private fun validateCount(numbers: Set<Number>) {
+        if (numbers.size != LOTTO_SIZE) {
+            throw IllegalArgumentException("중복되지 않는 6개의 숫자여야 합니다.")
         }
     }
 }
