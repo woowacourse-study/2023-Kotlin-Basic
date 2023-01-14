@@ -12,17 +12,7 @@ class Lotto(
 
     fun judgeWinning(winningLotto: Lotto, bonusNumber: Number): JudgeResult {
         var sameCount = numbers.count { winningLotto.numbers.contains(it) }
-        var bonusWin = false
-
-        for (number in numbers) {
-            if (winningLotto.contains(number)) {
-                sameCount += 1
-            }
-        }
-
-        if (numbers.contains(bonusNumber)) {
-            bonusWin = true
-        }
+        var bonusWin = numbers.contains(bonusNumber)
 
         return JudgeResult(sameCount, bonusWin)
     }

@@ -14,8 +14,8 @@ object LottoFactory {
     }
 
     private fun validateMoney(money: Long) {
-        if (money < 1000) {
-            throw IllegalArgumentException("천원 미만은 들어올 수 없습니다.")
+        if (money < 0) {
+            throw IllegalArgumentException("음수는 들어올 수 없습니다.")
         }
     }
 
