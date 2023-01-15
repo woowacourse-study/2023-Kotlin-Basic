@@ -13,10 +13,9 @@ class WinningLotto(private val lotto: Lotto, private val bonus: Ball) {
 }
 
 class Lotto(strategy: LottoStrategy) {
-    private val balls: Set<Ball>
+    private val balls: Set<Ball> = strategy.generateNumbers().map { Ball(it) }.toSet()
 
     init {
-        balls = strategy.generateNumbers().map { Ball(it) }.toSet()
         require(balls.distinct().size == 6) { "로또는 중복되지 않는 6개 숫자로 구성되어야 합니다" }
     }
 
