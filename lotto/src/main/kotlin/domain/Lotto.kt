@@ -16,7 +16,7 @@ class Lotto(strategy: LottoStrategy) {
     private val balls: Set<Ball> = strategy.generateNumbers().map { Ball(it) }.toSet()
 
     init {
-        require(balls.distinct().size == 6) { "로또는 중복되지 않는 6개 숫자로 구성되어야 합니다" }
+        require(balls.distinct().size == BALLS_COUNT) { "로또는 중복되지 않는 $BALLS_COUNT 개 숫자로 구성되어야 합니다" }
     }
 
     fun contains(ball: Ball): Boolean {
@@ -29,16 +29,23 @@ class Lotto(strategy: LottoStrategy) {
 
     fun state(): String {
         return balls.sortedBy { it.number }
-            .joinToString(separator = ", ", transform = { it.number.toString() })
+            .joinToString(separator = SEPARATOR, transform = { it.number.toString() })
     }
 
     companion object {
         const val PRICE = 1_000
+        const val BALLS_COUNT = 6
+        const val SEPARATOR = ", "
     }
 }
 
 data class Ball(val number: Int) {
     init {
-        require(number in 1..45) { "로또 숫자는 1 이상 45 이하입니다" }
+        require(number in MIN_VALUE..MAX_VALUE) { "로또 숫자는 $MIN_VALUE 이상 $MAX_VALUE 이하입니다" }
+    }
+
+    companion object {
+        const val MIN_VALUE = 1
+        const val MAX_VALUE = 45
     }
 }
