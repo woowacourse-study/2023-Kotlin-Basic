@@ -33,7 +33,7 @@ private fun inputManualCount(totalPurchaseCount: PurchaseCount): PurchaseCount {
         require(manualCount <= totalPurchaseCount.value) {
             "${totalPurchaseCount}장 보다 많이 구매할 수 없습니다."
         }
-        return PurchaseCount(manualCount)
+        PurchaseCount(manualCount)
     } catch (e: IllegalArgumentException) {
         printErrorMessage(e.message)
         inputManualCount(totalPurchaseCount)
