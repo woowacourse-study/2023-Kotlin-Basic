@@ -9,7 +9,7 @@ import io.kotest.matchers.shouldBe
 class LottoTest : StringSpec({
 
     "로또 숫자는 0 이하 46 이상이 될 수 없다" {
-        listOf(-1, 0, 46, 45).forAll { invalidNumber ->
+        listOf(-1, 0, 46).forAll { invalidNumber ->
             shouldThrow<IllegalArgumentException> { Ball(invalidNumber) }
                 .message shouldBe "로또 숫자는 1 이상 45 이하입니다"
         }
@@ -22,7 +22,7 @@ class LottoTest : StringSpec({
             listOf(1, 2, 3, 4, 5, 5)
         ).forAll { numbers ->
             shouldThrow<IllegalArgumentException> { Lotto { numbers } }
-                .message shouldBe "로또는 중복되지 않는 6개 숫자로 구성되어야 합니다"
+                .message shouldBe "로또는 중복되지 않는 6 개 숫자로 구성되어야 합니다"
         }
     }
 

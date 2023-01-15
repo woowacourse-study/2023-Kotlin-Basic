@@ -6,6 +6,6 @@ fun interface LottoStrategy {
 
 class AutoLottoStrategy : LottoStrategy {
     override fun generateNumbers(): List<Int> {
-        return (1..45).toList().shuffled().subList(0, 6)
+        return (1..45).toList().shuffled().take(6)
     }
 }

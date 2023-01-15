@@ -45,6 +45,6 @@ class MoneyTest: StringSpec({
 
     "지불 불가능한 금액일 경우 false를 반환한다" {
         val money = Money(1_000)
-        money.isPayable(1_001) shouldBe true
+        money.isPayable(1_001) shouldBe false
     }
 })
