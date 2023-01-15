@@ -4,7 +4,7 @@ data class LottoNumber(
     val value: Int
 ) {
     init {
-        require(value in MIN_VALUE..MAX_VALUE) { "로또 번호는 1 이상 45 이하여야 합니다." }
+        require(value in MIN_VALUE..MAX_VALUE) { "로또 번호는 $MIN_VALUE 이상 $MAX_VALUE 이하여야 합니다." }
     }
 
     override fun toString(): String {
@@ -12,7 +12,7 @@ data class LottoNumber(
     }
 
     companion object {
-        private const val MIN_VALUE = 1
-        private const val MAX_VALUE = 45
+        const val MIN_VALUE = 1
+        const val MAX_VALUE = 45
     }
 }

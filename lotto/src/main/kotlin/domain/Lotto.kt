@@ -13,7 +13,7 @@ class Lotto private constructor(
     fun countMatches(target: Lotto): Int = numbers.count { target.contains(it) }
 
     companion object {
-        private const val NUMBERS_SIZE = 6
+        const val NUMBERS_SIZE = 6
 
         fun from(numbers: List<Int>): Lotto = Lotto(numbers.map { LottoNumber(it) })
     }
