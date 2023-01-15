@@ -24,8 +24,6 @@ private fun addManualLottos(manualLottoCount: Int, lottos: Lottos) {
 
 private fun inputManualCount(lottos: Lottos): Int {
     val manualLottoCount = inputLottoCount()
-    if (!lottos.canBuyLottosOf(manualLottoCount)) {
-        throw IllegalArgumentException()
-    }
+    require(lottos.canBuyLottosOf(manualLottoCount)) {"금액이 모자라 구매할 수 없습니다"}
     return manualLottoCount
 }
