@@ -4,23 +4,23 @@ import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.shouldBe
 
-class LotteryTest: StringSpec({
+class LottosTest: StringSpec({
 
     "해당 개수만큼 로또를 구매할 수 있다면 true를 반환한다" {
-        val lottery = Lottery(Money(2_000))
-        lottery.canBuyLottosOf(2) shouldBe true
+        val lottos = Lottos(Money(2_000))
+        lottos.canBuyLottosOf(2) shouldBe true
     }
 
     "해당 개수만큼 로또를 구매할 수 없다면 false를 반환한다" {
-        val lottery = Lottery(Money(1_900))
-        lottery.canBuyLottosOf(2) shouldBe false
+        val lottos = Lottos(Money(1_900))
+        lottos.canBuyLottosOf(2) shouldBe false
     }
 
     "주어진 금액에서 가능한 많은 자동 로또를 생성한다" {
-        val lottery = Lottery(Money(9_999))
-        lottery.generateAutoLottos()
+        val lottos = Lottos(Money(9_999))
+        lottos.generateAutoLottos()
 
-        val state = lottery.state()
+        val state = lottos.state()
         state.autoLottos.size shouldBe 9
     }
 })

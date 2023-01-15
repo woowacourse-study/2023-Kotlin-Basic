@@ -3,28 +3,28 @@ import view.*
 
 fun main() {
     val amount = inputMoneyAmount()
-    val lottery = Lottery(Money(amount))
+    val lottos = Lottos(Money(amount))
 
-    val manualLottoCount = inputManualCount(lottery)
-    addManualLottos(manualLottoCount, lottery)
-    lottery.generateAutoLottos()
-    outputLotteryStatus(lottery.state())
+    val manualLottoCount = inputManualCount(lottos)
+    addManualLottos(manualLottoCount, lottos)
+    lottos.generateAutoLottos()
+    outputLotteryStatus(lottos.state())
 
     val winningLotto = WinningLotto(Lotto { inputWinningLotto() }, Ball(inputBonusBall()))
-    val result = lottery.scoredBy(winningLotto)
+    val result = lottos.scoredBy(winningLotto)
     outputLotteryResult(result)
 }
 
-private fun addManualLottos(manualLottoCount: Int, lottery: Lottery) {
+private fun addManualLottos(manualLottoCount: Int, lottos: Lottos) {
     if (manualLottoCount != 0) {
         val manualLottos = inputLottoNumbers(manualLottoCount).map { Lotto { it } }
-        lottery.addManualLottos(manualLottos)
+        lottos.addManualLottos(manualLottos)
     }
 }
 
-private fun inputManualCount(lottery: Lottery): Int {
+private fun inputManualCount(lottos: Lottos): Int {
     val manualLottoCount = inputLottoCount()
-    if (!lottery.canBuyLottosOf(manualLottoCount)) {
+    if (!lottos.canBuyLottosOf(manualLottoCount)) {
         throw IllegalArgumentException()
     }
     return manualLottoCount

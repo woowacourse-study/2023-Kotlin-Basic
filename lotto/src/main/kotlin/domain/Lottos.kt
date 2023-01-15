@@ -2,10 +2,10 @@ package domain
 
 import LotteryState
 
-class Lottery(private val money: Money) {
+class Lottos(private val money: Money) {
 
-    private var manualLottos: MutableList<Lotto> = mutableListOf()
-    private var autoLottos: MutableList<Lotto> = mutableListOf()
+    private val manualLottos: MutableList<Lotto> = mutableListOf()
+    private val autoLottos: MutableList<Lotto> = mutableListOf()
 
     fun canBuyLottosOf(count: Int): Boolean {
         return money.isPayable(count * Lotto.PRICE)
