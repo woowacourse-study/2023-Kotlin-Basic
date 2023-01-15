@@ -13,7 +13,5 @@ data class PurchaseCount(
 
     operator fun minus(other: PurchaseCount) = PurchaseCount(value - other.value)
 
-    override fun toString(): String {
-        return "$value"
-    }
+    override fun toString(): String = "$value"
 }
