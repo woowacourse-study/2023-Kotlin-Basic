@@ -16,11 +16,11 @@ class WinningLotto(
         val count = winningNumbers.countMatches(purchasedLotto)
 
         return when {
-            count == 6 -> Rank.FIRST
-            count == 5 && hasBonusBall() -> Rank.SECOND
-            count == 5 -> Rank.THIRD
-            count == 4 -> Rank.FOURTH
             count == 3 -> Rank.FIFTH
+            count == 4 -> Rank.FOURTH
+            count == 5 && !hasBonusBall() -> Rank.THIRD
+            count == 5 -> Rank.SECOND
+            count == 6 -> Rank.FIRST
             else -> Rank.FAILED
         }
     }
