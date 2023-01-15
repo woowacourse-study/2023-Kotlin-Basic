@@ -1,6 +1,6 @@
 package view
 
-import LotteryState
+import LottosDto
 import domain.LotteryResult
 import domain.Prize
 
@@ -56,13 +56,13 @@ private fun requireIsIntAndNotBlank(input: String) {
     require(input.isNotBlank()) { "빈 값을 입력할 수 없습니다" }
 }
 
-fun outputLotteryStatus(lotteryState: LotteryState) {
-    println("수동으로 ${lotteryState.manualLottos.size}장, 자동으로 ${lotteryState.autoLottos.size}장 구매했습니다")
+fun outputLotteryStatus(lottosDto: LottosDto) {
+    println("수동으로 ${lottosDto.manualLottos.size}장, 자동으로 ${lottosDto.autoLottos.size}장 구매했습니다")
 
-    for (manualLotto in lotteryState.manualLottos) {
+    for (manualLotto in lottosDto.manualLottos) {
         println("[${manualLotto.state()}]")
     }
-    for (autoLotto in lotteryState.autoLottos) {
+    for (autoLotto in lottosDto.autoLottos) {
         println("[${autoLotto.state()}]")
     }
 }

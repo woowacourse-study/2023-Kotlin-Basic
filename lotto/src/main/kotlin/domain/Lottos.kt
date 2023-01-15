@@ -1,6 +1,6 @@
 package domain
 
-import LotteryState
+import LottosDto
 
 class Lottos(private val money: Money) {
 
@@ -23,8 +23,8 @@ class Lottos(private val money: Money) {
         }
     }
 
-    fun state(): LotteryState {
-        return LotteryState(manualLottos, autoLottos)
+    fun state(): LottosDto {
+        return LottosDto(manualLottos, autoLottos)
     }
 
     fun scoredBy(winningLotto: WinningLotto): LotteryResult {
