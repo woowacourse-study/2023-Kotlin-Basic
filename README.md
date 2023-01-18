@@ -13,13 +13,15 @@
 - [로또](https://github.com/woowacourse/java-lotto)
   - 리뷰: 토르 -> 후디 -> 써머 -> 오찌 -> 토르  
 - [워들](https://github.com/woowahan-pjs/kotlin-wordle)
+  - 리뷰: 써머 -> 후디 -> 매트 -> 토르 -> 오찌 -> 써머
+  - 코틀린 적응기간을 위해 봄은 워들 미션의 리뷰에는 참여하지 않습니다. 대신 다른 인원들이 봄의 PR에 리뷰를 하도록 합니다.
 - [블랙잭](https://github.com/woowacourse/java-blackjack)
 - [지하철 노선도](https://github.com/woowacourse/atdd-subway-map) + [경로 조회](https://github.com/woowacourse/atdd-subway-path)
 
 ### :student: Members
-|![](https://github.com/injoon2019.png?size=100)|![](https://github.com/hyewoncc.png?size=100)|![](https://github.com/Ohzzi.png?size=100)|![](https://github.com/hyeonic.png?size=100)|![](https://github.com/devHudi.png?size=100)|
-|:-:|:-:|:-:|:-:|:-:|
-|[토르](https://github.com/injoon2019)|[써머](https://github.com/hyewoncc)|[오찌](https://github.com/Ohzzi)|[매트](https://github.com/hyeonic)|[후디](https://github.com/devHudi)|
+|![](https://github.com/injoon2019.png?size=100)|![](https://github.com/hyewoncc.png?size=100)|![](https://github.com/Ohzzi.png?size=100)|![](https://github.com/hyeonic.png?size=100)|![](https://github.com/devHudi.png?size=100)|![](https://github.com/JangBomi.png?size=100)|
+|:-:|:-:|:-:|:-:|:-:|:-:|
+|[토르](https://github.com/injoon2019)|[써머](https://github.com/hyewoncc)|[오찌](https://github.com/Ohzzi)|[매트](https://github.com/hyeonic)|[후디](https://github.com/devHudi)|[봄](https://github.com/JangBomi)|
 
 ### :book: Reference
 Kotlin in Action - 드미트리 제메로프 저
