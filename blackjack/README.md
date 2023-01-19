@@ -1,2 +1,2 @@
-# kotlin-lotto
-로또 미션 저장소
+# kotlin-blackjack
+블랙잭 미션 저장소
