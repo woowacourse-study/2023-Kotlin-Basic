@@ -1,2 +1,2 @@
-# kotlin-lotto
-로또 미션 저장소
+# kotlin-wordle
+워들 미션 저장소
