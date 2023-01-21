@@ -1,11 +1,11 @@
 package wordle.infra
 
-import wordle.domain.WordsReadable
+import wordle.domain.WordsReader
 import wordle.domain.Word
 import kotlin.io.path.Path
 import kotlin.io.path.readLines
 
-class FileWordsReadable : WordsReadable {
+class FileWordsReader : WordsReader {
 
     override fun read(): List<Word> {
         return Path(PATH).readLines()

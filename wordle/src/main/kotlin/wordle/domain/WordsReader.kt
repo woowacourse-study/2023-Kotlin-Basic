@@ -1,6 +1,6 @@
 package wordle.domain
 
-fun interface WordsReadable {
+fun interface WordsReader {
 
     fun read(): List<Word>
 }
