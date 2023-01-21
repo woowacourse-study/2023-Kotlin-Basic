@@ -29,4 +29,24 @@ class WordTest {
     fun `단어에 알파벳이 아닌 것이 포함된 경우 예외를 던진다`(word: String) {
         assertThrows<IllegalArgumentException> { Word(word) }
     }
+
+    @Test
+    fun `특정 위치의 문자가 서로 같으면 true를 반환한다`() {
+        val word = Word("hello")
+        val other = Word("heath") // 🟩🟩⬜⬜🟨
+
+        val actual = word.isSameIndex(other, 0)
+
+        assertTrue(actual)
+    }
+
+    @Test
+    fun `특정 위치의 문자가 서로 다르면 false를 반환한다`() {
+        val word = Word("hello")
+        val other = Word("heath") // 🟩🟩⬜⬜🟨
+
+        val actual = word.isSameIndex(other, 2)
+
+        assertFalse(actual)
+    }
 }
