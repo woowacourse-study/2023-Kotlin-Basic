@@ -5,10 +5,12 @@ data class Word(
 ) {
 
     init {
-        require(value.length == WORD_LENGTH) { "단어는 5자여야 합니다." }
+        require(value.length == LENGTH) { "단어는 ${LENGTH}자여야 합니다." }
     }
 
     override fun toString(): String = value
-}
 
-private const val WORD_LENGTH = 5
+    companion object {
+        const val LENGTH = 5
+    }
+}
