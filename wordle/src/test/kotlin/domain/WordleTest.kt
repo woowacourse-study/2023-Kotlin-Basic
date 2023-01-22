@@ -29,14 +29,14 @@ class WordleTest : StringSpec({
 
         wordle.proceedRound("rebut")
         wordle.proceedRound("awake")
-        wordle.proceedRound("cigar")
+        val actual = wordle.proceedRound("cigar")
 
         val expected = listOf(
             JudgementTile(listOf(YELLOW, GRAY, GRAY, GRAY, GRAY)),
             JudgementTile(listOf(YELLOW, GRAY, GRAY, GRAY, GRAY)),
             JudgementTile(listOf(GREEN, GREEN, GREEN, GREEN, GREEN))
         )
-        wordle.judgementTiles shouldContainExactly expected
+        actual shouldContainExactly expected
     }
 
     "이미 종료된 게임을 진행할 수 없다." {
