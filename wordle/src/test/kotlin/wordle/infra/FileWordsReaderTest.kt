@@ -12,6 +12,5 @@ class FileWordsReaderTest {
         val actual = wordsReader.read()
 
         assertEquals(actual.size, 2309)
-        println(actual)
     }
 }
