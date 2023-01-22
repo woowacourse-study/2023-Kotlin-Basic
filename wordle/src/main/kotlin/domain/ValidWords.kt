@@ -8,6 +8,8 @@ object ValidWords {
         .readLines()
         .map { Word(it) }
 
+    val size = cache.size
+
     fun contains(word: Word): Boolean = cache.contains(word)
 
     operator fun get(index: Int) = cache[index]
