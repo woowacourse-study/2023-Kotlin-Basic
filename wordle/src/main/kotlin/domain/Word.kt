@@ -16,6 +16,6 @@ data class Word(
     override fun toString(): String = value
 
     companion object {
-        const val LENGTH = 5
+        const val LENGTH: Int = 5
     }
 }
