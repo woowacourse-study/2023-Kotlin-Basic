@@ -35,3 +35,7 @@ private fun printColor(color: Color) {
         Color.GREEN -> print("🟩")
     }
 }
+
+fun printTryCount(currentRound: Int) {
+    println("$currentRound/${Wordle.MAX_ROUND}")
+}
