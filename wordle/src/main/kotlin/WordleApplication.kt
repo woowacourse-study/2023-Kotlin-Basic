@@ -8,7 +8,7 @@ fun main() {
     val wordle = Wordle(PickAnswer.Default())
     while (!wordle.isEnd) {
         val judgementTiles = retryOnException { wordle.proceedRound(inputPrediction()) }
-        terminateGameIfEnd(wordle, judgementTiles)
+        printMessageIfEnd(wordle, judgementTiles)
         printTiles(judgementTiles)
     }
 }
@@ -22,14 +22,14 @@ private fun <T> retryOnException(function: () -> T): T {
     }
 }
 
-private fun terminateGameIfEnd(wordle: Wordle, judgementTiles: List<JudgementTile>) {
+private fun printMessageIfEnd(wordle: Wordle, judgementTiles: List<JudgementTile>) {
     if (wordle.isEnd) {
         printTryCount(wordle.round)
-        printIfFailed(judgementTiles, wordle)
+        printMessageIfFailed(judgementTiles, wordle)
     }
 }
 
-private fun printIfFailed(judgementTiles: List<JudgementTile>, wordle: Wordle) {
+private fun printMessageIfFailed(judgementTiles: List<JudgementTile>, wordle: Wordle) {
     if (!judgementTiles.last().isAllGreen()) {
         printFailMessage(wordle.answer)
     }
