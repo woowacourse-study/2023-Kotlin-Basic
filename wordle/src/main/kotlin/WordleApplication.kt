@@ -17,7 +17,7 @@ private fun <T> retryOnException(function: () -> T): T {
     return try {
         function()
     } catch (e: Exception) {
-        println(e.localizedMessage)
+        printErrorMessage(e.localizedMessage)
         retryOnException(function)
     }
 }

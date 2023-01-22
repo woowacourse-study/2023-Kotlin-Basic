@@ -19,6 +19,10 @@ fun printStartMessage() {
     )
 }
 
+fun printErrorMessage(message: String) {
+    println(message)
+}
+
 fun printTiles(judgementTiles: List<JudgementTile>) {
     println()
     judgementTiles.forEach(::printTile)
