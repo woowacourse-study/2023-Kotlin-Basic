@@ -17,10 +17,14 @@ fun inputAnswer(): String {
 }
 
 fun printTryResult(result: List<String>) {
-    println(result)
+    println(result.joinToString(separator = "\n"))
 }
 
 fun printGameResult(win: Boolean, answer: Wordle) {
     println("승 : $win")
     println("정답: $answer")
+}
+
+fun printInputValidWordle() {
+    println("목록에 존재하는 단어를 적어주세요")
 }
