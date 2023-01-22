@@ -6,11 +6,11 @@ class Wordle(
     private val answer: Answer = pickAnswer()
     var round: Int = 0
         private set
-    val judgementTiles: MutableList<JudgementTile> = mutableListOf()
+    private val judgementTiles: MutableList<JudgementTile> = mutableListOf()
     var isEnd: Boolean = false
         private set
 
-    fun proceedRound(predictionString: String): JudgementTile {
+    fun proceedRound(predictionString: String): List<JudgementTile> {
         require(!isEnd) { "이미 게임이 종료되었습니다." }
         val judgementTile = answer.judge(Prediction(predictionString))
         round++
@@ -18,7 +18,7 @@ class Wordle(
         if (judgementTile.isAllGreen() || round == MAX_ROUND) {
             isEnd = true
         }
-        return judgementTile
+        return judgementTiles
     }
 
     companion object {
