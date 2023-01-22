@@ -1,5 +1,10 @@
 package view
 
+fun inputPrediction(): String {
+    println("정답을 입력해주세요.")
+    return readln()
+}
+
 fun printStartMessage() {
     println(
         """

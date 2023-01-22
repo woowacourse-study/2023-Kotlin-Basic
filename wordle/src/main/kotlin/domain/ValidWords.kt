@@ -4,9 +4,9 @@ import java.io.File
 
 object ValidWords {
 
-    private val cache: List<Word> = File("src/main/resources/words.txt")
+    private val cache: List<Word> = File(FILE_PATH!!.toURI())
         .readLines()
-        .map { Word(it) }
+        .map(::Word)
 
     val size = cache.size
 
@@ -14,3 +14,5 @@ object ValidWords {
 
     operator fun get(index: Int) = cache[index]
 }
+
+private val FILE_PATH = ValidWords.javaClass.classLoader.getResource("words.txt")
