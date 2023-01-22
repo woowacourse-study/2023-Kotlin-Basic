@@ -44,4 +44,8 @@ class Answer(
             charCounts.remove(char)
         }
     }
+
+    override fun toString(): String {
+        return "$word"
+    }
 }

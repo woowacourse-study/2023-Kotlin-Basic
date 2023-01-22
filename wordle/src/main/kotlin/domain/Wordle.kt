@@ -3,7 +3,7 @@ package domain
 class Wordle(
     pickAnswer: PickAnswer
 ) {
-    private val answer: Answer = pickAnswer()
+    val answer: Answer = pickAnswer()
     var round: Int = 0
         private set
     private val judgementTiles: MutableList<JudgementTile> = mutableListOf()

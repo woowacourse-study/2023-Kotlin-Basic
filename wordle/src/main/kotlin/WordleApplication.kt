@@ -1,9 +1,6 @@
 import domain.PickAnswer
 import domain.Wordle
-import view.inputPrediction
-import view.printStartMessage
-import view.printTiles
-import view.printTryCount
+import view.*
 
 fun main() {
     printStartMessage()
@@ -13,6 +10,9 @@ fun main() {
         val judgementTiles = retryOnException { wordle.proceedRound(inputPrediction()) }
         if (wordle.isEnd) {
             printTryCount(wordle.round)
+            if (!judgementTiles.last().isAllGreen()) {
+                printFailMessage(wordle.answer)
+            }
         }
         printTiles(judgementTiles)
     }

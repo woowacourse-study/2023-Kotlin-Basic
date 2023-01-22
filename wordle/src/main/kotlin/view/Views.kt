@@ -1,5 +1,6 @@
 package view
 
+import domain.Answer
 import domain.Color
 import domain.JudgementTile
 import domain.Wordle
@@ -19,7 +20,9 @@ fun printStartMessage() {
 }
 
 fun printTiles(judgementTiles: List<JudgementTile>) {
+    println()
     judgementTiles.forEach(::printTile)
+    println()
 }
 
 private fun printTile(judgementTile: JudgementTile) {
@@ -37,5 +40,21 @@ private fun printColor(color: Color) {
 }
 
 fun printTryCount(currentRound: Int) {
-    println("$currentRound/${Wordle.MAX_ROUND}")
+    println(
+        """
+        
+        $currentRound/${Wordle.MAX_ROUND}
+        """.trimIndent()
+    )
+}
+
+fun printFailMessage(answer: Answer) {
+    println(
+        """
+            
+        ${Wordle.MAX_ROUND}번의 기회를 모두 소진했습니다.
+        정답은 $answer 입니다.
+        내일 다시 도전해주세요.
+        """.trimIndent()
+    )
 }
