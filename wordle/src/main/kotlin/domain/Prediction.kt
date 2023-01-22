@@ -1,6 +1,6 @@
 package domain
 
-class Prediction(
+class Prediction private constructor(
     val word: Word
 ) {
 

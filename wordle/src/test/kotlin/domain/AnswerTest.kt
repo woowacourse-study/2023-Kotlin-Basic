@@ -14,7 +14,7 @@ class AnswerTest : StringSpec({
 
     "결과를 판정할 수 있다. - 정답과 예측이 완전히 일치하는 경우" {
         val answer = Answer(Word("cigar"))
-        val prediction = Prediction(Word("cigar"))
+        val prediction = Prediction("cigar")
 
         val judgementTile = answer.judge(prediction)
 
@@ -23,7 +23,7 @@ class AnswerTest : StringSpec({
 
     "결과를 판정할 수 있다. - 글자와 위치가 모두 일치하는 글자가 있는 경우" {
         val answer = Answer(Word("cigar"))
-        val prediction = Prediction(Word("comet"))
+        val prediction = Prediction("comet")
 
         val judgementTile = answer.judge(prediction)
 
@@ -32,7 +32,7 @@ class AnswerTest : StringSpec({
 
     "결과를 판정할 수 있다. - 글자는 일치하지만 위치가 다른 글자가 있는 경우" {
         val answer = Answer(Word("cigar"))
-        val prediction = Prediction(Word("heath"))
+        val prediction = Prediction("heath")
 
         val judgementTile = answer.judge(prediction)
 
@@ -41,7 +41,7 @@ class AnswerTest : StringSpec({
 
     "결과를 판정할 수 있다. - 동일한 글자를 두 개 이상 입력하고 정답에 다른 위치로 하나만 포함되어 있을 경우" {
         val answer = Answer(Word("react"))
-        val prediction = Prediction(Word("carry"))
+        val prediction = Prediction("carry")
 
         val judgementTile = answer.judge(prediction)
 
