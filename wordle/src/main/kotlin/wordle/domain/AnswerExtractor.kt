@@ -1,8 +1,8 @@
-package wordle.domain.answer
+package wordle.domain
 
 import wordle.domain.Word
 
-interface AnswerExtractor {
+fun interface AnswerExtractor {
 
     fun extract(words: List<Word>): Word
 }
