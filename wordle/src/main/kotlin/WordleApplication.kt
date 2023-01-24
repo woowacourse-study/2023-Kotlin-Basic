@@ -1,8 +1,5 @@
 import domain.WordleGame
-import view.inputWord
-import view.printAllRoundResults
-import view.printRoundCount
-import view.printStartMessage
+import view.*
 
 fun main() {
     printStartMessage()
@@ -17,6 +14,7 @@ fun main() {
 fun printGameResult(game: WordleGame) {
     if (game.isEnd) {
         printRoundCount(game.round)
+        printAnswer(game.answer)
     }
     printAllRoundResults(game.gameResult)
 }

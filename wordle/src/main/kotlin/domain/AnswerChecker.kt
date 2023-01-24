@@ -1,15 +1,12 @@
 package domain
 
-private fun String.toAnswerMarkingMap(): AnswerMarkings {
-    return AnswerMarkings(this.map { CharAndIsMarked(it) }.toMutableList())
-}
 
-class AnswerChecker(val answer: String) {
+class AnswerChecker(private val answer: Answer) {
 
     fun check(word: Word): RoundResult {
         val answerAndIsMarked = answer.toAnswerMarkingMap()
         val resultTiles: RoundResult = RoundResult.initTile()
-        
+
         markGreenTiles(answerAndIsMarked, resultTiles, word)
         markYellowTiles(answerAndIsMarked, resultTiles, word)
 

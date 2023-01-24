@@ -1,6 +1,6 @@
 package domain
 
-data class RoundResult(val tiles: MutableList<Tile>) {
+data class RoundResult(val tiles: MutableList<Tile>) : Iterable<Tile> {
     companion object {
         fun initTile(): RoundResult {
             return RoundResult(mutableListOf<Tile>(Tile.GREY, Tile.GREY, Tile.GREY, Tile.GREY, Tile.GREY))
@@ -22,5 +22,9 @@ data class RoundResult(val tiles: MutableList<Tile>) {
 
     fun markYellowAt(index: Int) {
         tiles[index] = Tile.YELLOW
+    }
+
+    override fun iterator(): Iterator<Tile> {
+        return tiles.iterator()
     }
 }

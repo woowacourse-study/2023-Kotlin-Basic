@@ -4,7 +4,7 @@ class WordleGame(var round: Int = 0,
                  var isEnd: Boolean = false,
                  val gameResult: GameResult = GameResult()) {
 
-    private val answer = "river"
+    val answer = Answer.todayAnswer()
     private val answerChecker = AnswerChecker(answer)
 
     fun proceed(word: Word) {
@@ -16,16 +16,6 @@ class WordleGame(var round: Int = 0,
             isEnd = true
         }
     }
-
-    /*
-    입력한 답) roier
-    답 ) river
-
-    GREEN GREY YELLOW GREEN GREEN
-    -> 타일은 입력한 값 기준임!
-
-     */
-
 
     val isInProgress: Boolean
         get() {
