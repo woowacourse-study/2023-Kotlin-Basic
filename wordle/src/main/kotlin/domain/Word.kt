@@ -5,11 +5,11 @@ class Word(word: String) {
     private val alphabets: List<Alphabet> = word.map { Alphabet(it) }
 
     init {
-        require(alphabets.size == 5) { "단어는 다섯글자로 구성됩니다" }
+        require(alphabets.size == Wordle.WORD_LENGTH) { "단어는 ${Wordle.WORD_LENGTH} 글자로 구성됩니다" }
     }
 
     fun compare(other: Word): List<Compared> {
-        val result = MutableList(5) { Compared.NONE }
+        val result = MutableList(Wordle.WORD_LENGTH) { Compared.NONE }
         val pool = AlphabetsPool(alphabets)
 
         for ((i, alphabet) in other.alphabets.withIndex()) {

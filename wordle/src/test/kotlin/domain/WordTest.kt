@@ -1,7 +1,4 @@
-import domain.Alphabet
-import domain.AlphabetsPool
-import domain.Compared
-import domain.Word
+import domain.*
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.core.spec.style.StringSpec
@@ -10,10 +7,10 @@ import io.kotest.matchers.shouldBe
 
 class WordTest: StringSpec({
 
-    "단어는 다섯글자로 구성해야 한다" {
+    "단어는 Wordle에서 지정한 크기로 구성해야 한다" {
         listOf("java", "kotlin").forAll { invalidValue ->
             shouldThrow<IllegalArgumentException> { Word(invalidValue) }
-                .message shouldBe "단어는 다섯글자로 구성됩니다"
+                .message shouldBe "단어는 ${Wordle.WORD_LENGTH} 글자로 구성됩니다"
         }
     }
 })
