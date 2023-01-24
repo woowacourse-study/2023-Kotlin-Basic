@@ -1,6 +1,6 @@
 package view
 
-import domain.ExpectedAnswer
+import domain.Word
 
 fun printStartMessage() {
     println("""
@@ -9,7 +9,8 @@ fun printStartMessage() {
     """.trimIndent())
 }
 
-fun inputAnswer() {
+fun inputWord(): Word {
     println("정답을 입력해주세요.")
-    val expectedAnswer = ExpectedAnswer(readLine())
+    val word = readLine() ?: throw IllegalArgumentException("정답을 입력해주세요!")
+    return Word(word)
 }
