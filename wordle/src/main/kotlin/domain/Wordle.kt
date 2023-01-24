@@ -2,12 +2,12 @@ package domain
 
 import domain.Compared.EQUAL
 
-class Wordle(policy: AnswerPolicy) {
-
-    private val answer = Word(policy.getWord())
+class Wordle(
+    private val answer: Word
+) {
+    private var hit: Boolean = false
     var trial = MAX_TRIAL
         private set
-    private var hit = false
 
     fun guess(word: Word): List<Compared> {
         requireNotEnded()

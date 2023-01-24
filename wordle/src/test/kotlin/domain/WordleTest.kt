@@ -9,7 +9,7 @@ class WordleTest: BehaviorSpec({
     Given("guess는") {
 
         When("시도 가능 횟수가 0 이하면") {
-            val wordle = Wordle { "apple" }
+            val wordle = Wordle(Word("apple"))
             for (i in 1..Wordle.MAX_TRIAL) wordle.guess(Word("break"))
 
             Then("호출 시 예외를 던진다") {
@@ -19,7 +19,7 @@ class WordleTest: BehaviorSpec({
         }
 
         When("이미 정답을 맞췄다면") {
-            val wordle = Wordle { "apple" }
+            val wordle = Wordle(Word("apple"))
             wordle.guess(Word("apple"))
 
             Then("호출 시 예외를 던진다") {
@@ -32,7 +32,7 @@ class WordleTest: BehaviorSpec({
     Given("isEnded는") {
 
         When("시도 가능 횟수가 1 이상이고 정답을 맞춘 적이 없다면") {
-            val wordle = Wordle { "apple" }
+            val wordle = Wordle(Word("apple"))
             val isEnded = wordle.isEnded()
 
             Then("false를 반환한다") {
@@ -41,7 +41,7 @@ class WordleTest: BehaviorSpec({
         }
 
         When("시도 가능 횟수가 1 이상이고 정답을 맞춘 적이 있다면") {
-            val wordle = Wordle { "apple" }
+            val wordle = Wordle(Word("apple"))
             wordle.guess(Word("apple"))
             val isEnded = wordle.isEnded()
 
@@ -51,7 +51,7 @@ class WordleTest: BehaviorSpec({
         }
 
         When("시도 가능 횟수가 0 이하면 맞췄는지 관계없이") {
-            val wordle = Wordle { "apple" }
+            val wordle = Wordle(Word("apple"))
             for (i in 1..Wordle.MAX_TRIAL) wordle.guess(Word("break"))
             val isEnded = wordle.isEnded()
 
