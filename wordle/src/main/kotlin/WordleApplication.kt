@@ -5,11 +5,12 @@ fun main() {
     printStartMessage()
     val game = WordleGame.start()
     do {
-        val word = inputWord()
+        val word = inputWordWithRetry()
         game.proceed(word)
         printGameResult(game)
     } while (game.isInProgress)
 }
+
 
 fun printGameResult(game: WordleGame) {
     if (game.isEnd) {

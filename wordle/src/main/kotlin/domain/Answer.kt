@@ -3,7 +3,7 @@ package domain
 import java.time.LocalDate
 import java.time.Period
 
-class Answer private constructor(val value: String) {
+class Answer(val value: String) {
 
     fun toAnswerMarkingMap(): AnswerMarkings {
         return AnswerMarkings(value.map { CharAndIsMarked(it) }.toMutableList())

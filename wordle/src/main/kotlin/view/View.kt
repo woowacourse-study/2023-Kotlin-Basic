@@ -41,3 +41,12 @@ fun inputWord(): Word {
     val word = readLine() ?: throw IllegalArgumentException("정답을 입력해주세요!")
     return Word(word)
 }
+
+fun inputWordWithRetry(): Word {
+    return try {
+        inputWord()
+    } catch (e: IllegalArgumentException) {
+        println(e.message)
+        inputWordWithRetry()
+    }
+}
