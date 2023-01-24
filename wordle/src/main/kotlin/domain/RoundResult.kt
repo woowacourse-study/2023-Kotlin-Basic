@@ -19,4 +19,8 @@ data class RoundResult(val tiles: MutableList<Tile>) {
     fun markGreenAt(index: Int) {
         tiles[index] = Tile.GREEN
     }
+
+    fun markYellowAt(index: Int) {
+        tiles[index] = Tile.YELLOW
+    }
 }

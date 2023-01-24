@@ -1,24 +1,37 @@
 package domain
 
+private fun String.toAnswerMarkingMap(): AnswerMarkings {
+    return AnswerMarkings(this.map { CharAndIsMarked(it) }.toMutableList())
+}
+
 class AnswerChecker(val answer: String) {
 
     fun check(word: Word): RoundResult {
-        val answerAndIsMarked = answer.map { CharAndIsMarked(it) }.toMutableList()
+        val answerAndIsMarked = answer.toAnswerMarkingMap()
         val resultTiles: RoundResult = RoundResult.initTile()
-
-        println(resultTiles)
+        
         markGreenTiles(answerAndIsMarked, resultTiles, word)
-        println(resultTiles)
+        markYellowTiles(answerAndIsMarked, resultTiles, word)
 
         return resultTiles
     }
 
-    private fun markGreenTiles(answerAndIsMarked: MutableList<CharAndIsMarked>, resultTile: RoundResult, word: Word) {
+    private fun markGreenTiles(answerAndIsMarked: AnswerMarkings, resultTile: RoundResult, word: Word) {
         answerAndIsMarked.zip(word.withIndex()) { wordAndIsMarked, answerWord ->
             if (wordAndIsMarked.char == answerWord.value) {
                 resultTile.markGreenAt(answerWord.index)
                 wordAndIsMarked.isMarked = true
             }
+        }
+    }
+
+    private fun markYellowTiles(answerAndIsMarked: AnswerMarkings, resultTile: RoundResult, word: Word) {
+        for ((index: Int, alphabet: Char) in word.withIndex()) {
+            if (answerAndIsMarked[index].isMarked) continue
+            if (answerAndIsMarked.doesNotContain(alphabet)) continue
+            val index: Int = answerAndIsMarked.getMarkingIndex(alphabet) ?: continue
+            resultTile.markYellowAt(index)
+            answerAndIsMarked[index].isMarked = true
         }
     }
 }
