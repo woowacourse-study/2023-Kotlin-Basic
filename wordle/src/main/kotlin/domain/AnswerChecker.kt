@@ -7,13 +7,14 @@ class AnswerChecker(val answer: String) {
             return false
         }
 
-    fun check(word: Word) {
+    fun check(word: Word): RoundResult {
         val answerAndIsMarked = answer.map { c -> CharAndIsMarked(c) }.toMutableList()
         val resultTiles = mutableListOf<Tile>(Tile.GREY, Tile.GREY, Tile.GREY, Tile.GREY, Tile.GREY)
 
         println(resultTiles)
         markGreenTiles(answerAndIsMarked, resultTiles, word)
         println(resultTiles)
+        return RoundResult(resultTiles)
     }
 
     private fun markGreenTiles(answerAndIsMarked: MutableList<CharAndIsMarked>, resultTile: MutableList<Tile>, word: Word) {

@@ -1,16 +1,18 @@
 package domain
 
-class WordleGame(var round: Int = 1,
-                 var isEnd: Boolean = false) {
+class WordleGame(var round: Int = 0,
+                 var isEnd: Boolean = false,
+                 val gameResult: GameResult = GameResult()) {
 
     private val answer = "river"
     private val answerChecker = AnswerChecker(answer)
 
     fun proceed(word: Word) {
-        answerChecker.check(word)
+        val roundResult = answerChecker.check(word)
         round++
+        gameResult.appendResult(roundResult)
 
-        if (round == 7 || answerChecker.isAnswer) {
+        if (round == 6 || answerChecker.isAnswer) {
             isEnd = true
         }
     }
