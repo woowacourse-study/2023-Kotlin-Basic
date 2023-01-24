@@ -8,10 +8,10 @@ class Game(
     private val wordList: WordList
 ) {
     private val submittedWords = mutableMapOf<Word, LetterCompareResults>()
-    val isEnd
-        get() = submittedWords.size >= MAX_SUBMIT_COUNT
+    val letterCompareResultsList // TODO: 이름 개선
+        get() = submittedWords.values
 
-    // TODO: 시간 관련 리팩토링
+    // TODO: 리팩토링
     fun submitWord(text: String, now: LocalDateTime): LetterCompareResults {
         val submittedWord = Word(text)
 
