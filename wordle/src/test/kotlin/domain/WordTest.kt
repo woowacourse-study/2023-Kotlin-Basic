@@ -4,6 +4,7 @@ import domain.LetterCompareResult.*
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.collections.shouldContainExactly
+import io.kotest.matchers.shouldBe
 
 class WordTest : FunSpec({
 
@@ -20,6 +21,13 @@ class WordTest : FunSpec({
         letters.map { it.letter } shouldContainExactly listOf(
             "H", "E", "L", "L", "O"
         )
+    }
+
+    test("동등성 테스트") {
+        val word1 = Word("apple")
+        val word2 = Word("apple")
+
+        (word1 == word2) shouldBe true
     }
 
     context("compareWithCorrectAnswer 테스트 (정답: SPILL)") {

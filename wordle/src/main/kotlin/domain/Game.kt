@@ -2,10 +2,8 @@ package domain
 
 import java.time.LocalDateTime
 
-private const val MAX_SUBMIT_COUNT = 6
-
 class Game(
-    private val wordList: WordList
+    private val wordList: WordList // TODO: 이름 개선
 ) {
     private val submittedWords = mutableMapOf<Word, LetterCompareResults>()
     val letterCompareResultsList // TODO: 이름 개선
@@ -14,6 +12,9 @@ class Game(
     // TODO: 리팩토링
     fun submitWord(text: String, now: LocalDateTime): LetterCompareResults {
         val submittedWord = Word(text)
+        if (!wordList.contains(submittedWord)) {
+            throw IllegalArgumentException("단어 리스트에 존재하는 단어를 제출해야합니다.")
+        }
 
         val todayWordPicker = TodayWordPicker(wordList)
         val todayWord = todayWordPicker.pick(now)

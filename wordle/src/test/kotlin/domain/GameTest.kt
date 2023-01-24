@@ -1,6 +1,7 @@
 package domain
 
 import domain.LetterCompareResult.*
+import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.collections.shouldContainExactly
 import java.time.LocalDateTime
@@ -16,5 +17,15 @@ class GameTest : FunSpec({
         letterCompareResults.values shouldContainExactly listOf(
             GRAY, GRAY, YELLOW, GREEN, GRAY
         )
+    }
+
+    test("단어 리스트에 없는 단어를 제출하면 예외가 발생한다.") {
+        val wordList = WordList("HELLO\nMYSQL\nSPILL\nREACT")
+
+        val game = Game(wordList)
+
+        shouldThrow<IllegalArgumentException> {
+            game.submitWord("MICRO", LocalDateTime.of(2021, 6, 21, 0, 0))
+        }
     }
 })

@@ -14,7 +14,9 @@ fun main() {
 
     for (round in 1..6) {
         printSubmitWordMessage()
-        if (submitSingleWord(game, round)) break
+
+        val success = retry { submitSingleWord(game, round) }
+        if (success) return
     }
 
     printFailMessage()
@@ -36,4 +38,13 @@ private fun submitSingleWord(game: Game, round: Int): Boolean {
     }
 
     return false
+}
+
+private fun <T> retry(function: () -> T): T {
+    return try {
+        function()
+    } catch (e: IllegalArgumentException) {
+        println(e.message)
+        retry(function)
+    }
 }

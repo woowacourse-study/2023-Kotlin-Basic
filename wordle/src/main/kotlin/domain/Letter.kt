@@ -5,9 +5,9 @@ private const val LETTER_LENGTH = 1
 private const val MIN_POSITION = 1
 private const val MAX_POSITION = 6
 
-class Letter(
+data class Letter(
     val letter: String,
-    val position: Int
+    private val position: Int
 ) {
     init {
         validateLetterLength()
