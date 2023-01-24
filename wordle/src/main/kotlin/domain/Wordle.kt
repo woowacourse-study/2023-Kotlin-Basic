@@ -5,7 +5,8 @@ import domain.Compared.EQUAL
 class Wordle(policy: AnswerPolicy) {
 
     private val answer = Word(policy.getWord())
-    private var trial = MAX_TRIAL
+    var trial = MAX_TRIAL
+        private set
     private var hit = false
 
     fun guess(word: Word): List<Compared> {
@@ -27,7 +28,7 @@ class Wordle(policy: AnswerPolicy) {
     }
 
     companion object {
+        const val MAX_TRIAL = 6
         const val WORD_LENGTH = 5
-        const val MAX_TRIAL = 5
     }
 }
