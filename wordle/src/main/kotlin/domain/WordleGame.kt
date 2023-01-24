@@ -12,7 +12,7 @@ class WordleGame(var round: Int = 0,
         round++
         gameResult.appendResult(roundResult)
 
-        if (round == 6 || answerChecker.isAnswer) {
+        if (roundResult.isAnswer || round.isFinish()) {
             isEnd = true
         }
     }
@@ -37,5 +37,9 @@ class WordleGame(var round: Int = 0,
             return WordleGame()
         }
     }
+}
+
+private fun Int.isFinish(): Boolean {
+    return this == 6
 }
 

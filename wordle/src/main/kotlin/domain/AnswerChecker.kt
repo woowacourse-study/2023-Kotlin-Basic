@@ -2,29 +2,23 @@ package domain
 
 class AnswerChecker(val answer: String) {
 
-    val isAnswer: Boolean
-        get() {
-            return false
-        }
-
     fun check(word: Word): RoundResult {
-        val answerAndIsMarked = answer.map { c -> CharAndIsMarked(c) }.toMutableList()
-        val resultTiles = mutableListOf<Tile>(Tile.GREY, Tile.GREY, Tile.GREY, Tile.GREY, Tile.GREY)
+        val answerAndIsMarked = answer.map { CharAndIsMarked(it) }.toMutableList()
+        val resultTiles: RoundResult = RoundResult.initTile()
 
         println(resultTiles)
         markGreenTiles(answerAndIsMarked, resultTiles, word)
         println(resultTiles)
-        return RoundResult(resultTiles)
+
+        return resultTiles
     }
 
-    private fun markGreenTiles(answerAndIsMarked: MutableList<CharAndIsMarked>, resultTile: MutableList<Tile>, word: Word) {
+    private fun markGreenTiles(answerAndIsMarked: MutableList<CharAndIsMarked>, resultTile: RoundResult, word: Word) {
         answerAndIsMarked.zip(word.withIndex()) { wordAndIsMarked, answerWord ->
             if (wordAndIsMarked.char == answerWord.value) {
-                resultTile[answerWord.index] = Tile.GREEN
+                resultTile.markGreenAt(answerWord.index)
                 wordAndIsMarked.isMarked = true
             }
         }
     }
-
-
 }
