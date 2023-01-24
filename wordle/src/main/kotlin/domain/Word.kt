@@ -1,3 +1,5 @@
+package domain
+
 class Word(word: String) {
 
     private val alphabets: List<Alphabet> = word.map { Alphabet(it) }
