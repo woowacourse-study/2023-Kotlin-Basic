@@ -6,8 +6,6 @@ class StudyTest {
 
     @Test
     fun String을_Map으로_바꿔보기() {
-
-
         val ex1: Map<Int, IndexedValue<Char>> = str.withIndex().associateBy({ it.index })
         val ex1_1: Map<Int, IndexedValue<Char>> = str.withIndex().associateBy { it.index }
         println(ex1)

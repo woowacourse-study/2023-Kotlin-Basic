@@ -29,7 +29,8 @@ class WordleGame(var round: Int = 0,
     }
 }
 
-private fun Int.isFinish(): Boolean {
-    return this == 6
-}
+private const val TOTAL_ROUND = 6
 
+private fun Int.isFinish(): Boolean {
+    return this == TOTAL_ROUND
+}

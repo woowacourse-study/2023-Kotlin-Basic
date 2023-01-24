@@ -42,11 +42,10 @@ fun inputWord(): Word {
     return Word(word)
 }
 
-fun inputWordWithRetry(): Word {
-    return try {
-        inputWord()
-    } catch (e: IllegalArgumentException) {
-        println(e.message)
-        inputWordWithRetry()
-    }
+fun inputWordWithRetry(): Word = try {
+    inputWord()
+} catch (e: IllegalArgumentException) {
+    println(e.message)
+    inputWordWithRetry()
 }
+

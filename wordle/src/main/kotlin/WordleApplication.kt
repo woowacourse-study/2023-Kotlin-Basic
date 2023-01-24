@@ -19,4 +19,3 @@ fun printGameResult(game: WordleGame) {
     }
     printAllRoundResults(game.gameResult)
 }
-
