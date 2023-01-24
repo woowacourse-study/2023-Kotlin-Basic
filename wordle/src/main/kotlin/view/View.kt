@@ -1,8 +1,6 @@
 package view
 
-import domain.GameResult
-import domain.RoundResult
-import domain.Word
+import domain.*
 
 private const val TOTAL_ROUND: Int = 6
 
@@ -17,6 +15,10 @@ fun printRoundCount(round: Int) {
     println("${round}/${TOTAL_ROUND}")
 }
 
+fun printAnswer(answer: Answer) {
+    println("오늘의 정답: ${answer.value}")
+}
+
 fun printAllRoundResults(gameResult: GameResult) {
     for (result in gameResult) {
         printRoundResult(result)
@@ -24,7 +26,14 @@ fun printAllRoundResults(gameResult: GameResult) {
 }
 
 fun printRoundResult(result: RoundResult) {
-    println(result)
+    for (tile in result) {
+        when (tile) {
+            Tile.GREEN -> print("\uD83D\uDFE9")
+            Tile.YELLOW -> print("\uD83D\uDFE8")
+            Tile.GREY -> print("⬜")
+        }
+    }
+    println()
 }
 
 fun inputWord(): Word {
