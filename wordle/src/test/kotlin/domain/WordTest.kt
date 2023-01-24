@@ -29,7 +29,7 @@ class WordTest : FunSpec({
             val word = Word("HELLO")
             val actual = word.compareWithCorrectAnswer(correctAnswer)
 
-            actual shouldContainExactly listOf(
+            actual.values shouldContainExactly listOf(
                 GRAY, GRAY, YELLOW, GREEN, GRAY
             )
         }
@@ -38,7 +38,7 @@ class WordTest : FunSpec({
             val word = Word("LABEL")
             val actual = word.compareWithCorrectAnswer(correctAnswer)
 
-            actual shouldContainExactly listOf(
+            actual.values shouldContainExactly listOf(
                 YELLOW, GRAY, GRAY, GRAY, GREEN
             )
         }
@@ -47,7 +47,7 @@ class WordTest : FunSpec({
             val word = Word("SPELL")
             val actual = word.compareWithCorrectAnswer(correctAnswer)
 
-            actual shouldContainExactly listOf(
+            actual.values shouldContainExactly listOf(
                 GREEN, GREEN, GRAY, GREEN, GREEN
             )
         }
@@ -56,7 +56,7 @@ class WordTest : FunSpec({
             val word = Word("SPILL")
             val actual = word.compareWithCorrectAnswer(correctAnswer)
 
-            actual shouldContainExactly listOf(
+            actual.values shouldContainExactly listOf(
                 GREEN, GREEN, GREEN, GREEN, GREEN
             )
         }

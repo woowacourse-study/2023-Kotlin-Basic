@@ -18,7 +18,7 @@ class Word(
     }
 
     // TODO: 리팩토링
-    fun compareWithCorrectAnswer(correctAnswer: Word): List<LetterCompareResult> {
+    fun compareWithCorrectAnswer(correctAnswer: Word): LetterCompareResults {
         val letterCompareResults = mutableListOf<LetterCompareResult>()
 
         for (letter in letters) {
@@ -43,6 +43,6 @@ class Word(
             letterCompareResults.add(letterCompareResult)
         }
 
-        return letterCompareResults
+        return LetterCompareResults(letterCompareResults)
     }
 }

@@ -10,7 +10,8 @@ class TodayWordPickerTest : FunSpec({
     test("pick 메소드는 오늘 날짜의 단어를 반환한다.") {
         val testNow = LocalDateTime.of(2021, 6, 21, 0, 0)
 
-        val todayWordPicker = TodayWordPicker("HELLO\nSPILL\nMYSQL\nREACT")
+        val wordList = WordList("HELLO\nSPILL\nMYSQL\nREACT")
+        val todayWordPicker = TodayWordPicker(wordList)
         val actual = todayWordPicker.pick(testNow)
 
         actual.letters.map { it.letter } shouldContainExactly listOf("M", "Y", "S", "Q", "L")
