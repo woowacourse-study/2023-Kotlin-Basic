@@ -1,4 +1,5 @@
 import domain.Compared
+import domain.Word
 import domain.Wordle
 
 fun outputIntro() {
@@ -10,9 +11,15 @@ fun outputGuessResults(results: List<List<Compared>>) {
     println("\n${convertToEmoji(results)}\n")
 }
 
-fun outputWordleResult(remainTrial: Int, results: List<List<Compared>>) {
+fun outputWinResult(remainTrial: Int, results: List<List<Compared>>) {
     println("${Wordle.MAX_TRIAL - remainTrial}/${Wordle.MAX_TRIAL}")
     println(convertToEmoji(results))
+}
+
+fun outputLoseResult(answer: Word, results: List<List<Compared>>) {
+    println("X/${Wordle.MAX_TRIAL}")
+    println(convertToEmoji(results))
+    println("정답은 $answer 이었습니다")
 }
 
 private fun convertToEmoji(results: List<List<Compared>>) = results.joinToString(separator = "\n") { it ->

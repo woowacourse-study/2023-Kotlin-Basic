@@ -1,21 +1,15 @@
+import domain.ByDateTimePolicy
 import domain.Compared
 import domain.Word
 import domain.Wordle
-import java.time.LocalDateTime
 
 fun main() {
     outputIntro()
-    val answer = readAnswer()
-    val wordle = Wordle(Word(answer))
+    val words = readWordsFromFile("wordle/src/main/resources/words.txt").map { Word(it) }
+    val wordle = Wordle(words, ByDateTimePolicy())
     val wordleResults = play(wordle)
-    outputWordleResult(wordle.trial, wordleResults)
+    if (wordle.hit) outputWinResult(wordle.trial, wordleResults) else outputLoseResult(wordle.answer, wordleResults)
 }
-
-private fun readAnswer() = getWordFromFile(
-    "wordle/src/main/resources/words.txt",
-    LocalDateTime.of(2021, 6, 19, 0, 0),
-    LocalDateTime.now()
-)
 
 private fun play(wordle: Wordle): MutableList<List<Compared>> {
     val guessResult: MutableList<List<Compared>> = mutableListOf()

@@ -13,6 +13,10 @@ class WordTest: StringSpec({
                 .message shouldBe "단어는 ${Wordle.WORD_LENGTH} 글자로 구성됩니다"
         }
     }
+
+    "단어는 동일한 문자열이면 같은 객체로 취급한다" {
+        (Word("apple") == Word("apple")) shouldBe true
+    }
 })
 
 class WordCompareTest: BehaviorSpec({

@@ -26,6 +26,23 @@ class Word(word: String) {
         }
         return result
     }
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (javaClass != other?.javaClass) return false
+
+        other as Word
+
+        return (alphabets == other.alphabets)
+    }
+
+    override fun hashCode(): Int {
+        return alphabets.hashCode()
+    }
+
+    override fun toString(): String {
+        return alphabets.map { it.value }.joinToString(separator = "")
+    }
 }
 
 class AlphabetsPool(alphabets: List<Alphabet>) {
@@ -44,7 +61,7 @@ class AlphabetsPool(alphabets: List<Alphabet>) {
     }
 }
 
-class Alphabet(private val value: Char) {
+class Alphabet(val value: Char) {
 
     init {
         require(value in alphabets) { "값은 영어 알파벳이어야 합니다" }

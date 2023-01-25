@@ -3,16 +3,20 @@ package domain
 import domain.Compared.EQUAL
 
 class Wordle(
-    private val answer: Word
+    private val words: List<Word>,
+    policy: AnswerPolicy
 ) {
-    private var hit: Boolean = false
+    val answer = policy.pick(words)
+    var hit = false
+        private set
     var trial = MAX_TRIAL
         private set
 
     fun guess(word: Word): List<Compared> {
         requireNotEnded()
-        trial -= 1
+        require(words.contains(word)) { "게임 단어 목록에 포함된 답만 제시할 수 있습니다" }
 
+        trial -= 1
         val result = answer.compare(word)
         if (result.all { it == EQUAL }) hit = true
         return result
@@ -32,3 +36,5 @@ class Wordle(
         const val WORD_LENGTH = 5
     }
 }
+
+
