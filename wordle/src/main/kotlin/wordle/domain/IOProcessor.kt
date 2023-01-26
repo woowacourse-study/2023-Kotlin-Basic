@@ -10,5 +10,5 @@ interface IOProcessor {
 
     fun outputTiles(tiles: List<List<Tile>>)
 
-    fun fail()
+    fun fail(message: String?)
 }

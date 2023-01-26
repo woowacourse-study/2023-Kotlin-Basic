@@ -2,7 +2,6 @@ package wordle.view
 
 import wordle.domain.IOProcessor
 import wordle.domain.Tile
-import java.lang.Exception
 import java.util.Scanner
 
 class ConsoleIOProcessor(
@@ -18,14 +17,9 @@ class ConsoleIOProcessor(
         )
     }
 
-    override fun inputGuess() = retryNextLine(scanner)
-
-    private tailrec fun retryNextLine(scanner: Scanner): String = try {
+    override fun inputGuess(): String {
         println("정답을 입력해 주세요.")
-        scanner.nextLine()
-    } catch (e: Exception) {
-        println(e.message)
-        retryNextLine(scanner)
+        return scanner.nextLine()
     }
 
     override fun end(tiles: List<List<Tile>>) {
@@ -34,19 +28,12 @@ class ConsoleIOProcessor(
     }
 
     override fun outputTiles(tiles: List<List<Tile>>) {
-        println(
-            """
-            
-            ${tiles.joinToString("\n", transform = ::joinTile)}
-            
-            """.trimIndent()
-        )
+        println("\n${tiles.joinToString("\n", transform = ::joinTile)}\n")
     }
 
-    private fun joinTile(it: List<Tile>) = it.map(Tile::symbol)
-        .joinToString("")
+    private fun joinTile(it: List<Tile>) = it.map(Tile::symbol).joinToString("")
 
-    override fun fail() {
-        println("게임에 실패하였습니다.")
+    override fun fail(message: String?) {
+        println(message ?: "[예외] 의도하지 않은 예외가 발생하였습니다.")
     }
 }
