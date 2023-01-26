@@ -49,4 +49,12 @@ class WordTest {
 
         assertFalse(actual)
     }
+
+    @Test
+    fun `data class는 자동으로 equals, hashCode를 생성한다`() {
+        val word = Word("hello")
+        val other = Word("hello")
+
+        assertEquals(word, other)
+    }
 }
