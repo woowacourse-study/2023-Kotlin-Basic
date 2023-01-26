@@ -1,5 +1,7 @@
 package wordle.domain
 
+import java.lang.RuntimeException
+
 class Game(
     private val wordsReader: WordsReader,
     private val ioProcessor: IOProcessor,
@@ -25,14 +27,15 @@ class Game(
             ioProcessor.outputTiles(judgeAll())
         }
 
-        ioProcessor.fail()
+        ioProcessor.fail("게임에 실패하였습니다.")
     }
 
     private tailrec fun retryGetGuess(): Word = try {
         val guess = Word(ioProcessor.inputGuess())
         words.validateNonExist(guess)
         guess
-    } catch (e: Exception) {
+    } catch (e: RuntimeException) {
+        ioProcessor.fail(e.message)
         retryGetGuess()
     }
 
