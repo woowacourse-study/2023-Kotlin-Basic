@@ -2,11 +2,8 @@ package wordle.view
 
 import wordle.domain.IOProcessor
 import wordle.domain.Tile
-import java.util.Scanner
 
-class ConsoleIOProcessor(
-    private val scanner: Scanner,
-) : IOProcessor {
+class ConsoleIOProcessor : IOProcessor {
 
     override fun start() {
         println(
@@ -19,7 +16,7 @@ class ConsoleIOProcessor(
 
     override fun inputGuess(): String {
         println("정답을 입력해 주세요.")
-        return scanner.nextLine()
+        return readLine() ?: ""
     }
 
     override fun end(tiles: List<List<Tile>>) {
