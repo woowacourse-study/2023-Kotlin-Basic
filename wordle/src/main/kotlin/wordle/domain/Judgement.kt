@@ -25,9 +25,7 @@ class Judgement(
     }
 
     private fun fillGreenTiles(tiles: MutableList<Tile>, countOfChars: MutableMap<Char, Int>) {
-        for (index in 0 until answer.value.length) {
-            fillGreenTile(index, tiles, countOfChars)
-        }
+        (0 until answer.value.length).forEach { fillGreenTile(it, tiles, countOfChars) }
     }
 
     private fun fillGreenTile(index: Int, tiles: MutableList<Tile>, countOfChars: MutableMap<Char, Int>) {
@@ -38,9 +36,7 @@ class Judgement(
     }
 
     private fun fillYellowTiles(tiles: MutableList<Tile>, countOfChars: MutableMap<Char, Int>) {
-        for (index in 0 until answer.value.length) {
-            fillYellowTile(tiles, index, countOfChars)
-        }
+        (0 until answer.value.length).forEach { fillYellowTile(tiles, it, countOfChars) }
     }
 
     private fun fillYellowTile(tiles: MutableList<Tile>, index: Int, countOfChars: MutableMap<Char, Int>) {
