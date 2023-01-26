@@ -10,13 +10,17 @@ class ConsoleIOProcessor(
 ) : IOProcessor {
 
     override fun start() {
-        println("WORDLE을 6번 만에 맞춰 보세요.")
-        println("시도의 결과는 타일의 색 변화로 나타납니다.")
+        println(
+            """
+            WORDLE을 6번 만에 맞춰 보세요.
+            시도의 결과는 타일의 색 변화로 나타납니다.
+            """.trimIndent()
+        )
     }
 
     override fun inputGuess() = retryNextLine(scanner)
 
-    private fun retryNextLine(scanner: Scanner): String = try {
+    private tailrec fun retryNextLine(scanner: Scanner): String = try {
         println("정답을 입력해 주세요.")
         scanner.nextLine()
     } catch (e: Exception) {
@@ -30,9 +34,13 @@ class ConsoleIOProcessor(
     }
 
     override fun outputTiles(tiles: List<List<Tile>>) {
-        println()
-        println(tiles.joinToString("\n", transform = ::joinTile))
-        println()
+        println(
+            """
+            
+            ${tiles.joinToString("\n", transform = ::joinTile)}
+            
+            """.trimIndent()
+        )
     }
 
     private fun joinTile(it: List<Tile>) = it.map(Tile::symbol)
