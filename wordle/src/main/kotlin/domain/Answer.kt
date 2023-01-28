@@ -19,20 +19,20 @@ class Answer(
     }
 
     private fun paintGreen(colors: MutableList<Color>, prediction: Prediction, charCounts: MutableMap<Char, Int>) {
-        for (index in 0 until word.length) {
-            val char = prediction.word[index]
-            if (word[index] == char) {
-                colors[index] = Color.GREEN
+        (0 until word.length).forEach {
+            val char = prediction.word[it]
+            if (word[it] == char) {
+                colors[it] = Color.GREEN
                 decreaseCharCount(charCounts, char)
             }
         }
     }
 
     private fun paintYellow(colors: MutableList<Color>, prediction: Prediction, charCounts: MutableMap<Char, Int>) {
-        for (index in 0 until word.length) {
-            val char = prediction.word[index]
-            if (colors[index] != Color.GREEN && charCounts.contains(char)) {
-                colors[index] = Color.YELLOW
+        (0 until word.length).forEach {
+            val char = prediction.word[it]
+            if (colors[it] != Color.GREEN && charCounts.contains(char)) {
+                colors[it] = Color.YELLOW
                 decreaseCharCount(charCounts, char)
             }
         }

@@ -7,18 +7,18 @@ fun main() {
     printStartMessage()
     val wordle = Wordle(PickAnswer.Default())
     while (!wordle.isEnd) {
-        val judgementTiles = retryOnException { wordle.proceedRound(inputPrediction()) }
+        val judgementTiles = retryForException { wordle.proceedRound(inputPrediction()) }
         printMessageIfEnd(wordle, judgementTiles)
         printTiles(judgementTiles)
     }
 }
 
-private fun <T> retryOnException(function: () -> T): T {
+private fun <T> retryForException(function: () -> T): T {
     return try {
         function()
     } catch (e: Exception) {
         printErrorMessage(e.localizedMessage)
-        retryOnException(function)
+        retryForException(function)
     }
 }
 

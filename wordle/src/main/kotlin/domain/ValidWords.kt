@@ -1,10 +1,12 @@
 package domain
 
-import java.io.File
+import java.io.FileNotFoundException
+import kotlin.io.path.Path
+import kotlin.io.path.readLines
 
 object ValidWords {
 
-    private val cache: List<Word> = File(FILE_PATH!!.toURI())
+    private val cache: List<Word> = Path(filePath ?: throw FileNotFoundException())
         .readLines()
         .map(::Word)
 
@@ -15,4 +17,4 @@ object ValidWords {
     operator fun get(index: Int) = cache[index]
 }
 
-private val FILE_PATH = ValidWords.javaClass.classLoader.getResource("words.txt")
+private val filePath = ValidWords.javaClass.classLoader.getResource("words.txt")?.path
