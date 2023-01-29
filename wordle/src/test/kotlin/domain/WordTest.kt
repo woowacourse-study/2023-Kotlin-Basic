@@ -3,6 +3,8 @@ package domain
 import domain.LetterCompareResult.*
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.FunSpec
+import io.kotest.data.forAll
+import io.kotest.data.row
 import io.kotest.matchers.collections.shouldContainExactly
 import io.kotest.matchers.shouldBe
 
@@ -30,43 +32,15 @@ class WordTest : FunSpec({
         (word1 == word2) shouldBe true
     }
 
-    context("compareWithCorrectAnswer 테스트 (정답: SPILL)") {
-        val correctAnswer = Word("SPILL")
-
-        test("입력: HELLO") {
-            val word = Word("HELLO")
-            val actual = word.compareWithCorrectAnswer(correctAnswer)
-
-            actual.values shouldContainExactly listOf(
-                GRAY, GRAY, YELLOW, GREEN, GRAY
-            )
-        }
-
-        test("입력: LABEL") {
-            val word = Word("LABEL")
-            val actual = word.compareWithCorrectAnswer(correctAnswer)
-
-            actual.values shouldContainExactly listOf(
-                YELLOW, GRAY, GRAY, GRAY, GREEN
-            )
-        }
-
-        test("입력: SPELL") {
-            val word = Word("SPELL")
-            val actual = word.compareWithCorrectAnswer(correctAnswer)
-
-            actual.values shouldContainExactly listOf(
-                GREEN, GREEN, GRAY, GREEN, GREEN
-            )
-        }
-
-        test("입력: SPILL") {
-            val word = Word("SPILL")
-            val actual = word.compareWithCorrectAnswer(correctAnswer)
-
-            actual.values shouldContainExactly listOf(
-                GREEN, GREEN, GREEN, GREEN, GREEN
-            )
+    test("compareWithCorrectAnswer 테스트") {
+        forAll(
+            row(Word("spill"), Word("hello"), listOf(GRAY, GRAY, YELLOW, GREEN, GRAY)),
+            row(Word("spill"), Word("label"), listOf(YELLOW, GRAY, GRAY, GRAY, GREEN)),
+            row(Word("spill"), Word("spell"), listOf(GREEN, GREEN, GRAY, GREEN, GREEN)),
+            row(Word("spill"), Word("spill"), listOf(GREEN, GREEN, GREEN, GREEN, GREEN)),
+            row(Word("covet"), Word("click"), listOf(GREEN, GRAY, GRAY, GRAY, GRAY)),
+        ) { correctAnswer, submittedWord, expected ->
+            submittedWord.compareWithCorrectAnswer(correctAnswer).values shouldContainExactly expected
         }
     }
 })
