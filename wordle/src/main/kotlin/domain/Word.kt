@@ -17,35 +17,52 @@ class Word(
         letters = word.map { letter -> Letter(letter.toString()) }.toList()
     }
 
-    // TODO: 리팩토링
     fun compareWithCorrectAnswer(correctAnswer: Word): Tiles {
         val answerLetters = ArrayList<Letter?>(correctAnswer.letters)
-        val submitLetters = this.letters
 
-        val tiles = mutableListOf(GRAY, GRAY, GRAY, GRAY, GRAY)
-        for (i in 0..4) {
-            val currentLetter = submitLetters[i]
-            if (currentLetter == answerLetters[i]) {
-                tiles[i] = GREEN
+        var tiles = listOf(GRAY, GRAY, GRAY, GRAY, GRAY)
+        tiles = judgeGreen(tiles, answerLetters)
+        tiles = judgeYellow(tiles, answerLetters)
+
+        return Tiles(tiles)
+    }
+
+    private fun judgeGreen(
+        tiles: List<Tile>,
+        answerLetters: ArrayList<Letter?>
+    ): List<Tile> {
+        return tiles.mapIndexed { i, tile ->
+            if (letters[i] == answerLetters[i]) {
+                GREEN
+            } else {
+                tile
             }
         }
+    }
+
+    private fun judgeYellow(
+        tiles: List<Tile>,
+        answerLetters: ArrayList<Letter?>
+    ): List<Tile> {
+        val copiedTiles = tiles.toMutableList()
 
         for (i in 0..4) {
-            val currentTile = tiles[i]
-            if (currentTile == GREEN) {
+            if (tiles[i] == GREEN) {
                 continue
             }
 
-            val currentLetter = submitLetters[i]
+            val currentLetter = letters[i]
             for ((j, letter) in answerLetters.withIndex()) {
-                if (tiles[j] == GREEN) continue
-                if (currentLetter == letter) {
-                    tiles[i] = YELLOW
+                val sameInOtherPosition = currentLetter == letter
+                val alreadyGreen = tiles[j] == GREEN
+
+                if (sameInOtherPosition && !alreadyGreen) {
+                    copiedTiles[i] = YELLOW
                 }
             }
         }
 
-        return Tiles(tiles)
+        return copiedTiles
     }
 
     override fun equals(other: Any?): Boolean {
