@@ -3,10 +3,10 @@ package wordle.domain
 import java.lang.RuntimeException
 
 class Game(
-    private val wordsReader: WordsReader,
+    wordsReader: WordsReader,
+    answerExtractor: AnswerExtractor = FixedAnswerExtractor(),
     private val ioProcessor: IOProcessor,
-    private val answerExtractor: AnswerExtractor = FixedAnswerExtractor(),
-    private var judgements: MutableList<Judgement> = mutableListOf(),
+    private val judgements: Judgements = Judgements(),
 ) {
 
     private val words: Words = Words(wordsReader.read())
@@ -15,16 +15,16 @@ class Game(
     fun play() {
         ioProcessor.start()
 
-        while (isPlaying()) {
+        while (judgements.isPlaying) {
             val guess = retryGetGuess()
             judgements.add(Judgement(answer, guess))
 
-            if (isEnd()) {
-                ioProcessor.end(judgeAll())
+            if (judgements.isEnd) {
+                ioProcessor.end(judgements.judgeAll())
                 return
             }
 
-            ioProcessor.outputTiles(judgeAll())
+            ioProcessor.outputTiles(judgements.judgeAll())
         }
 
         ioProcessor.fail("게임에 실패하였습니다.")
@@ -38,13 +38,4 @@ class Game(
         ioProcessor.fail(e.message)
         retryGetGuess()
     }
-
-    private fun isPlaying() = judgements.size < 6
-
-    private fun isEnd() = judgements.isAllGreenTiles()
-
-    private fun judgeAll() = judgements.map(Judgement::judge)
-
-    private fun List<Judgement>.isAllGreenTiles() = map { it.judge() }
-        .any { it.all(Tile::isGreen) }
 }
