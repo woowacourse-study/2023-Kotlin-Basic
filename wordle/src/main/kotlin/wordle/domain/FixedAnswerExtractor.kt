@@ -1,19 +1,17 @@
 package wordle.domain
 
-import java.time.Duration
-import java.time.LocalDateTime
-import kotlin.math.abs
+import java.time.LocalDate
+import java.time.Period
 
 class FixedAnswerExtractor : AnswerExtractor {
 
     override fun extract(words: List<Word>): Word {
-        val index = abs(toDays() % words.size)
-        return words[index.toInt()]
+        return words[toDays() % words.size]
     }
 
-    private fun toDays() = Duration.between(LocalDateTime.now(), STANDARD_LOCAL_DATE_TIME).toDays()
+    private fun toDays() = Period.between(LocalDate.now(), STANDARD_LOCAL_DATE).days
 
     companion object {
-        val STANDARD_LOCAL_DATE_TIME: LocalDateTime = LocalDateTime.of(2021, 6, 19, 0, 0)
+        val STANDARD_LOCAL_DATE: LocalDate = LocalDate.of(2021, 6, 19)
     }
 }
