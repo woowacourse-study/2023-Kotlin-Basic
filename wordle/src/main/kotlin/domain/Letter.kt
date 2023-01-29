@@ -3,7 +3,7 @@ package domain
 private const val LETTER_LENGTH = 1
 
 private const val MIN_POSITION = 1
-private const val MAX_POSITION = 6
+private const val MAX_POSITION = 5
 
 data class Letter(
     val letter: String,
@@ -22,7 +22,7 @@ data class Letter(
 
     private fun validatePosition() {
         if (position !in MIN_POSITION..MAX_POSITION) {
-            throw IllegalArgumentException("위치는 반드시 1~6 사이여야 합니다. (입력: ${position})")
+            throw IllegalArgumentException("위치는 반드시 1~5 사이여야 합니다. (입력: ${position})")
         }
     }
 

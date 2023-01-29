@@ -35,11 +35,11 @@ class LetterTest : StringSpec({
         actual shouldBe LetterCompareResult.GRAY
     }
 
-    "position은 1~6 사이가 아니라면 예외를 던진다." {
+    "position은 1~5 사이가 아니라면 예외를 던진다." {
         forAll(
             row(-1),
             row(0),
-            row(7),
+            row(6),
         ) { it ->
             shouldThrow<IllegalArgumentException> {
                 Letter("A", it)
