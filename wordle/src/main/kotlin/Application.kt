@@ -8,7 +8,7 @@ private const val WORDS_TXT_PATH = "src/main/resources/words.txt"
 
 fun main() {
     val wordList = WordList(readWordsTxt().trim())
-    val game = Game(wordList)
+    val game = Game(wordList, LocalDateTime.now())
 
     printTitleMessage()
 
@@ -28,7 +28,7 @@ private fun readWordsTxt(): String {
 }
 
 private fun submitSingleWord(game: Game, round: Int): Boolean {
-    val result = game.submitWord(inputText(), LocalDateTime.now())
+    val result = game.submitWord(inputText())
 
     printLetterCompareResults(game.letterCompareResultsList.toList())
 
