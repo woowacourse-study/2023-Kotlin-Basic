@@ -1,5 +1,8 @@
 package wordle.domain
 
+private const val LIMIT_LENGTH = 5
+private val REGEX = Regex("^[a-zA-Z]*$")
+
 data class Word(
     val value: String,
 ) {
@@ -10,9 +13,4 @@ data class Word(
     }
 
     fun isSameIndex(other: Word, index: Int) = value[index] == other.value[index]
-
-    companion object {
-        const val LIMIT_LENGTH = 5
-        val REGEX = Regex("^[a-zA-Z]*$")
-    }
 }
