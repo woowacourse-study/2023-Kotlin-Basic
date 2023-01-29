@@ -8,7 +8,9 @@ enum class Tile(
     YELLOW("🟨"),
     GRAY("⬜");
 
-    fun isGreen() = this == GREEN
+    val isGreen
+        get() = this == GREEN
 
-    fun isGray() = this == GRAY
+    val isGray
+        get() = this == GRAY
 }

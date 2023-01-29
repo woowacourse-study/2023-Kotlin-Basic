@@ -9,7 +9,7 @@ class TileTest {
     fun `🟩인지 판별한다`() {
         val tile = Tile.GREEN
 
-        val actual = tile.isGreen()
+        val actual = tile.isGreen
 
         assertTrue(actual)
     }
@@ -18,7 +18,7 @@ class TileTest {
     fun `⬜인지 판별한다`() {
         val tile = Tile.GRAY
 
-        val actual = tile.isGray()
+        val actual = tile.isGray
 
         assertTrue(actual)
     }

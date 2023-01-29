@@ -47,7 +47,7 @@ class Judgement(
     }
 
     private fun isFillYellowTile(tiles: MutableList<Tile>, index: Int, countOfChars: MutableMap<Char, Int>) =
-        tiles[index].isGray()
+        tiles[index].isGray
                 && countOfChars.containsKey(guess.value[index])
                 && countOfChars[guess.value[index]] != 0
 
