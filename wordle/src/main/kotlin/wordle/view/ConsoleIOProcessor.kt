@@ -16,7 +16,7 @@ class ConsoleIOProcessor : IOProcessor {
 
     override fun inputGuess(): String {
         println("정답을 입력해 주세요.")
-        return readLine() ?: ""
+        return readln()
     }
 
     override fun end(tiles: List<List<Tile>>) {
@@ -25,7 +25,8 @@ class ConsoleIOProcessor : IOProcessor {
     }
 
     override fun outputTiles(tiles: List<List<Tile>>) {
-        println("\n${tiles.joinToString("\n", transform = ::joinTile)}\n")
+        val tiles = tiles.joinToString("\n", transform = ::joinTile)
+        println("\n${tiles}\n")
     }
 
     private fun joinTile(it: List<Tile>) = it.map(Tile::symbol).joinToString("")
