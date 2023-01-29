@@ -2,7 +2,11 @@ import domain.AnswerSelector
 import domain.Board
 import domain.Wordle
 import util.readWords
-import view.*
+import view.inputAnswer
+import view.printGameResult
+import view.printGameStart
+import view.printInputValidWordle
+import view.printTryResult
 import java.time.LocalDate
 
 fun main() {
@@ -18,7 +22,7 @@ fun main() {
     printGameResult(win = board.win(), answer = board.answer)
 }
 
-private fun playRound(board: Board) {
+private tailrec fun playRound(board: Board) {
     runCatching {
         val tryAnswer = inputAnswer()
         val tryResults = board.tryAnswer(Wordle.from(tryAnswer))

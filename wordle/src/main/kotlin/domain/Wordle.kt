@@ -21,19 +21,17 @@ class Wordle private constructor(
 
     fun markAnswer(tryAnswer: Wordle): String =
         with(StringBuilder()) {
-            for (i in (0..(tryAnswer.length() - 1)) step 1) {
-                if (values[i] == tryAnswer[i]) {
-                    this.append(Color.G)
-                } else if (tryAnswer[i] in values) {
-                    this.append(Color.Y)
-                } else {
-                    this.append(Color.W)
+            (0 until tryAnswer.length()).forEach {
+                when {
+                    isSameCharacterAndPosition(tryAnswer, it) -> this.append(Color.G)
+                    sameCharacterExists(tryAnswer, it) -> this.append(Color.Y)
+                    else -> this.append(Color.W)
                 }
             }
             toString()
         }
 
-    fun length(): Int =
+    private fun length(): Int =
         values.length
 
     private fun validateAnswer(values: String) {
@@ -55,6 +53,10 @@ class Wordle private constructor(
             throw IllegalArgumentException("정답은 다섯 글자여야 합니다. ")
         }
     }
+
+    private fun sameCharacterExists(tryAnswer: Wordle, it: Int) = tryAnswer[it] in values
+
+    private fun isSameCharacterAndPosition(tryAnswer: Wordle, it: Int) = values[it] == tryAnswer[it]
 
     operator fun get(index: Int): Char {
         return values[index]
