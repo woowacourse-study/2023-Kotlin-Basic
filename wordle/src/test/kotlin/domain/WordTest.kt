@@ -1,6 +1,6 @@
 package domain
 
-import domain.LetterCompareResult.*
+import domain.Tile.*
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.data.forAll

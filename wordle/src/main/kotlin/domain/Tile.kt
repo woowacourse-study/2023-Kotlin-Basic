@@ -1,6 +1,6 @@
 package domain
 
-enum class LetterCompareResult(
+enum class Tile(
     val character: String
 ) {
     GREEN("\uD83D\uDFE9"),

@@ -1,6 +1,6 @@
 package view
 
-import domain.LetterCompareResults
+import domain.Tiles
 
 fun inputText(): String {
     return readLine() ?: ""
@@ -14,9 +14,9 @@ fun printSubmitWordMessage() {
     println("정답을 입력해 주세요.")
 }
 
-fun printLetterCompareResults(letterCompareResultsList: List<LetterCompareResults>) {
+fun printLetterCompareResults(tilesList: List<Tiles>) {
     println()
-    for (singleResult in letterCompareResultsList) {
+    for (singleResult in tilesList) {
         println(singleResult.values.joinToString("") { it.character })
     }
     println()

@@ -7,15 +7,15 @@ class Game(
     now: LocalDateTime
 ) {
     private val todayWord = TodayWordPicker(wordList).pick(now)
-    val letterCompareResultsList = mutableListOf<LetterCompareResults>()
+    val tilesList = mutableListOf<Tiles>()
 
     // TODO: 리팩토링
-    fun submitWord(text: String): LetterCompareResults {
+    fun submitWord(text: String): Tiles {
         val submittedWord = Word(text)
         validateWord(submittedWord)
 
         val letterCompareResults = submittedWord.compareWithCorrectAnswer(todayWord)
-        letterCompareResultsList.add(letterCompareResults)
+        tilesList.add(letterCompareResults)
 
         return letterCompareResults
     }

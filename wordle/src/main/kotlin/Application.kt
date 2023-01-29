@@ -30,7 +30,7 @@ private fun readWordsTxt(): String {
 private fun submitSingleWord(game: Game, round: Int): Boolean {
     val result = game.submitWord(inputText())
 
-    printLetterCompareResults(game.letterCompareResultsList)
+    printLetterCompareResults(game.tilesList)
 
     if (result.isCorrect) {
         printSuccessMessage(round)

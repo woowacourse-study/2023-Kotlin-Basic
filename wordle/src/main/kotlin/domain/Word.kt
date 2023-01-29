@@ -1,6 +1,6 @@
 package domain
 
-import domain.LetterCompareResult.*
+import domain.Tile.*
 
 private const val WORD_LENGTH = 5
 
@@ -18,7 +18,7 @@ class Word(
     }
 
     // TODO: 리팩토링
-    fun compareWithCorrectAnswer(correctAnswer: Word): LetterCompareResults {
+    fun compareWithCorrectAnswer(correctAnswer: Word): Tiles {
         val answerLetters = ArrayList<Letter?>(correctAnswer.letters)
         val submitLetters = this.letters
 
@@ -45,7 +45,7 @@ class Word(
             }
         }
 
-        return LetterCompareResults(tiles)
+        return Tiles(tiles)
     }
 
     override fun equals(other: Any?): Boolean {
