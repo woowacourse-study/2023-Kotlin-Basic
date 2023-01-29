@@ -14,10 +14,10 @@ class Game(
         val submittedWord = Word(text)
         validateWord(submittedWord)
 
-        val letterCompareResult = submittedWord.compareWithCorrectAnswer(todayWord)
-        letterCompareResultsList.add(letterCompareResult)
+        val letterCompareResults = submittedWord.compareWithCorrectAnswer(todayWord)
+        letterCompareResultsList.add(letterCompareResults)
 
-        return letterCompareResult
+        return letterCompareResults
     }
 
     private fun validateWord(submittedWord: Word) {
