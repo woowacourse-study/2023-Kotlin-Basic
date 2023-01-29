@@ -12,8 +12,8 @@ class Word(
             throw IllegalArgumentException("글자수는 반드시 5글자여야 합니다. (입력: ${word.length}글자)")
         }
 
-        letters = word.mapIndexed { index, string ->
-            Letter(string.toString(), index + 1)
+        letters = word.mapIndexed { index, letter ->
+            Letter(letter.toString(), index + 1)
         }.toList()
     }
 
