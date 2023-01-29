@@ -3,19 +3,17 @@ package domain
 class Word(private val value: String) {
 
     init {
-        if (value !in ANSWER_CANDIDATES) {
-            throw IllegalArgumentException("단어 리스트에 존재하지 않는 단어입니다.")
-        }
+        require(value in ANSWER_CANDIDATES) { "단어 리스트에 존재하지 않는 단어입니다." }
     }
 
-    val length: Int = value.length
+    val length = value.length
 
     operator fun get(index: Int): Char {
         return value[index]
     }
 
     fun toCharAndIsMarked(): MutableList<CharAndIsMarked> {
-        return value.map { c -> CharAndIsMarked(c) }.toMutableList()
+        return value.map { CharAndIsMarked(it) }.toMutableList()
     }
 
     fun withIndex(): Iterable<IndexedValue<Char>> {

@@ -1,11 +1,16 @@
 package domain
 
-class WordleGame(var round: Int = 0,
-                 var isEnd: Boolean = false,
-                 val gameResult: GameResult = GameResult()) {
+import java.time.LocalDate
 
-    val answer = Answer.todayAnswer()
+class WordleGame private constructor(var round: Int = 0,
+                                     var isEnd: Boolean = false,
+                                     val gameResult: GameResult = GameResult()) {
+
+    val answer = Answer.answerOfDate(LocalDate.now())
     private val answerChecker = AnswerChecker(answer)
+
+    val isInProgress: Boolean
+        get() = !isEnd
 
     fun proceed(word: Word) {
         val roundResult = answerChecker.check(word)
@@ -16,11 +21,6 @@ class WordleGame(var round: Int = 0,
             isEnd = true
         }
     }
-
-    val isInProgress: Boolean
-        get() {
-            return !isEnd
-        }
 
     companion object {
         fun start(): WordleGame {

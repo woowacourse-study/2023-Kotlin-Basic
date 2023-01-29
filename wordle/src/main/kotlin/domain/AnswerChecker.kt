@@ -24,11 +24,14 @@ class AnswerChecker(private val answer: Answer) {
 
     private fun markYellowTiles(answerAndIsMarked: AnswerMarkings, resultTile: RoundResult, word: Word) {
         for ((index: Int, alphabet: Char) in word.withIndex()) {
-            if (answerAndIsMarked[index].isMarked) continue
-            if (answerAndIsMarked.doesNotContain(alphabet)) continue
-            val index: Int = answerAndIsMarked.getMarkingIndex(alphabet) ?: continue
-            resultTile.markYellowAt(index)
-            answerAndIsMarked[index].isMarked = true
+            if (isNotMarkingCase(answerAndIsMarked, index, alphabet)) continue
+            val markingIndex: Int = answerAndIsMarked.getMarkingIndex(alphabet) ?: continue
+            resultTile.markYellowAt(markingIndex)
+            answerAndIsMarked[markingIndex].isMarked = true
         }
+    }
+
+    private fun isNotMarkingCase(answerAndIsMarked: AnswerMarkings, index: Int, alphabet: Char): Boolean {
+        return answerAndIsMarked[index].isMarked || answerAndIsMarked.doesNotContain(alphabet)
     }
 }

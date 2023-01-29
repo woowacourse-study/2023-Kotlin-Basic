@@ -19,9 +19,8 @@ class AnswerMarkings(private val answerAndIsMarked: MutableList<CharAndIsMarked>
 
     fun getMarkingIndex(alphabet: Char): Int? {
         return answerAndIsMarked.withIndex()
-                .filter { it -> !it.value.isMarked }
-                .filter { it -> it.value.char == alphabet }
-                .map { it -> it.index }
+                .filter { !it.value.isMarked && it.value.char == alphabet }
+                .map { it.index }
                 .getOrNull(0)
     }
 }

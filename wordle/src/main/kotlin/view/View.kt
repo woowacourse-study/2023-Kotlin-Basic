@@ -38,14 +38,16 @@ fun printRoundResult(result: RoundResult) {
 
 fun inputWord(): Word {
     println("정답을 입력해주세요.")
-    val word = readLine() ?: throw IllegalArgumentException("정답을 입력해주세요!")
+    val word = readln()
     return Word(word)
 }
 
-fun inputWordWithRetry(): Word = try {
-    inputWord()
-} catch (e: IllegalArgumentException) {
-    println(e.message)
-    inputWordWithRetry()
+fun inputWordWithRetry(): Word {
+    return try {
+        inputWord()
+    } catch (e: IllegalArgumentException) {
+        println(e.message)
+        inputWordWithRetry()
+    }
 }
 
