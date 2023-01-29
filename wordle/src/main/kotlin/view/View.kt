@@ -20,9 +20,7 @@ fun printAnswer(answer: Answer) {
 }
 
 fun printAllRoundResults(gameResult: GameResult) {
-    for (result in gameResult) {
-        printRoundResult(result)
-    }
+    gameResult.forEach { printRoundResult(it) }
 }
 
 fun printRoundResult(result: RoundResult) {
