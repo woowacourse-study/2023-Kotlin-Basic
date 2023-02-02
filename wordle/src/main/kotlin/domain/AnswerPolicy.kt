@@ -1,7 +1,7 @@
 package domain
 
-import java.time.Duration
-import java.time.LocalDateTime
+import java.time.LocalDate
+import java.time.Period
 
 fun interface AnswerPolicy {
     fun pick(words: List<Word>): Word
@@ -10,7 +10,7 @@ fun interface AnswerPolicy {
 class ByDateTimePolicy : AnswerPolicy {
 
     override fun pick(words: List<Word>): Word {
-        val duration = Duration.between(LocalDateTime.of(2021, 6, 19, 0, 0), LocalDateTime.now())
-        return words[duration.toDays().toInt() % words.size]
+        val period = Period.between(LocalDate.of(2021, 6, 19), LocalDate.now())
+        return words[period.days % words.size]
     }
 }
