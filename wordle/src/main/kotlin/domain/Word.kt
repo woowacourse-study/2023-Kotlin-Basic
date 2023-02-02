@@ -55,9 +55,7 @@ class AlphabetsPool(alphabets: List<Alphabet>) {
     }
 
     fun spend(alphabet: Alphabet) {
-        if (pool.containsKey(alphabet)) {
-            pool[alphabet] = pool[alphabet]!!.minus(1)
-        }
+        pool.computeIfPresent(alphabet){_, count -> count - 1}
     }
 }
 
