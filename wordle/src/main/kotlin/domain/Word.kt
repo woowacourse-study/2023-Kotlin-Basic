@@ -16,9 +16,10 @@ class Word(word: String) {
             if (alphabets[i] == alphabet) {
                 result[i] = Compared.EQUAL
                 pool.spend(alphabet)
-                continue
             }
+        }
 
+        for ((i, alphabet) in other.alphabets.withIndex()) {
             if (alphabets.contains(alphabet) && pool.has(alphabet)) {
                 result[i] = Compared.EXIST
                 pool.spend(alphabet)
