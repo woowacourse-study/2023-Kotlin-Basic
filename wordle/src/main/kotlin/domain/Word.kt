@@ -16,9 +16,10 @@ class Word(word: String) {
             if (alphabets[i] == alphabet) {
                 result[i] = Compared.EQUAL
                 pool.spend(alphabet)
-                continue
             }
+        }
 
+        for ((i, alphabet) in other.alphabets.withIndex()) {
             if (alphabets.contains(alphabet) && pool.has(alphabet)) {
                 result[i] = Compared.EXIST
                 pool.spend(alphabet)
@@ -55,9 +56,7 @@ class AlphabetsPool(alphabets: List<Alphabet>) {
     }
 
     fun spend(alphabet: Alphabet) {
-        if (pool.containsKey(alphabet)) {
-            pool[alphabet] = pool[alphabet]!!.minus(1)
-        }
+        pool.computeIfPresent(alphabet){_, count -> count - 1}
     }
 }
 

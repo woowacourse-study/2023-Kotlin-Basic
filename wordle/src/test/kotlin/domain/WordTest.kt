@@ -1,4 +1,9 @@
-import domain.*
+import domain.Alphabet
+import domain.AlphabetsPool
+import domain.Compared.*
+import domain.Word
+import domain.Wordle
+
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.core.spec.style.StringSpec
@@ -29,7 +34,7 @@ class WordCompareTest: BehaviorSpec({
             val result = answer.compare(guess)
 
             Then("결과로 NONE, NONE, NONE, NONE, NONE 이 나온다") {
-                result shouldBe listOf(Compared.NONE, Compared.NONE, Compared.NONE, Compared.NONE, Compared.NONE)
+                result shouldBe listOf(NONE, NONE, NONE, NONE, NONE)
             }
         }
 
@@ -38,7 +43,7 @@ class WordCompareTest: BehaviorSpec({
             val result = answer.compare(guess)
 
             Then("결과로 EQUAL, NONE, NONE, NONE, EQUAL 이 나온다") {
-                result shouldBe listOf(Compared.EQUAL, Compared.NONE, Compared.NONE, Compared.NONE, Compared.EQUAL)
+                result shouldBe listOf(EQUAL, NONE, NONE, NONE, EQUAL)
             }
         }
 
@@ -47,7 +52,7 @@ class WordCompareTest: BehaviorSpec({
             val result = answer.compare(guess)
 
             Then("결과로 EQUAL, NONE, NONE, NONE, EQUAL 이 나온다") {
-                result shouldBe listOf(Compared.EQUAL, Compared.NONE, Compared.NONE, Compared.NONE, Compared.EQUAL)
+                result shouldBe listOf(EQUAL, NONE, NONE, NONE, EQUAL)
             }
         }
 
@@ -56,7 +61,7 @@ class WordCompareTest: BehaviorSpec({
             val result = answer.compare(guess)
 
             Then("결과로 EXIST, NONE, NONE, NONE, EQUAL 이 나온다") {
-                result shouldBe listOf(Compared.EXIST, Compared.NONE, Compared.NONE, Compared.NONE, Compared.EQUAL)
+                result shouldBe listOf(EXIST, NONE, NONE, NONE, EQUAL)
             }
         }
 
@@ -65,7 +70,20 @@ class WordCompareTest: BehaviorSpec({
             val result = answer.compare(guess)
 
             Then("결과로 EQUAL, EQUAL, EQUAL, EQUAL, EQUAL 이 나온다") {
-                result shouldBe listOf(Compared.EQUAL, Compared.EQUAL, Compared.EQUAL, Compared.EQUAL, Compared.EQUAL)
+                result shouldBe listOf(EQUAL, EQUAL, EQUAL, EQUAL, EQUAL)
+            }
+        }
+    }
+
+    Given("'silly'이 단어로 주어졌을 때") {
+        val answer = Word("silly")
+
+        When("'lilly'로 비교하면") {
+            val guess = Word("lilly")
+            val result = answer.compare(guess)
+
+            Then("결과로 NONE, NONE, NONE, NONE, NONE 이 나온다") {
+                result shouldBe listOf(NONE, EQUAL, EQUAL, EQUAL, EQUAL)
             }
         }
     }
