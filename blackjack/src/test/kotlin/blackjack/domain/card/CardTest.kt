@@ -14,4 +14,13 @@ class CardTest {
 
         assertThat(result).isTrue
     }
+
+    @Test
+    fun `score를 계산한다`() {
+        val card = Card(Denomination.ACE, Suit.DIAMOND)
+
+        val result = card.calculateScore(10)
+
+        assertThat(result).isEqualTo(21)
+    }
 }

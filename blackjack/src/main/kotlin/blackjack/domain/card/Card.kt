@@ -1,7 +1,11 @@
 package blackjack.domain.card
 
 data class Card(
-    private val denomination: Denomination,
-    private val suit: Suit,
+    val denomination: Denomination,
+    val suit: Suit,
 ) {
+
+    fun calculateScore(score: Int): Int {
+        return denomination + score
+    }
 }
