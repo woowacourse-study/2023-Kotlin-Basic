@@ -8,4 +8,8 @@ data class Card(
     fun calculateScore(score: Int): Int {
         return denomination + score
     }
+
+    fun isAce(): Boolean {
+        return denomination.isAce()
+    }
 }

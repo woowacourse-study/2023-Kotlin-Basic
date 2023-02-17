@@ -38,4 +38,8 @@ enum class Denomination(
 
         return score + BONUS_ACE_SCORE
     }
+
+    fun isAce(): Boolean {
+        return this === ACE
+    }
 }
