@@ -15,7 +15,7 @@ class Cards(
         return cards.size
     }
 
-    private fun hasAce(): Boolean {
+    fun hasAce(): Boolean {
         return cards.any { it.number == Number.ACE }
     }
 

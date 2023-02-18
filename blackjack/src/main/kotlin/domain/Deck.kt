@@ -22,7 +22,7 @@ class Hit(
 
     override fun score() = cards.sum()
 
-    override fun stay(): Deck = Stand(cards)
+    override fun stay() = Stand(cards)
 
     override fun isFinished() = false
 }
@@ -33,9 +33,11 @@ class Stand(
 
     override fun draw(card: Card): Deck = throw IllegalStateException("카드를 더 추가할 수 없습니다")
 
-    override fun score() = cards.sum()
+    override fun score(): Int {
+        return if (cards.hasAce() && cards.sum() + 10 <= 21) cards.sum() + 10 else cards.sum()
+    }
 
-    override fun stay(): Deck = this
+    override fun stay() = this
 
     override fun isFinished() = true
 }
@@ -44,7 +46,7 @@ class Bust(
     private val cards: Cards
 ) : Deck {
 
-    override fun draw(card: Card): Deck = throw IllegalStateException("카드를 더 추가할 수 없습니다")
+    override fun draw(card: Card) = throw IllegalStateException("카드를 더 추가할 수 없습니다")
 
     override fun score() = 0
 
@@ -57,7 +59,7 @@ class BlackJack(
     private val cards: Cards
 ) : Deck {
 
-    override fun draw(card: Card): Deck = throw IllegalStateException("카드를 더 추가할 수 없습니다")
+    override fun draw(card: Card) = throw IllegalStateException("카드를 더 추가할 수 없습니다")
 
     override fun score() = 21
 

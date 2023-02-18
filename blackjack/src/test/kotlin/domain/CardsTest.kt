@@ -9,6 +9,7 @@ import io.kotest.matchers.types.instanceOf
 class CardsTest : ExpectSpec({
 
     context("카드패 상태에 따라 Deck의 구현체를 생성한다") {
+
         expect("카드패가 블랙잭이다") {
             val cards = Cards(mutableListOf(Card(DIAMOND, ACE), Card(SPADE, KING)))
             cards.toDeck() shouldBe instanceOf<BlackJack>()

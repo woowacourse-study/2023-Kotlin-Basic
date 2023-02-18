@@ -43,6 +43,21 @@ class DeckTest : ExpectSpec({
             val stand = Stand(Cards(cards))
             stand.stay() shouldBe instanceOf<Stand>()
         }
+
+        context("점수를 메길 때 ACE가 있다면, 1과 11중에 유리한 점수로 메긴다") {
+
+            expect("ACE를 11로 할 때, 점수가 21 이하라면 11로 계산한다") {
+                val cards = mutableListOf(Card(DIAMOND, ACE), Card(SPADE, THREE), Card(HEART, SEVEN))
+                val stand = Stand(Cards(cards))
+                stand.score() shouldBe 21
+            }
+
+            expect("ACE를 11로 할 때, 점수가 21 초과라면 1로 계산한다") {
+                val cards = mutableListOf(Card(DIAMOND, ACE), Card(SPADE, THREE), Card(HEART, EIGHT))
+                val stand = Stand(Cards(cards))
+                stand.score() shouldBe 12
+            }
+        }
     }
 
     context("Bust 상태 행동을 검증한다") {
