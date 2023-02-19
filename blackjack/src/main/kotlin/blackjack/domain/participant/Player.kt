@@ -10,7 +10,6 @@ class Player(
     private val bettingMoney: BettingMoney = BettingMoney.of(money)
 
     override fun isDrawable(): Boolean {
-        println(state)
         return !state.isFinished()
     }
 
