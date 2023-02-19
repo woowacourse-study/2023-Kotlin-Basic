@@ -9,10 +9,12 @@ class Hit(
 
     override fun draw(card: Card): State {
         cards.append(card)
-        return when {
-            cards.isBust() -> Bust(cards)
-            else -> Hit(cards)
+
+        if (cards.isBust()) {
+            return Bust(cards)
         }
+
+        return Hit(cards)
     }
 
     override fun stay(): State {
