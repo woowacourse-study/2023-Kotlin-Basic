@@ -14,6 +14,11 @@ abstract class Participant protected constructor(
             return cards.totalScore()
         }
 
+    val cards: List<Card>
+        get() {
+            return state.cards().value
+        }
+
     fun isReady(): Boolean {
         return state.isRunning()
     }

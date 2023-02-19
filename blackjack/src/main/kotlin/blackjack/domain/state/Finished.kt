@@ -21,10 +21,10 @@ abstract class Finished(
     }
 
     override fun isRunning(): Boolean {
-        return true
+        return false
     }
 
     override fun isFinished(): Boolean {
-        return false
+        return true
     }
 }
