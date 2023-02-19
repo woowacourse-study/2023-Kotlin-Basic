@@ -1,9 +1,12 @@
-package blackjack.domain
+package blackjack.domain.card
 
 class Card private constructor(
     val rank: Rank,
     val shape: Shape,
 ) {
+    val score: Int
+        get() = rank.score
+
     companion object {
         private val cache = mutableSetOf<Card>()
 
