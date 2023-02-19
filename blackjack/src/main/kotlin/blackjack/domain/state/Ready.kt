@@ -10,11 +10,16 @@ class Ready(
 
     override fun draw(card: Card): State {
         cards.append(card)
-        return when {
-            cards.isBlackjack() -> Blackjack(cards)
-            cards.isReady() -> Hit(cards)
-            else -> Ready(Cards())
+
+        if (cards.isBlackjack()) {
+            return Blackjack(cards)
         }
+
+        if (cards.isReady()) {
+            return Hit(cards)
+        }
+
+        return Ready(cards)
     }
 
     override fun stay(): State {
