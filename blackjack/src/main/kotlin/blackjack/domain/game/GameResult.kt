@@ -11,6 +11,10 @@ class GameResult(
     val playersResult = PlayersResult()
 
     init {
+        /*
+            TODO: Participant 가 직접 승패를 결정하도록 변경
+            TODO: score가 아무리 커도 BUST 되었으면 패배하도록 변경
+        */
         for (player in players) {
             if (dealer.score > player.score) {
                 playersResult.lose(player)

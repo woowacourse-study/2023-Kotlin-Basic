@@ -11,10 +11,10 @@ class BlackjackGame(
     val dealer: Dealer
     val players: List<Player>
     var playerToHit: Player
+    val isDealerHit // 딜러가 히트할 차례인지 여부
+        get() = players.all { it.state != ParticipantState.HIT }
 
     private val deck = Deck()
-    private val isDealerHit // 딜러가 히트할 차례인지 여부
-        get() = players.all { it.state != ParticipantState.HIT }
 
     init {
         dealer = Dealer(deck.pop(), deck.pop())

@@ -10,6 +10,7 @@ class Hand private constructor(
 
     private val bust: Boolean
         get() = score > BUST_THRESHOLD
+    // TODO: 버스트 되었지만, ACE가 포함되어 있을 때 ACE를 1점으로 취급하면 버스트가 아닐 경우 ACE를 1점으로 취급해야 한다
 
     /**
      * add 이후 더 카드를 뽑을 수 있는 상태인지 (!bust) 반환한다.

@@ -33,4 +33,8 @@ class Card private constructor(
         result = 31 * result + shape.hashCode()
         return result
     }
+
+    override fun toString(): String {
+        return "Card(rank=$rank, shape=$shape)"
+    }
 }
