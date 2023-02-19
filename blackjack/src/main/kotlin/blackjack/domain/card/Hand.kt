@@ -3,7 +3,7 @@ package blackjack.domain.card
 private const val BUST_THRESHOLD = 21
 
 class Hand private constructor(
-    private val cards: MutableSet<Card>
+    val cards: MutableSet<Card>
 ){
     val score: Int
         get() = cards.sumOf { it.score }

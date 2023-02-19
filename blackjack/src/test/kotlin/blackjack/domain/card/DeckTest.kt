@@ -1,7 +1,5 @@
-package blackjack.domain
+package blackjack.domain.card
 
-import blackjack.domain.card.Card
-import blackjack.domain.card.Deck
 import io.kotest.matchers.collections.shouldHaveSize
 import org.junit.jupiter.api.Test
 
