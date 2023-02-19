@@ -23,4 +23,13 @@ class CardTest {
 
         assertThat(result).isEqualTo(21)
     }
+
+    @Test
+    fun `ace인지 검증한다`() {
+        val card = Card(Denomination.ACE, Suit.DIAMOND)
+
+        val result = card.isAce()
+
+        assertThat(result).isTrue
+    }
 }
