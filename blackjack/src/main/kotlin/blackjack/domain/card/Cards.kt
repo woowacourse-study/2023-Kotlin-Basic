@@ -1,10 +1,10 @@
 package blackjack.domain.card
 
 private const val BLACKJACK_SCORE = 21
-private const val READY_SIZE = 21
+private const val READY_SIZE = 2
 
 class Cards(
-    private val value: MutableList<Card> = mutableListOf(),
+    val value: MutableList<Card> = mutableListOf(),
 ) {
 
     fun isBlackjack(): Boolean {
@@ -27,7 +27,7 @@ class Cards(
         var totalScore = 0
         value.toList()
             .sortedBy { it.denomination.score }
-            .forEach{ totalScore = it.calculateScore(totalScore) }
+            .forEach { totalScore = it.calculateScore(totalScore) }
 
         return totalScore
     }
