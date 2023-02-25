@@ -1,6 +1,7 @@
 package domain
 
 abstract class Participant(startDeck: Started) {
+
     var deck = startDeck.toDeck()
 
     fun isFinished() = deck.isFinished()
@@ -16,6 +17,14 @@ class Player(
     cards: Cards
 ) : Participant(Started(cards)) {
 
+    fun getWinning(dealer: Dealer): Double {
+        val ratio = deck.getOdd(dealer.deck).ratio
+        return bet.times(ratio)
+    }
+
+    fun finish() {
+        deck = deck.stay()
+    }
 }
 
 class Dealer(cards: Cards) : Participant(Started(cards)) {

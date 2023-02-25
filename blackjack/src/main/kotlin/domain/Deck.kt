@@ -12,14 +12,14 @@ sealed interface Deck {
 
     fun isFinished(): Boolean
 
-    fun getOdd(other: Finish): Odds
+    fun getOdd(other: Deck): Odds
 }
 
 sealed class Running(val cards: Cards) : Deck {
 
     override fun isFinished() = false
 
-    override fun getOdd(other: Finish) = throw IllegalStateException("아직 승률을 구할 수 없습니다")
+    override fun getOdd(other: Deck) = throw IllegalStateException("아직 승률을 구할 수 없습니다")
 }
 
 sealed class Finish(val cards: Cards) : Deck {
@@ -37,7 +37,9 @@ class Started(private val cards: Cards) {
         require(cards.size() == 2) { "두 장의 카드로 시작해야 합니다" }
     }
 
-    fun toDeck() = if (cards.size() == 2 && cards.sum() == 11 && cards.hasAce()) BlackJack(cards) else Hit(cards)
+    fun toDeck() = if (isBlackJack()) BlackJack(cards) else Hit(cards)
+
+    private fun isBlackJack() = cards.size() == 2 && cards.sum() == 11 && cards.hasAce()
 }
 
 class Hit(cards: Cards) : Running(cards) {
@@ -58,7 +60,7 @@ class Stand(cards: Cards) : Finish(cards) {
         return if (cards.hasAce() && cards.sum() + 10 <= 21) cards.sum() + 10 else cards.sum()
     }
 
-    override fun getOdd(other: Finish): Odds {
+    override fun getOdd(other: Deck): Odds {
         if (other is BlackJack || score() < other.score()) {
             return LOSE
         }
@@ -73,12 +75,12 @@ class Bust(cards: Cards) : Finish(cards) {
 
     override fun score() = 0
 
-    override fun getOdd(other: Finish) = if (other is Bust) WIN else LOSE
+    override fun getOdd(other: Deck) = if (other is Bust) WIN else LOSE
 }
 
 class BlackJack(cards: Cards) : Finish(cards) {
 
     override fun score() = 21
 
-    override fun getOdd(other: Finish) = if (other is BlackJack) WIN else BLACKJACK_WIN
+    override fun getOdd(other: Deck) = if (other is BlackJack) WIN else BLACKJACK_WIN
 }
