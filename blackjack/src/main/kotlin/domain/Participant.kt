@@ -1,6 +1,9 @@
 package domain
 
-abstract class Participant(startDeck: Started) {
+abstract class Participant(
+    val name: String,
+    startDeck: Started
+) {
 
     var deck = startDeck.toDeck()
 
@@ -10,26 +13,40 @@ abstract class Participant(startDeck: Started) {
         check(!isFinished()) { "카드를 더 뽑을 수 없습니다" }
         deck = deck.draw(card)
     }
+
+    open fun showCards(): List<Card> = deck.cards()
+
+    abstract fun earning(): Int
 }
 
 class Player(
+    name: String,
     val bet: Int,
     cards: Cards
-) : Participant(Started(cards)) {
+) : Participant(name, Started(cards)) {
 
-    fun getWinning(dealer: Dealer): Double {
+    var earning = 0
+
+    fun winning(dealer: Dealer): Int {
         val ratio = deck.getOdd(dealer.deck).ratio
-        return bet.times(ratio)
+        val winning = bet.times(ratio).toInt()
+        earning = winning - bet
+        return winning
     }
 
     fun finish() {
         deck = deck.stay()
     }
+
+    override fun earning() = earning
 }
 
-class Dealer(cards: Cards) : Participant(Started(cards)) {
+class Dealer(
+    cards: Cards
+) : Participant("딜러", Started(cards)) {
 
-    private val pot = 0
+    private var pot = 0
+    private var end = false
 
     init {
         deck = if (deck.score() >= 17) deck.stay() else deck
@@ -37,6 +54,20 @@ class Dealer(cards: Cards) : Participant(Started(cards)) {
 
     override fun draw(card: Card) {
         super.draw(card)
-        deck.stay()
+        deck = deck.stay()
     }
+
+    fun deposit(bet: Int) {
+        pot += bet
+    }
+
+    fun withdraw(winning: Int) {
+        pot -= winning
+    }
+
+    fun end() { end = true }
+
+    override fun showCards() = if (end) super.showCards() else listOf(deck.cards()[0])
+
+    override fun earning() = pot
 }

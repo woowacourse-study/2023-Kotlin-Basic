@@ -1,10 +1,10 @@
 package domain
 
 class Cards(
-    private val cards: MutableList<Card>
+    val cards: MutableList<Card>
 ) {
     init {
-        require(cards == cards.distinct()){ "중복되는 카드로 구성할 수 없습니다" }
+        require(cards == cards.distinct()) { "중복되는 카드로 구성할 수 없습니다" }
     }
 
     fun sum(): Int {
@@ -24,13 +24,28 @@ class Cards(
     }
 }
 
+class PlayingCards {
+
+    private val playingCards = Suit.values().flatMap { suit ->
+        Number.values().map { number -> Card(suit, number) }
+    }.shuffled().toMutableList()
+
+    fun hand(): Cards {
+        val hand = playingCards.take(2)
+        playingCards.removeAll(hand)
+        return Cards(hand.toMutableList())
+    }
+
+    fun pop() = playingCards.removeFirst()
+}
+
 data class Card(
     val suit: Suit,
     val number: Number
 ) {
 }
 
-enum class Suit{
+enum class Suit {
     SPADE,
     HEART,
     DIAMOND,

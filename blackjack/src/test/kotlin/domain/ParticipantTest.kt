@@ -34,22 +34,22 @@ class ParticipantTest : ExpectSpec({
 
             expect("플레이어만 블랙잭이면 1.5배의 추가 금액을 받는다") {
                 val playerCards = mutableListOf(Card(CLUB, ACE), Card(DIAMOND, QUEEN))
-                val player = Player(10_000, Cards(playerCards))
+                val player = Player("cat", 10_000, Cards(playerCards))
 
                 val dealerCards = mutableListOf(Card(CLUB, EIGHT), Card(HEART, QUEEN))
                 val dealer = Dealer(Cards(dealerCards))
 
-                player.getWinning(dealer) shouldBe 25_000
+                player.winning(dealer) shouldBe 25_000
             }
 
             expect("플레이어와 딜러 둘 다 블랙잭이면 1배의 추가 금액을 받는다") {
                 val playerCards = mutableListOf(Card(CLUB, ACE), Card(DIAMOND, QUEEN))
-                val player = Player(10_000, Cards(playerCards))
+                val player = Player("cat",10_000, Cards(playerCards))
 
                 val dealerCards = mutableListOf(Card(DIAMOND, ACE), Card(HEART, JACK))
                 val dealer = Dealer(Cards(dealerCards))
 
-                player.getWinning(dealer) shouldBe 20_000
+                player.winning(dealer) shouldBe 20_000
             }
         }
 
@@ -58,24 +58,24 @@ class ParticipantTest : ExpectSpec({
 
             expect("플레이어의 숫자 합이 더 크면 1배의 추가 금액을 받는다") {
                 val playerCards = mutableListOf(Card(CLUB, NINE), Card(DIAMOND, QUEEN))
-                val player = Player(10_000, Cards(playerCards))
+                val player = Player("cat",10_000, Cards(playerCards))
                 player.finish()
 
                 val dealerCards = mutableListOf(Card(DIAMOND, EIGHT), Card(HEART, JACK))
                 val dealer = Dealer(Cards(dealerCards))
 
-                player.getWinning(dealer) shouldBe 20_000
+                player.winning(dealer) shouldBe 20_000
             }
 
             expect("딜러의 숫자 합이 더 크면 돈을 받을 수 없다") {
                 val playerCards = mutableListOf(Card(CLUB, SEVEN), Card(DIAMOND, QUEEN))
-                val player = Player(10_000, Cards(playerCards))
+                val player = Player("cat",10_000, Cards(playerCards))
                 player.finish()
 
                 val dealerCards = mutableListOf(Card(DIAMOND, EIGHT), Card(HEART, JACK))
                 val dealer = Dealer(Cards(dealerCards))
 
-                player.getWinning(dealer) shouldBe 0
+                player.winning(dealer) shouldBe 0
             }
         }
 
@@ -83,26 +83,26 @@ class ParticipantTest : ExpectSpec({
 
             expect("딜러도 버스트라면 1배의 추가 금액을 받는다") {
                 val playerCards = mutableListOf(Card(CLUB, SEVEN), Card(DIAMOND, QUEEN))
-                val player = Player(10_000, Cards(playerCards))
+                val player = Player("cat",10_000, Cards(playerCards))
                 player.draw(Card(SPADE, FIVE))
 
                 val dealerCards = mutableListOf(Card(DIAMOND, FIVE), Card(HEART, JACK))
                 val dealer = Dealer(Cards(dealerCards))
                 dealer.draw(Card(SPADE, EIGHT))
 
-                player.getWinning(dealer) shouldBe 20_000
+                player.winning(dealer) shouldBe 20_000
             }
 
             expect("딜러는 버스트가 아니라면 돈을 받을 수 없다") {
                 val playerCards = mutableListOf(Card(CLUB, SEVEN), Card(DIAMOND, QUEEN))
-                val player = Player(10_000, Cards(playerCards))
+                val player = Player("cat",10_000, Cards(playerCards))
                 player.draw(Card(SPADE, FIVE))
 
                 val dealerCards = mutableListOf(Card(DIAMOND, FIVE), Card(HEART, JACK))
                 val dealer = Dealer(Cards(dealerCards))
                 dealer.draw(Card(HEART, FIVE))
 
-                player.getWinning(dealer) shouldBe 0
+                player.winning(dealer) shouldBe 0
             }
         }
     }

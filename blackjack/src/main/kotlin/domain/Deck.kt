@@ -13,6 +13,8 @@ sealed interface Deck {
     fun isFinished(): Boolean
 
     fun getOdd(other: Deck): Odds
+
+    fun cards(): List<Card>
 }
 
 sealed class Running(val cards: Cards) : Deck {
@@ -20,6 +22,8 @@ sealed class Running(val cards: Cards) : Deck {
     override fun isFinished() = false
 
     override fun getOdd(other: Deck) = throw IllegalStateException("아직 승률을 구할 수 없습니다")
+
+    override fun cards() = cards.cards
 }
 
 sealed class Finish(val cards: Cards) : Deck {
@@ -29,6 +33,8 @@ sealed class Finish(val cards: Cards) : Deck {
     override fun draw(card: Card) = throw IllegalStateException("더이상 카드를 추가할 수 없습니다")
 
     override fun isFinished() = true
+
+    override fun cards() = cards.cards
 }
 
 class Started(private val cards: Cards) {
@@ -64,7 +70,7 @@ class Stand(cards: Cards) : Finish(cards) {
         if (other is BlackJack || score() < other.score()) {
             return LOSE
         }
-        if (score() > other.score()) {
+        if (other is Bust || score() > other.score()) {
             return WIN
         }
         return DRAW
@@ -73,7 +79,7 @@ class Stand(cards: Cards) : Finish(cards) {
 
 class Bust(cards: Cards) : Finish(cards) {
 
-    override fun score() = 0
+    override fun score() = cards.sum()
 
     override fun getOdd(other: Deck) = if (other is Bust) WIN else LOSE
 }

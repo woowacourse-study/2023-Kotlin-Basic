@@ -13,7 +13,7 @@ class DeckTest : ExpectSpec({
 
         expect("카드패가 블랙잭이다") {
             val cards = Cards(mutableListOf(Card(DIAMOND, ACE), Card(SPADE, KING)))
-            Started(cards).toDeck() shouldBe instanceOf<BlackJack>()
+            Started(cards).toDeck() shouldBe instanceOf<BlackJackGame>()
         }
 
         expect("블랙잭이 아니라면 힛이다") {
