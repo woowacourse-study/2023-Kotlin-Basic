@@ -3,6 +3,10 @@ package domain
 class Cards(
     private val cards: MutableList<Card>
 ) {
+    init {
+        require(cards == cards.distinct()){ "중복되는 카드로 구성할 수 없습니다" }
+    }
+
     fun sum(): Int {
         return cards.sumOf { it.number.value }
     }
@@ -17,12 +21,6 @@ class Cards(
 
     fun hasAce(): Boolean {
         return cards.any { it.number == Number.ACE }
-    }
-
-    fun toDeck(): Deck {
-        if (cards.size == 2 && sum() == 11 && hasAce()) return BlackJack(this)
-        if (sum() > 21) return Bust(this)
-        return Hit(this)
     }
 }
 

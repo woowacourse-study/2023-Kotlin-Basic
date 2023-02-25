@@ -9,6 +9,27 @@ import io.kotest.matchers.types.instanceOf
 
 class DeckTest : ExpectSpec({
 
+    context(" Started는 카드패 상태에 따라 Deck의 구현체를 생성한다") {
+
+        expect("카드패가 블랙잭이다") {
+            val cards = Cards(mutableListOf(Card(DIAMOND, ACE), Card(SPADE, KING)))
+            Started(cards).toDeck() shouldBe instanceOf<BlackJack>()
+        }
+
+        expect("블랙잭이 아니라면 힛이다") {
+            val cards = Cards(mutableListOf(Card(DIAMOND, ACE), Card(SPADE, NINE)))
+            Started(cards).toDeck() shouldBe instanceOf<Hit>()
+        }
+
+        expect("카드가 2장이 아니라면 생성할 수 없다") {
+            val lessCards = Cards(mutableListOf(Card(DIAMOND, ACE)))
+            shouldThrow<IllegalArgumentException> { Started(lessCards).toDeck() }
+
+            val moreCards = Cards(mutableListOf(Card(DIAMOND, ACE), Card(SPADE, NINE), Card(HEART, TWO)))
+            shouldThrow<IllegalArgumentException> { Started(moreCards).toDeck() }
+        }
+    }
+
     context("Hit 상태 행동을 검증한다") {
 
         expect("카드를 뽑을 때 합이 21을 초과하면 버스트 상태를 반환한다") {
@@ -32,18 +53,6 @@ class DeckTest : ExpectSpec({
 
     context("Stand 상태 행동을 검증한다") {
 
-        expect("카드를 더 뽑을 수 없다") {
-            val cards = mutableListOf(Card(DIAMOND, FIVE), Card(SPADE, EIGHT))
-            val stand = Stand(Cards(cards))
-            shouldThrow<IllegalStateException> { stand.draw(Card(CLUB, FIVE)) }
-        }
-
-        expect("스테이하면 스탠드 상태를 반환한다") {
-            val cards = mutableListOf(Card(DIAMOND, FIVE), Card(SPADE, EIGHT))
-            val stand = Stand(Cards(cards))
-            stand.stay() shouldBe instanceOf<Stand>()
-        }
-
         context("점수를 메길 때 ACE가 있다면, 1과 11중에 유리한 점수로 메긴다") {
 
             expect("ACE를 11로 할 때, 점수가 21 이하라면 11로 계산한다") {
@@ -62,43 +71,19 @@ class DeckTest : ExpectSpec({
 
     context("Bust 상태 행동을 검증한다") {
 
-        expect("카드를 더 뽑을 수 없다") {
-            val cards = mutableListOf(Card(DIAMOND, FIVE), Card(SPADE, EIGHT), Card(HEART, TEN))
-            val bust = Bust(Cards(cards))
-            shouldThrow<IllegalStateException> { bust.draw(Card(CLUB, ACE)) }
-        }
-
         expect("점수는 0점 처리된다") {
             val cards = mutableListOf(Card(DIAMOND, FIVE), Card(SPADE, EIGHT), Card(HEART, TEN))
             val bust = Bust(Cards(cards))
             bust.score() shouldBe 0
         }
-
-        expect("스테이하면 버스트 상태를 유지한다") {
-            val cards = mutableListOf(Card(DIAMOND, FIVE), Card(SPADE, EIGHT), Card(HEART, TEN))
-            val bust = Bust(Cards(cards))
-            bust.stay() shouldBe instanceOf<Bust>()
-        }
     }
 
     context ("블랙잭 상태 행동을 검증한다") {
-
-        expect("카드를 더 뽑을 수 없다") {
-            val cards = mutableListOf(Card(DIAMOND, ACE), Card(SPADE, KING))
-            val blackJack = BlackJack(Cards(cards))
-            shouldThrow<IllegalStateException> { blackJack.draw(Card(CLUB, ACE)) }
-        }
 
         expect("점수는 21점이다") {
             val cards = mutableListOf(Card(DIAMOND, ACE), Card(SPADE, KING))
             val blackJack = BlackJack(Cards(cards))
             blackJack.score() shouldBe 21
-        }
-
-        expect("스테이하면 블랙잭 상태 그대로다") {
-            val cards = mutableListOf(Card(DIAMOND, ACE), Card(SPADE, KING))
-            val blackJack = BlackJack(Cards(cards))
-            blackJack.stay() shouldBe instanceOf<BlackJack>()
         }
     }
 })

@@ -1,14 +1,12 @@
 package domain
 
-abstract class Participant(
-    cards: Cards
-) {
-    var deck = cards.toDeck()
+abstract class Participant(startDeck: Started) {
+    var deck = startDeck.toDeck()
 
     fun isFinished() = deck.isFinished()
 
     open fun draw(card: Card) {
-        check(!deck.isFinished()) { "카드를 더 뽑을 수 없습니다" }
+        check(!isFinished()) { "카드를 더 뽑을 수 없습니다" }
         deck = deck.draw(card)
     }
 }
@@ -16,18 +14,16 @@ abstract class Participant(
 class Player(
     val bet: Int,
     cards: Cards
-) : Participant(cards) {
+) : Participant(Started(cards)) {
 
 }
 
-class Dealer(
-    cards: Cards
-) : Participant(cards) {
+class Dealer(cards: Cards) : Participant(Started(cards)) {
+
     private val pot = 0
 
     init {
-        val initialDeck = cards.toDeck()
-        deck = if (initialDeck.score() >= 17) initialDeck.stay() else initialDeck
+        deck = if (deck.score() >= 17) deck.stay() else deck
     }
 
     override fun draw(card: Card) {
