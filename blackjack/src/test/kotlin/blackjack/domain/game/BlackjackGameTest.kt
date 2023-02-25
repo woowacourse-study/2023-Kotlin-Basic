@@ -100,6 +100,7 @@ internal class BlackjackGameTest {
 
         // Then
         blackjackGame.dealer.hand.cards shouldHaveSize 3
+        // TODO: 간헐적으로 실패하는 테스트 (사유: 간헐적으로 딜러가 버스트됨)
     }
 
     @Test

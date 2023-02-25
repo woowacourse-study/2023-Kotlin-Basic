@@ -24,7 +24,7 @@ object GameController {
 
     fun hitRound() {
         while (!blackjackGame.dealerHitTurn) {
-            val player = blackjackGame.playerToHit // TODO: player가 STAND 혹은 BUST라면 건너뛰도록 변경
+            val player = blackjackGame.playerToHit
             val hitResult = blackjackGame.playerHit(playerHitOrStandView(player))
 
             participantCardsView(player)
