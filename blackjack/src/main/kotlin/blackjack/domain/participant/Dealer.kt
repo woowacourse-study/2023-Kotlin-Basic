@@ -6,7 +6,7 @@ import blackjack.domain.card.Hand
 private const val DEALER_HIT_THRESHOLD = 16
 private const val DEALER_NAME = "딜러"
 
-class Dealer(card1: Card, card2: Card): Participant {
+class Dealer(card1: Card, card2: Card) : Participant {
     override val name: String = DEALER_NAME
     override val hand: Hand = Hand.init(card1, card2)
     override val score: Int

@@ -48,7 +48,7 @@ fun playerHitOrStandView(
 
     println("${player.name}는 한장의 카드를 더 받겠습니까?(예는 y, 아니오는 n)")
 
-    return when(readln()) {
+    return when (readln()) {
         "y" -> true
         "n" -> false
         else -> throw IllegalArgumentException("y 또는 n 만 입력할 수 있습니다.")

@@ -1,8 +1,5 @@
 package blackjack.domain.game
 
-import blackjack.domain.card.Card
-import blackjack.domain.card.Rank
-import blackjack.domain.card.Shape
 import blackjack.domain.testdouble.FakeDeck
 import io.kotest.assertions.assertSoftly
 import io.kotest.assertions.throwables.shouldThrow

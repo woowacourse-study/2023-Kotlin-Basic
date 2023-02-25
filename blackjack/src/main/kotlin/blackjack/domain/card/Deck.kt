@@ -6,7 +6,7 @@ interface Deck {
     fun pop(): Card
 }
 
-class DefaultDeck: Deck {
+class DefaultDeck : Deck {
     private val deck: LinkedList<Card>
 
     init {

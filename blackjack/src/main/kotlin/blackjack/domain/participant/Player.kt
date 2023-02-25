@@ -7,7 +7,7 @@ class Player(
     override val name: String,
     card1: Card,
     card2: Card
-): Participant {
+) : Participant {
     override val hand: Hand = Hand.init(card1, card2)
     override val score: Int
         get() = hand.score

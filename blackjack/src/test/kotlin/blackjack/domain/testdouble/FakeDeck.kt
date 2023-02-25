@@ -6,7 +6,7 @@ import blackjack.domain.card.Rank
 import blackjack.domain.card.Shape
 import java.util.*
 
-class FakeDeck: Deck {
+class FakeDeck : Deck {
     var deck: LinkedList<Card> = LinkedList(
         Rank.values().flatMap { rank ->
             Shape.values().map { shape ->

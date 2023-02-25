@@ -5,7 +5,7 @@ private const val ACE_SCORE_ADJUSTMENT_AMOUNT = 9
 
 class Hand private constructor(
     val cards: MutableSet<Card>
-){
+) {
     val score: Int
         get() = calculateScore()
 
