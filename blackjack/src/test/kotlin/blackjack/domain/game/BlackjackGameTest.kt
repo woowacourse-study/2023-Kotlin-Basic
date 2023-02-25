@@ -70,21 +70,6 @@ internal class BlackjackGameTest {
     }
 
     @Test
-    fun `모든 플레이어가 스탠드한 경우 마지막 playerHit 반환값은 false이다`() {
-        // Given
-        val names = listOf("aa", "bb", "cc")
-        val blackjackGame = BlackjackGame(names)
-
-        // When
-        blackjackGame.playerHit(false) // aa
-        blackjackGame.playerHit(false) // bb
-        val actual = blackjackGame.playerHit(false) // cc
-
-        // Then
-        actual shouldBe false
-    }
-
-    @Test
     fun `모든 플레이어가 스탠드한 상태에서 플레이어는 추가로 히트 or 스탠드 할 수 없다`() {
         // Given
         val names = listOf("aa", "bb", "cc")

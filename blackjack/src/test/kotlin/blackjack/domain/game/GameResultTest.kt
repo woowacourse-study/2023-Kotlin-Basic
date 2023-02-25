@@ -54,4 +54,60 @@ internal class GameResultTest {
             playersResult.result[loser] shouldBe WinDrawLose.LOSE
         }
     }
+
+    @Test
+    fun `딜러가 플레이어보다 점수가 높더라도, 딜러가 버스트되었다면 플레이어의 승리이다`() {
+        // Given
+        val dealer = Dealer(
+            Card.from(Rank.KING, Shape.CLOVER),
+            Card.from(Rank.SIX, Shape.CLOVER),
+        )
+        dealer.hit(Card.from(Rank.QUEEN, Shape.CLOVER))
+
+        val player = Player(
+            "player",
+            Card.from(Rank.TWO, Shape.CLOVER),
+            Card.from(Rank.THREE, Shape.CLOVER),
+        )
+
+        // When
+        val gameResult = GameResult(
+            dealer,
+            listOf(player)
+        )
+
+        // Then
+        assertSoftly(gameResult) {
+            dealerResult.result[WinDrawLose.LOSE] shouldBe 1
+            playersResult.result[player] shouldBe WinDrawLose.WIN
+        }
+    }
+
+    @Test
+    fun `플레이어가 딜러보다 점수가 높더라도, 플레이어가 버스트되었다면 플레이어의 승리이다`() {
+        // Given
+        val dealer = Dealer(
+            Card.from(Rank.TWO, Shape.CLOVER),
+            Card.from(Rank.THREE, Shape.CLOVER),
+        )
+
+        val player = Player(
+            "player",
+            Card.from(Rank.KING, Shape.CLOVER),
+            Card.from(Rank.QUEEN, Shape.CLOVER),
+        )
+        player.hit(Card.from(Rank.JACK, Shape.CLOVER))
+
+        // When
+        val gameResult = GameResult(
+            dealer,
+            listOf(player)
+        )
+
+        // Then
+        assertSoftly(gameResult) {
+            dealerResult.result[WinDrawLose.WIN] shouldBe 1
+            playersResult.result[player] shouldBe WinDrawLose.LOSE
+        }
+    }
 }

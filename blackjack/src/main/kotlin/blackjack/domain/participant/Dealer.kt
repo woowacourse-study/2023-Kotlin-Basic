@@ -22,7 +22,11 @@ class Dealer(card1: Card, card2: Card): Participant {
 
         hand.add(card)
 
-        return ParticipantState.STAND.also {
+        return if (hand.bust) {
+            ParticipantState.BUST
+        } else {
+            ParticipantState.STAND
+        }.also {
             state = it
         }
     }
