@@ -8,7 +8,7 @@ internal class DeckTest {
     @Test
     fun `모든 카드가 중복되지 않게 하나씩 총 52개 생성된다`() {
         // Given
-        val deck = Deck()
+        val deck = DefaultDeck()
 
         // When
         val poppedCards = mutableSetOf<Card>()
@@ -24,7 +24,7 @@ internal class DeckTest {
     @Test
     fun `카드 순서가 랜덤하게 섞인다`() {
         // Given
-        val decks = (1..10).map { Deck() }
+        val decks = (1..10).map { DefaultDeck() }
 
         // When
         val cardsOfDecks = decks.map { deck ->

@@ -1,10 +1,15 @@
 package blackjack.domain.game
 
+import blackjack.domain.card.Card
+import blackjack.domain.card.Rank
+import blackjack.domain.card.Shape
+import blackjack.domain.testdouble.FakeDeck
 import io.kotest.assertions.assertSoftly
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.matchers.collections.shouldHaveSize
 import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.Test
+import java.util.*
 
 internal class BlackjackGameTest {
 
@@ -89,7 +94,8 @@ internal class BlackjackGameTest {
     fun `모든 플레이어가 스탠드한 상태에서 딜러는 히트 or 스탠드 할 수 있다`() {
         // Given
         val names = listOf("aa", "bb", "cc")
-        val blackjackGame = BlackjackGame(names)
+        val fakeDeck = FakeDeck()
+        val blackjackGame = BlackjackGame(names, fakeDeck)
 
         blackjackGame.playerHit(false) // aa
         blackjackGame.playerHit(false) // bb
@@ -100,24 +106,22 @@ internal class BlackjackGameTest {
 
         // Then
         blackjackGame.dealer.hand.cards shouldHaveSize 3
-        // TODO: 간헐적으로 실패하는 테스트 (사유: 간헐적으로 딜러가 버스트됨)
     }
 
     @Test
     fun `모든 플레이어가 스탠드하지 않았다면 딜러는 히트 or 스탠드 할 수 없다`() {
-        /*
-         * TODO:
-         *   아직 객체가 테스트할 수 없는 구조 (주어진 카드가 랜덤이다)
-         *   테스트에서 Deck을 원하는 순서로 주입할 수 있어야 테스트 가능
-         */
-    }
+        // Given
+        val names = listOf("aa", "bb", "cc")
+        val fakeDeck = FakeDeck()
+        val blackjackGame = BlackjackGame(names, fakeDeck)
 
-    @Test
-    fun `게임의 승패 결과를 반환한다`() {
-        /*
-         * TODO:
-         *   아직 객체가 테스트할 수 없는 구조 (주어진 카드가 랜덤이다)
-         *   테스트에서 Deck을 원하는 순서로 주입할 수 있어야 테스트 가능
-         */
+        blackjackGame.playerHit(false) // aa
+        blackjackGame.playerHit(true) // bb
+        blackjackGame.playerHit(false) // cc
+
+        // When & Then
+        shouldThrow<IllegalStateException> {
+            blackjackGame.dealerHitOrStand()
+        }
     }
 }

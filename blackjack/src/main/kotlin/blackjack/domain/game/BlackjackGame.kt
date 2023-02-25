@@ -1,20 +1,20 @@
 package blackjack.domain.game
 
 import blackjack.domain.card.Deck
+import blackjack.domain.card.DefaultDeck
 import blackjack.domain.participant.Dealer
 import blackjack.domain.participant.ParticipantState
 import blackjack.domain.participant.Player
 
 class BlackjackGame(
-    playerNames: List<String>
+    playerNames: List<String>,
+    private val deck: Deck = DefaultDeck(),
 ) {
     val dealer: Dealer
     val players: List<Player>
     var playerToHit: Player
     val dealerHitTurn // 딜러가 히트할 차례인지 여부
         get() = players.all { it.state != ParticipantState.HIT }
-
-    private val deck = Deck()
 
     init {
         dealer = Dealer(deck.pop(), deck.pop())

@@ -2,7 +2,11 @@ package blackjack.domain.card
 
 import java.util.LinkedList
 
-class Deck {
+interface Deck {
+    fun pop(): Card
+}
+
+class DefaultDeck: Deck {
     private val deck: LinkedList<Card>
 
     init {
@@ -15,5 +19,5 @@ class Deck {
         deck = LinkedList(cards)
     }
 
-    fun pop(): Card = deck.pop()
+    override fun pop(): Card = deck.pop()
 }
