@@ -7,21 +7,13 @@ class Cards(
         require(cards == cards.distinct()) { "중복되는 카드로 구성할 수 없습니다" }
     }
 
-    fun sum(): Int {
-        return cards.sumOf { it.number.value }
-    }
+    fun sum() = cards.sumOf { it.number.value }
 
-    fun add(card: Card) {
-        cards.add(card)
-    }
+    fun add(card: Card) { cards.add(card) }
 
-    fun size(): Int {
-        return cards.size
-    }
+    fun size() = cards.size
 
-    fun hasAce(): Boolean {
-        return cards.any { it.number == Number.ACE }
-    }
+    fun hasAce() = cards.any { it.number == Number.ACE }
 }
 
 class PlayingCards {
@@ -42,8 +34,7 @@ class PlayingCards {
 data class Card(
     val suit: Suit,
     val number: Number
-) {
-}
+) {}
 
 enum class Suit {
     SPADE,
