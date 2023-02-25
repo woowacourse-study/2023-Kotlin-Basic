@@ -38,3 +38,7 @@ class Card private constructor(
         return "Card(rank=$rank, shape=$shape)"
     }
 }
+
+fun Collection<Card>.hasAce(): Boolean = this.any { it.rank == Rank.ACE }
+
+fun Collection<Card>.aceCount(): Int = this.count { it.rank == Rank.ACE }

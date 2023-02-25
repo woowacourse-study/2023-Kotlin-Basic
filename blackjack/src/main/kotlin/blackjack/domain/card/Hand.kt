@@ -1,16 +1,16 @@
 package blackjack.domain.card
 
 private const val BUST_THRESHOLD = 21
+private const val ACE_SCORE_ADJUSTMENT_AMOUNT = 9
 
 class Hand private constructor(
     val cards: MutableSet<Card>
 ){
     val score: Int
-        get() = cards.sumOf { it.score }
+        get() = calculateScore()
 
-    private val bust: Boolean
+    val bust: Boolean
         get() = score > BUST_THRESHOLD
-    // TODO: 버스트 되었지만, ACE가 포함되어 있을 때 ACE를 1점으로 취급하면 버스트가 아닐 경우 ACE를 1점으로 취급해야 한다
 
     /**
      * add 이후 더 카드를 뽑을 수 있는 상태인지 (!bust) 반환한다.
@@ -22,6 +22,17 @@ class Hand private constructor(
 
         cards.add(card)
         return !bust
+    }
+
+    private fun calculateScore(): Int {
+        var sumOfScore = cards.sumOf { it.score }
+        if (cards.hasAce()) {
+            for (ignored in 1..cards.aceCount()) {
+                sumOfScore -= ACE_SCORE_ADJUSTMENT_AMOUNT
+                if (sumOfScore <= BUST_THRESHOLD) break
+            }
+        }
+        return sumOfScore
     }
 
     companion object {
