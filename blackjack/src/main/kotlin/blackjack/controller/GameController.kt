@@ -1,6 +1,7 @@
 package blackjack.controller
 
 import blackjack.domain.game.BlackjackGame
+import blackjack.domain.participant.ParticipantState
 import blackjack.view.*
 
 object GameController {
@@ -22,9 +23,15 @@ object GameController {
     }
 
     fun hitRound() {
-        while (!blackjackGame.isDealerHit) {
+        while (!blackjackGame.dealerHitTurn) {
             val player = blackjackGame.playerToHit // TODO: player가 STAND 혹은 BUST라면 건너뛰도록 변경
-            blackjackGame.playerHit(playerHitOrStandView(player))
+            val hitResult = blackjackGame.playerHit(playerHitOrStandView(player))
+
+            participantCardsView(player)
+
+            if (hitResult == ParticipantState.BUST) {
+                playerBustView(player)
+            }
         }
     }
 

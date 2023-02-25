@@ -11,7 +11,7 @@ class BlackjackGame(
     val dealer: Dealer
     val players: List<Player>
     var playerToHit: Player
-    val isDealerHit // 딜러가 히트할 차례인지 여부
+    val dealerHitTurn // 딜러가 히트할 차례인지 여부
         get() = players.all { it.state != ParticipantState.HIT }
 
     private val deck = Deck()
@@ -28,23 +28,28 @@ class BlackjackGame(
     /**
      * 현재 차례의 플레이어가 스탠드할지 히트할지 결정한다.
      *
-     * @return 계속해서 playerHit를 호출할 수 있는지 여부를 반환한다
+     * @return 플레이어가 히트한 이후의 ParticipantState
      */
-    fun playerHit(hit: Boolean): Boolean {
-        check(!isDealerHit) { "딜러가 히트할 차례입니다" }
+    fun playerHit(hit: Boolean): ParticipantState {
+        check(!dealerHitTurn) { "딜러가 히트할 차례입니다" }
 
-        playerHitOrStand(hit)
+        val state = playerHitOrStand(hit)
 
-        nextPlayerTurn()
+        if (!dealerHitTurn) {
+            do {
+                nextPlayerTurn()
+            } while (playerToHit.state != ParticipantState.HIT)
+        }
 
-        return !isDealerHit
+        return state
     }
 
-    private fun playerHitOrStand(hit: Boolean) {
-        if (hit) {
+    private fun playerHitOrStand(hit: Boolean): ParticipantState {
+        return if (hit) {
             playerToHit.hit(deck.pop())
         } else {
             playerToHit.stand()
+            ParticipantState.STAND
         }
     }
 

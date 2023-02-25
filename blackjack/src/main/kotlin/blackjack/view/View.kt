@@ -4,6 +4,7 @@ import blackjack.domain.card.Card
 import blackjack.domain.game.GameResult
 import blackjack.domain.game.WinDrawLose
 import blackjack.domain.participant.Dealer
+import blackjack.domain.participant.Participant
 import blackjack.domain.participant.Player
 
 private const val INPUT_DELIMITER = ","
@@ -14,6 +15,12 @@ fun startGameView(): List<String> {
     return readln().split(INPUT_DELIMITER)
 }
 
+fun participantCardsView(
+    participant: Participant
+) {
+    println(participant.toCardText())
+}
+
 fun initialDealCardsView(
     dealer: Dealer,
     players: List<Player>,
@@ -21,11 +28,17 @@ fun initialDealCardsView(
     println()
 
     println("딜러와 ${players.toNames()}에게 2장을 나누었습니다.")
-    println("딜러: ${dealer.hand.cards.toNames()}")
+    println(dealer.toCardText())
 
     for (player in players) {
-        println("${player.name}: ${player.hand.cards.toNames()}")
+        println(player.toCardText())
     }
+}
+
+fun playerBustView(
+    player: Player
+) {
+    println("플레이어 ${player.name}이 버스트 되었습니다.")
 }
 
 fun playerHitOrStandView(
@@ -78,6 +91,8 @@ fun finalResultView(
         println("${entry.key.name}: ${entry.value.koreanName}")
     }
 }
+
+private fun Participant.toCardText() = "${this.name}: ${this.hand.cards.toNames()}"
 
 private fun List<Player>.toNames() = this.joinToString(OUTPUT_DELIMITER) { it.name }
 
