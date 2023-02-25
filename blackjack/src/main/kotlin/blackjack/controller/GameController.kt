@@ -24,13 +24,15 @@ object GameController {
 
     fun hitRound() {
         while (!blackjackGame.dealerHitTurn) {
-            val player = blackjackGame.playerToHit
-            val hitResult = blackjackGame.playerHit(playerHitOrStandView(player))
+            retryOnFailure {
+                val player = blackjackGame.playerToHit
+                val hitResult = blackjackGame.playerHit(playerHitOrStandView(player))
 
-            participantCardsView(player)
+                participantCardsView(player)
 
-            if (hitResult == ParticipantState.BUST) {
-                playerBustView(player)
+                if (hitResult == ParticipantState.BUST) {
+                    playerBustView(player)
+                }
             }
         }
     }
@@ -49,5 +51,14 @@ object GameController {
         )
 
         finalResultView(blackjackGame.generateResult())
+    }
+
+    private fun retryOnFailure(operation: () -> Unit) {
+        try {
+            operation()
+        } catch (e: Exception) {
+            println(e.message)
+            retryOnFailure(operation)
+        }
     }
 }
