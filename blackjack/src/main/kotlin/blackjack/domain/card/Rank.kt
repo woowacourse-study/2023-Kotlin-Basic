@@ -4,7 +4,7 @@ enum class Rank(
     val symbol: String,
     val score: Int
 ) {
-    ACE("A", 10), // 기본적으로 10점 취급, 버스트 시 1점 취급
+    ACE("A", 11), // 기본적으로 11점 취급, 버스트 시 1점 취급
     TWO("2", 2),
     THREE("3", 3),
     FOUR("4", 4),

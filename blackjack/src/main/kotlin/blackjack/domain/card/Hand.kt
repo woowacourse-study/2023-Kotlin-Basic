@@ -1,7 +1,7 @@
 package blackjack.domain.card
 
 private const val BUST_THRESHOLD = 21
-private const val ACE_SCORE_ADJUSTMENT_AMOUNT = 9
+private const val ACE_SCORE_ADJUSTMENT_AMOUNT = 10
 
 class Hand private constructor(
     val cards: MutableSet<Card>
@@ -27,10 +27,7 @@ class Hand private constructor(
     private fun calculateScore(): Int {
         var sumOfScore = cards.sumOf { it.score }
         if (cards.hasAce()) {
-            for (ignored in 1..cards.aceCount()) {
-                sumOfScore -= ACE_SCORE_ADJUSTMENT_AMOUNT
-                if (sumOfScore <= BUST_THRESHOLD) break
-            }
+            sumOfScore -= ACE_SCORE_ADJUSTMENT_AMOUNT
         }
         return sumOfScore
     }

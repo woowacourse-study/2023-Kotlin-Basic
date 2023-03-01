@@ -40,7 +40,7 @@ internal class HandTest {
     }
 
     @Test
-    fun `ACE가 2장 이상 있을 때, A를 1점처리 할 경우 최대한 점수가 높은 방향으로 처리한다`() {
+    fun `ACE가 2장 이상 있더라도 최대 ACE 1장만 1점 취급할 수 있다`() {
         // Given
         val hand = Hand.init(
             Card.from(Rank.TEN, Shape.CLOVER),
@@ -52,8 +52,8 @@ internal class HandTest {
 
         // Then
         assertSoftly(hand) {
-            score shouldBe 21
-            bust shouldBe false
+            score shouldBe 22
+            bust shouldBe true
         }
     }
 }
