@@ -13,7 +13,7 @@ internal class DeckTest {
         // When
         val poppedCards = mutableSetOf<Card>()
 
-        for (ignored in 1..52) {
+        (1..52).forEach { _ ->
             poppedCards.add(deck.pop())
         }
 
