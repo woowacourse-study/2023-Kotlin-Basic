@@ -20,6 +20,7 @@ interface Participant {
         return when {
             this.state == ParticipantState.BUST && other.state != ParticipantState.BUST -> WinDrawLose.LOSE
             this.state != ParticipantState.BUST && other.state == ParticipantState.BUST -> WinDrawLose.WIN
+            this.state == ParticipantState.BUST && other.state == ParticipantState.BUST -> WinDrawLose.DRAW
             this.score > other.score -> WinDrawLose.WIN
             this.score == other.score -> WinDrawLose.DRAW
             this.score < other.score -> WinDrawLose.LOSE

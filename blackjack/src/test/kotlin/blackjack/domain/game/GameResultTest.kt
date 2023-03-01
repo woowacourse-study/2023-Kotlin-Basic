@@ -110,4 +110,33 @@ internal class GameResultTest {
             playersResult.result[player] shouldBe WinDrawLose.LOSE
         }
     }
+
+    @Test
+    fun `플레이어와 딜러 모두가 버스트되었다면, 플레이어와 딜러 모두 무승부다`() {
+        // Given
+        val dealer = Dealer(
+            Card.from(Rank.KING, Shape.CLOVER),
+            Card.from(Rank.SIX, Shape.CLOVER),
+        )
+        dealer.hit(Card.from(Rank.JACK, Shape.CLOVER))
+
+        val player = Player(
+            "player",
+            Card.from(Rank.KING, Shape.HEART),
+            Card.from(Rank.QUEEN, Shape.HEART),
+        )
+        player.hit(Card.from(Rank.JACK, Shape.CLOVER))
+
+        // When
+        val gameResult = GameResult(
+            dealer,
+            listOf(player)
+        )
+
+        // Then
+        assertSoftly(gameResult) {
+            dealerResult.result[WinDrawLose.DRAW] shouldBe 1
+            playersResult.result[player] shouldBe WinDrawLose.DRAW
+        }
+    }
 }
