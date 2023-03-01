@@ -1,23 +1,23 @@
 package blackjack.domain.card
 
-import java.util.LinkedList
+private const val TOP_OF_DECK_INDEX = 0
 
 interface Deck {
     fun pop(): Card
 }
 
 class DefaultDeck : Deck {
-    private val deck: LinkedList<Card>
+    private val deck: MutableList<Card>
 
     init {
         val cards = Rank.values().flatMap { rank ->
             Shape.values().map { shape ->
                 Card.from(rank, shape)
             }
-        }.shuffled()
+        }.shuffled().toMutableList()
 
-        deck = LinkedList(cards)
+        deck = cards
     }
 
-    override fun pop(): Card = deck.pop()
+    override fun pop(): Card = deck.removeAt(TOP_OF_DECK_INDEX)
 }
