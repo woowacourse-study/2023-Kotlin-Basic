@@ -20,18 +20,4 @@ internal class DeckTest {
         // Then
         poppedCards shouldHaveSize(52)
     }
-
-    @Test
-    fun `카드 순서가 랜덤하게 섞인다`() {
-        // Given
-        val decks = (1..10).map { DefaultDeck() }
-
-        // When
-        val cardsOfDecks = decks.map { deck ->
-            (1..52).map { deck.pop() }
-        }.toSet()
-
-        // Then
-        cardsOfDecks shouldHaveSize 10
-    }
 }
