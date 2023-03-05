@@ -6,6 +6,5 @@ fun main() {
     GameController.startGame()
     GameController.dealCards()
     GameController.hitRound()
-    GameController.dealerHitOrStand()
     GameController.result()
 }

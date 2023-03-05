@@ -1,12 +1,12 @@
 package blackjack.controller
 
 import blackjack.domain.game.BlackjackGame
+import blackjack.domain.participant.Dealer
 import blackjack.domain.participant.ParticipantState
+import blackjack.domain.participant.Player
 import blackjack.view.*
 
 object GameController {
-
-    // TODO: 에러 핸들링 및 재시도 로직 추가
 
     private lateinit var blackjackGame: BlackjackGame
 
@@ -23,24 +23,28 @@ object GameController {
     }
 
     fun hitRound() {
-        while (!blackjackGame.dealerHitTurn) {
-            retryOnFailure {
-                val player = blackjackGame.playerToHit
-                val hitResult = blackjackGame.playerHit(playerHitOrStandView(player))
+        while (true) {
+            val participant = blackjackGame.participantToHit
 
-                participantCardsView(player)
-
-                if (hitResult == ParticipantState.BUST) {
-                    playerBustView(player)
+            when(participant) {
+                is Player -> {
+                    retryOnFailure { blackjackGame.playerHitOrStand(playerHitOrStandView(participant)) }
+                }
+                is Dealer -> {
+                    val dealerHit = blackjackGame.dealerHitOrStand()
+                    if (dealerHit) dealerHitView()
                 }
             }
-        }
-    }
 
-    fun dealerHitOrStand() {
-        val dealerHit = blackjackGame.dealerHitOrStand()
-        if (dealerHit) {
-            dealerHitView()
+            participantCardsView(participant)
+
+            if (participant.state == ParticipantState.BUST) {
+                participantBustView(participant)
+            }
+
+            if (blackjackGame.hitRoundEnd) break
+
+            blackjackGame.setNextParticipant()
         }
     }
 

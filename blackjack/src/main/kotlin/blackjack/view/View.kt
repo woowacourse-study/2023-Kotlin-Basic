@@ -35,10 +35,10 @@ fun initialDealCardsView(
     }
 }
 
-fun playerBustView(
-    player: Player
+fun participantBustView(
+    participant: Participant
 ) {
-    println("플레이어 ${player.name}이 버스트 되었습니다.")
+    println("참가자 ${participant.name}이 버스트 되었습니다.")
 }
 
 fun playerHitOrStandView(

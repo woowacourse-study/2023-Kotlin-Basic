@@ -20,35 +20,39 @@ internal class BlackjackGameTest {
 
         // Then
         assertSoftly(blackjackGame) {
-            dealer.hand.cards shouldHaveSize 2
-            players shouldHaveSize 3
-            players[0].hand.cards shouldHaveSize 2
-            players[1].hand.cards shouldHaveSize 2
-            players[2].hand.cards shouldHaveSize 2
+            participants shouldHaveSize 4
+            participants[0].hand.cards shouldHaveSize 2
+            participants[1].hand.cards shouldHaveSize 2
+            participants[2].hand.cards shouldHaveSize 2
+            participants[3].hand.cards shouldHaveSize 2
         }
     }
 
     @Test
-    fun `플레이어가 히트하면 다음 플레이어에게 차례가 넘어간다`() {
+    fun `setNextParticipant를 호출하면 다음 참가자로 턴이 변경된다`() {
         // Given
         val names = listOf("aa", "bb", "cc")
         val blackjackGame = BlackjackGame(names)
 
         // When
-        val player1 = blackjackGame.playerToHit
-        blackjackGame.playerHit(true) // aa
+        val player1 = blackjackGame.participantToHit
+        blackjackGame.setNextParticipant()
 
-        val player2 = blackjackGame.playerToHit
-        blackjackGame.playerHit(false) // bb
+        val player2 = blackjackGame.participantToHit
+        blackjackGame.setNextParticipant()
 
-        val player3 = blackjackGame.playerToHit
-        blackjackGame.playerHit(true) // cc
+        val player3 = blackjackGame.participantToHit
+        blackjackGame.setNextParticipant()
+
+        val dealer = blackjackGame.participantToHit
+        blackjackGame.setNextParticipant()
 
         // Then
         assertSoftly {
             player1.name shouldBe "aa"
             player2.name shouldBe "bb"
             player3.name shouldBe "cc"
+            dealer.name shouldBe "딜러"
         }
     }
 
@@ -56,15 +60,20 @@ internal class BlackjackGameTest {
     fun `플레이어 추가 히트 여부를 전달받아 각 플레이어에 히트한다`() {
         // Given
         val names = listOf("aa", "bb", "cc")
-        val blackjackGame = BlackjackGame(names)
+        val blackjackGame = BlackjackGame(names, FakeDeck())
 
         // When
-        blackjackGame.playerHit(true) // aa
-        blackjackGame.playerHit(false) // bb
-        blackjackGame.playerHit(true) // cc
+        blackjackGame.playerHitOrStand(true) // aa
+        blackjackGame.setNextParticipant()
+
+        blackjackGame.playerHitOrStand(false) // bb
+        blackjackGame.setNextParticipant()
+
+        blackjackGame.playerHitOrStand(true) // cc
+        blackjackGame.setNextParticipant()
 
         // Then
-        assertSoftly(blackjackGame.players) {
+        assertSoftly(blackjackGame.participants) {
             it[0].hand.cards shouldHaveSize 3
             it[1].hand.cards shouldHaveSize 2
             it[2].hand.cards shouldHaveSize 3
@@ -77,13 +86,18 @@ internal class BlackjackGameTest {
         val names = listOf("aa", "bb", "cc")
         val blackjackGame = BlackjackGame(names)
 
-        blackjackGame.playerHit(false) // aa
-        blackjackGame.playerHit(false) // bb
-        blackjackGame.playerHit(false) // cc
+        blackjackGame.playerHitOrStand(false) // aa
+        blackjackGame.setNextParticipant()
+
+        blackjackGame.playerHitOrStand(false) // bb
+        blackjackGame.setNextParticipant()
+
+        blackjackGame.playerHitOrStand(false) // cc
+        blackjackGame.setNextParticipant()
 
         // When & Then
         shouldThrow<IllegalStateException> {
-            blackjackGame.playerHit(true)
+            blackjackGame.playerHitOrStand(true)
         }
     }
 
@@ -94,31 +108,19 @@ internal class BlackjackGameTest {
         val fakeDeck = FakeDeck()
         val blackjackGame = BlackjackGame(names, fakeDeck)
 
-        blackjackGame.playerHit(false) // aa
-        blackjackGame.playerHit(false) // bb
-        blackjackGame.playerHit(false) // cc
+        blackjackGame.playerHitOrStand(false) // aa
+        blackjackGame.setNextParticipant()
+
+        blackjackGame.playerHitOrStand(false) // bb
+        blackjackGame.setNextParticipant()
+
+        blackjackGame.playerHitOrStand(false) // cc
+        blackjackGame.setNextParticipant()
 
         // When
         blackjackGame.dealerHitOrStand()
 
         // Then
         blackjackGame.dealer.hand.cards shouldHaveSize 3
-    }
-
-    @Test
-    fun `모든 플레이어가 스탠드하지 않았다면 딜러는 히트 or 스탠드 할 수 없다`() {
-        // Given
-        val names = listOf("aa", "bb", "cc")
-        val fakeDeck = FakeDeck()
-        val blackjackGame = BlackjackGame(names, fakeDeck)
-
-        blackjackGame.playerHit(false) // aa
-        blackjackGame.playerHit(true) // bb
-        blackjackGame.playerHit(false) // cc
-
-        // When & Then
-        shouldThrow<IllegalStateException> {
-            blackjackGame.dealerHitOrStand()
-        }
     }
 }
