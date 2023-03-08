@@ -11,12 +11,12 @@ class Cards(
         return isReady() && hasAce() && totalScore() == BLACKJACK_SCORE
     }
 
-    fun isReady(): Boolean {
-        return value.size == READY_SIZE
-    }
-
     private fun hasAce(): Boolean {
         return value.any(Card::isAce)
+    }
+
+    fun isReady(): Boolean {
+        return value.size == READY_SIZE
     }
 
     fun isBust(): Boolean {
