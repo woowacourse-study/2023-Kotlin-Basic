@@ -16,6 +16,7 @@
   - 리뷰: 써머 -> 후디 -> 매트 -> 토르 -> 오찌 -> 써머
   - 코틀린 적응기간을 위해 봄은 워들 미션의 리뷰에는 참여하지 않습니다. 대신 다른 인원들이 봄의 PR에 리뷰를 하도록 합니다.
 - [블랙잭](https://github.com/woowacourse/java-blackjack)
+  - 리뷰: 오찌 -> 후디 -> 봄 -> 써머 -> 토르 -> 매트 -> 오찌
 - [지하철 노선도](https://github.com/woowacourse/atdd-subway-map) + [경로 조회](https://github.com/woowacourse/atdd-subway-path)
 
 ### :student: Members
