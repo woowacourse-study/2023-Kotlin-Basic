@@ -18,8 +18,7 @@ enum class PlayCommand(
 
     companion object {
         fun of(value: String): PlayCommand {
-            return PlayCommand.values()
-                .find { it.value == value }
+            return PlayCommand.values().find { it.value == value }
                 ?: throw IllegalArgumentException("존재하지 않는 명령어 입니다.")
         }
     }
