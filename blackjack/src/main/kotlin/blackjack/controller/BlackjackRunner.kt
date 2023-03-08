@@ -49,12 +49,14 @@ class BlackjackRunner {
     }
 
     private fun pickCard(deck: Deck, player: Player, playCommand: PlayCommand) {
-        if (playCommand.isYes()) {
-            player.hit(deck.pick())
-            printPlayerCard(player)
-        }
-        if (playCommand.isNo()) {
-            player.stay()
+        when {
+            playCommand.isYes() -> {
+                player.hit(deck.pick())
+                printPlayerCard(player)
+            }
+            playCommand.isNo() -> {
+                player.stay()
+            }
         }
     }
 
@@ -67,12 +69,9 @@ class BlackjackRunner {
     }
 
     private fun getDealerProfit(dealer: Dealer, players: List<Player>): String {
-        var totalProfit: BettingMoney = BettingMoney.ZERO
-        for (player in players) {
-            val profit = player.calculateProfit(dealer)
-            totalProfit += profit.times(REVERSE_MONEY)
-        }
-        return totalProfit.value.toString()
+        return players.map { it.calculateProfit(dealer) * REVERSE_MONEY }
+            .sumOf(BettingMoney::value)
+            .toString()
     }
 
     private fun createPlayerResults(dealer: Dealer, players: List<Player>): List<PlayerResult> {
